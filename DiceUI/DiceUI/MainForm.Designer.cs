@@ -38,14 +38,16 @@ namespace DiceUI
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.DiceHeight = new System.Windows.Forms.TextBox();
+            this.DiceWidth = new System.Windows.Forms.TextBox();
+            this.DiceThickness = new System.Windows.Forms.TextBox();
+            this.DedgingDiametr = new System.Windows.Forms.TextBox();
+            this.EdgeWidth = new System.Windows.Forms.TextBox();
+            this.EdgeDepth = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.DedgingDepth = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -61,13 +63,15 @@ namespace DiceUI
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.DedgingDepth);
+            this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.button1);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox6);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox5);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox4);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox3);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.textBox1);
+            this.splitContainer1.Panel1.Controls.Add(this.EdgeDepth);
+            this.splitContainer1.Panel1.Controls.Add(this.EdgeWidth);
+            this.splitContainer1.Panel1.Controls.Add(this.DedgingDiametr);
+            this.splitContainer1.Panel1.Controls.Add(this.DiceThickness);
+            this.splitContainer1.Panel1.Controls.Add(this.DiceWidth);
+            this.splitContainer1.Panel1.Controls.Add(this.DiceHeight);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
@@ -146,47 +150,53 @@ namespace DiceUI
             this.label7.TabIndex = 6;
             this.label7.Text = "Глубина каемки";
             // 
-            // textBox1
+            // DiceHeight
             // 
-            this.textBox1.Location = new System.Drawing.Point(139, 57);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(133, 22);
-            this.textBox1.TabIndex = 0;
+            this.DiceHeight.Location = new System.Drawing.Point(139, 57);
+            this.DiceHeight.Name = "DiceHeight";
+            this.DiceHeight.Size = new System.Drawing.Size(133, 22);
+            this.DiceHeight.TabIndex = 0;
+            this.DiceHeight.TextChanged += new System.EventHandler(this.DiceHeight_TextChanged);
             // 
-            // textBox2
+            // DiceWidth
             // 
-            this.textBox2.Location = new System.Drawing.Point(139, 83);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(133, 22);
-            this.textBox2.TabIndex = 7;
+            this.DiceWidth.Location = new System.Drawing.Point(139, 83);
+            this.DiceWidth.Name = "DiceWidth";
+            this.DiceWidth.Size = new System.Drawing.Size(133, 22);
+            this.DiceWidth.TabIndex = 7;
+            this.DiceWidth.TextChanged += new System.EventHandler(this.DiceWidth_TextChanged);
             // 
-            // textBox3
+            // DiceThickness
             // 
-            this.textBox3.Location = new System.Drawing.Point(139, 113);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(133, 22);
-            this.textBox3.TabIndex = 8;
+            this.DiceThickness.Location = new System.Drawing.Point(139, 113);
+            this.DiceThickness.Name = "DiceThickness";
+            this.DiceThickness.Size = new System.Drawing.Size(133, 22);
+            this.DiceThickness.TabIndex = 8;
+            this.DiceThickness.TextChanged += new System.EventHandler(this.DiceThickness_TextChanged);
             // 
-            // textBox4
+            // DedgingDiametr
             // 
-            this.textBox4.Location = new System.Drawing.Point(139, 145);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(133, 22);
-            this.textBox4.TabIndex = 9;
+            this.DedgingDiametr.Location = new System.Drawing.Point(139, 145);
+            this.DedgingDiametr.Name = "DedgingDiametr";
+            this.DedgingDiametr.Size = new System.Drawing.Size(133, 22);
+            this.DedgingDiametr.TabIndex = 9;
+            this.DedgingDiametr.TextChanged += new System.EventHandler(this.DedgingDiametr_TextChanged);
             // 
-            // textBox5
+            // EdgeWidth
             // 
-            this.textBox5.Location = new System.Drawing.Point(139, 174);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(133, 22);
-            this.textBox5.TabIndex = 10;
+            this.EdgeWidth.Location = new System.Drawing.Point(139, 174);
+            this.EdgeWidth.Name = "EdgeWidth";
+            this.EdgeWidth.Size = new System.Drawing.Size(133, 22);
+            this.EdgeWidth.TabIndex = 10;
+            this.EdgeWidth.TextChanged += new System.EventHandler(this.EdgeWidth_TextChanged);
             // 
-            // textBox6
+            // EdgeDepth
             // 
-            this.textBox6.Location = new System.Drawing.Point(139, 201);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(133, 22);
-            this.textBox6.TabIndex = 11;
+            this.EdgeDepth.Location = new System.Drawing.Point(139, 201);
+            this.EdgeDepth.Name = "EdgeDepth";
+            this.EdgeDepth.Size = new System.Drawing.Size(133, 22);
+            this.EdgeDepth.TabIndex = 11;
+            this.EdgeDepth.TextChanged += new System.EventHandler(this.EdgeDepth_TextChanged);
             // 
             // button1
             // 
@@ -202,9 +212,26 @@ namespace DiceUI
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(11, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(532, 478);
+            this.pictureBox1.Size = new System.Drawing.Size(567, 487);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(12, 229);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(116, 17);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Глубина выемки";
+            // 
+            // DedgingDepth
+            // 
+            this.DedgingDepth.Location = new System.Drawing.Point(139, 230);
+            this.DedgingDepth.Name = "DedgingDepth";
+            this.DedgingDepth.Size = new System.Drawing.Size(133, 22);
+            this.DedgingDepth.TabIndex = 14;
+            this.DedgingDepth.TextChanged += new System.EventHandler(this.DedgingDepth_TextChanged);
             // 
             // MainForm
             // 
@@ -229,12 +256,12 @@ namespace DiceUI
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox EdgeDepth;
+        private System.Windows.Forms.TextBox EdgeWidth;
+        private System.Windows.Forms.TextBox DedgingDiametr;
+        private System.Windows.Forms.TextBox DiceThickness;
+        private System.Windows.Forms.TextBox DiceWidth;
+        private System.Windows.Forms.TextBox DiceHeight;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
@@ -243,5 +270,7 @@ namespace DiceUI
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.TextBox DedgingDepth;
+        private System.Windows.Forms.Label label8;
     }
 }
