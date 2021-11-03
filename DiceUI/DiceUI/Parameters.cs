@@ -20,14 +20,14 @@ namespace DiceUI
         DiceHeight,
 
         /// <summary>
-        /// Толщина кости
-        /// </summary>
-        DiceThickness,
-
-        /// <summary>
         /// Ширина кости
         /// </summary>
         DiceWidth,
+
+        /// <summary>
+        /// Толщина кости
+        /// </summary>
+        DiceThickness,
 
         /// <summary>
         /// Диаметр выемки
