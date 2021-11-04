@@ -66,15 +66,6 @@ namespace DiceUI
         {
             CheckValue(sender, e);
         }
-
-        private void EdgeDepth_TextChanged(object sender, EventArgs e)
-        {
-            CheckValue(sender, e);
-        }
-
-        private void DedgingDepth_TextChanged(object sender, EventArgs e)
-        {
-            CheckValue(sender, e);
-        }
+        
     }
 }

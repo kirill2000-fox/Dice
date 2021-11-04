@@ -39,15 +39,6 @@ namespace DiceUI
         /// </summary>
         EdgeWidth,
 
-        /// <summary>
-        /// Глубина каемки
-        /// </summary>
-        EdgeDepth,
-
-        /// <summary>
-        /// Глубина выемки
-        /// </summary>
-        DedgingDepth,
     }
     public class Parameters
     {
