@@ -27,6 +27,13 @@ namespace DiceUI
         /// </summary>
         private void CheckValue(object sender, EventArgs e)
         {
+
+            //double DiceHeightValue = double.Parse(DiceHeight.Text);
+            //double DiceWidthValue = double.Parse(DiceWidth.Text);
+            //double DiceThicknessValue = double.Parse(DiceThickness.Text);
+            //double DedgingDiametrValue = double.Parse(DedgingDiametr.Text);
+            //double EdgeWidthValue = double.Parse(EdgeWidth.Text);
+
             /// <summary>
             /// переменная для преобразования текста
             /// </summary>
@@ -40,7 +47,42 @@ namespace DiceUI
             // Если возможно преобразовать или поле пустое
             if (double.TryParse(tb.Text, out preob) || string.IsNullOrEmpty(tb.Text))
                 tb.BackColor = SystemColors.Window;//оставляем поле чистым
-            else tb.BackColor = Color.Red;//иначе делаем красным.
+            else tb.BackColor = Color.Crimson;//иначе делаем красным.
+
+     //       try
+     //       {
+     //           if ((DiceHeightValue > 60) || (DiceHeightValue < 120))
+     //           {
+     //               DiceHeight.BackColor = Color.Crimson;
+     //           }
+
+
+     //           if ((DiceWidthValue > 30) || (DiceWidthValue < 60))
+     //           {
+     //               DiceWidth.BackColor = Color.Crimson;
+     //           }
+
+     //           if ((DiceThicknessValue > 10) || (DiceThicknessValue < 30))
+     //           {
+     //               DiceThickness.BackColor = Color.Crimson;
+     //           }
+
+     //           if ((DedgingDiametrValue > 8) || (DedgingDiametrValue < 15))
+     //           {
+     //               DedgingDiametr.BackColor = Color.Crimson;
+     //           }
+
+     //           if ((EdgeWidthValue > 3) || (EdgeWidthValue < 24))
+     //           {
+     //               EdgeWidth.BackColor = Color.Crimson;
+     //           }
+     //       }
+     //       catch (Exception ex)
+     //       {
+     //           MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, 
+					//MessageBoxIcon.Error);
+     //       }
+            
         }
         private void DiceHeight_TextChanged(object sender, EventArgs e)
         {
@@ -50,6 +92,11 @@ namespace DiceUI
         private void DiceWidth_TextChanged(object sender, EventArgs e)
         {
             CheckValue(sender, e);
+            double DiceWidthValue = double.Parse(DiceWidth.Text);
+            if ((DiceWidthValue > 30) || (DiceWidthValue < 60))
+            {
+                DiceWidth.BackColor = Color.Crimson;
+            }
         }
 
         private void DiceThickness_TextChanged(object sender, EventArgs e)
@@ -57,7 +104,7 @@ namespace DiceUI
             CheckValue(sender, e);
         }
 
-        private void DedgingDiametr_TextChanged(object sender, EventArgs e)
+        private void DredgingDiametr_TextChanged(object sender, EventArgs e)
         {
             CheckValue(sender, e);
         }

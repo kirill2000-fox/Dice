@@ -32,7 +32,7 @@ namespace DiceUI
         /// <summary>
         /// Диаметр выемки
         /// </summary>
-        DedgingDiametr,
+        DredgingDiametr,
 
         /// <summary>
         /// Ширина каемки
