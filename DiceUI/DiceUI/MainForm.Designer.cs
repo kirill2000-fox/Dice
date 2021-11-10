@@ -29,11 +29,17 @@ namespace DiceUI
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.BuildObjectbutton = new System.Windows.Forms.Button();
             this.EdgeWidth = new System.Windows.Forms.TextBox();
-            this.DedgingDiametr = new System.Windows.Forms.TextBox();
+            this.DredgingDiametr = new System.Windows.Forms.TextBox();
             this.DiceThickness = new System.Windows.Forms.TextBox();
             this.DiceWidth = new System.Windows.Forms.TextBox();
             this.DiceHeight = new System.Windows.Forms.TextBox();
@@ -44,11 +50,7 @@ namespace DiceUI
             this.DiceHeightlabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -71,7 +73,7 @@ namespace DiceUI
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.BuildObjectbutton);
             this.splitContainer1.Panel1.Controls.Add(this.EdgeWidth);
-            this.splitContainer1.Panel1.Controls.Add(this.DedgingDiametr);
+            this.splitContainer1.Panel1.Controls.Add(this.DredgingDiametr);
             this.splitContainer1.Panel1.Controls.Add(this.DiceThickness);
             this.splitContainer1.Panel1.Controls.Add(this.DiceWidth);
             this.splitContainer1.Panel1.Controls.Add(this.DiceHeight);
@@ -88,6 +90,56 @@ namespace DiceUI
             this.splitContainer1.Size = new System.Drawing.Size(943, 541);
             this.splitContainer1.SplitterDistance = 306;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label6.Location = new System.Drawing.Point(13, 282);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(85, 17);
+            this.label6.TabIndex = 17;
+            this.label6.Text = "(от 3 до 24)";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label5.Location = new System.Drawing.Point(13, 236);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(85, 17);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "(от 8 до 15)";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label4.Location = new System.Drawing.Point(12, 183);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 17);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "(от 10 до 30)";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label3.Location = new System.Drawing.Point(12, 136);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(93, 17);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "(от 30 до 60)";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.label2.Location = new System.Drawing.Point(12, 88);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(101, 17);
+            this.label2.TabIndex = 13;
+            this.label2.Text = "(от 60 до 120)";
             // 
             // BuildObjectbutton
             // 
@@ -106,13 +158,13 @@ namespace DiceUI
             this.EdgeWidth.TabIndex = 10;
             this.EdgeWidth.TextChanged += new System.EventHandler(this.EdgeWidth_TextChanged);
             // 
-            // DedgingDiametr
+            // DredgingDiametr
             // 
-            this.DedgingDiametr.Location = new System.Drawing.Point(162, 212);
-            this.DedgingDiametr.Name = "DredgingDiametr";
-            this.DedgingDiametr.Size = new System.Drawing.Size(141, 22);
-            this.DedgingDiametr.TabIndex = 9;
-            this.DedgingDiametr.TextChanged += new System.EventHandler(this.DredgingDiametr_TextChanged);
+            this.DredgingDiametr.Location = new System.Drawing.Point(162, 212);
+            this.DredgingDiametr.Name = "DredgingDiametr";
+            this.DredgingDiametr.Size = new System.Drawing.Size(141, 22);
+            this.DredgingDiametr.TabIndex = 9;
+            this.DredgingDiametr.TextChanged += new System.EventHandler(this.DredgingDiametr_TextChanged);
             // 
             // DiceThickness
             // 
@@ -201,56 +253,6 @@ namespace DiceUI
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label2.Location = new System.Drawing.Point(12, 88);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 17);
-            this.label2.TabIndex = 13;
-            this.label2.Text = "(от 60 до 120)";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.Location = new System.Drawing.Point(12, 136);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(111, 17);
-            this.label3.TabIndex = 14;
-            this.label3.Text = "(от 30 до 0.5*А)";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label4.Location = new System.Drawing.Point(12, 183);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(93, 17);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "(от 10 до 30)";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label5.Location = new System.Drawing.Point(13, 236);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 17);
-            this.label5.TabIndex = 16;
-            this.label5.Text = "(от 8 до 15)";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label6.Location = new System.Drawing.Point(13, 282);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 17);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "(от 3 до 1/5*А)";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -275,7 +277,7 @@ namespace DiceUI
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button BuildObjectbutton;
         private System.Windows.Forms.TextBox EdgeWidth;
-        private System.Windows.Forms.TextBox DedgingDiametr;
+        private System.Windows.Forms.TextBox DredgingDiametr;
         private System.Windows.Forms.TextBox DiceThickness;
         private System.Windows.Forms.TextBox DiceWidth;
         private System.Windows.Forms.TextBox DiceHeight;
@@ -291,5 +293,6 @@ namespace DiceUI
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

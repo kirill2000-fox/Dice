@@ -86,31 +86,37 @@ namespace DiceUI
         }
         private void DiceHeight_TextChanged(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(DiceHeight, "Значение должно быть от 60 мм до 120 мм");
             CheckValue(sender,e);
         }
 
         private void DiceWidth_TextChanged(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(DiceWidth, "Значение должно быть от 30 мм до 0.5*А мм");
             CheckValue(sender, e);
-            double DiceWidthValue = double.Parse(DiceWidth.Text);
-            if ((DiceWidthValue > 30) || (DiceWidthValue < 60))
-            {
-                DiceWidth.BackColor = Color.Crimson;
-            }
+            //double DiceWidthValue = double.Parse(DiceWidth.Text);
+            //if ((DiceWidthValue > 30) || (DiceWidthValue < 60))
+            //{
+            //    DiceWidth.BackColor = Color.Crimson;
+            //}
         }
 
         private void DiceThickness_TextChanged(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(DiceThickness, "Значение должно быть от 10 мм до 30 мм");
             CheckValue(sender, e);
         }
 
         private void DredgingDiametr_TextChanged(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(DredgingDiametr, "Значение должно быть от 8 мм до 15 мм");
             CheckValue(sender, e);
+            
         }
 
         private void EdgeWidth_TextChanged(object sender, EventArgs e)
         {
+            toolTip1.SetToolTip(EdgeWidth, "Значение должно быть от 3 мм до 1.5*А мм");
             CheckValue(sender, e);
         }
         
