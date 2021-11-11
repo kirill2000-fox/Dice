@@ -157,6 +157,7 @@ namespace DiceUI
             this.EdgeWidth.Size = new System.Drawing.Size(141, 22);
             this.EdgeWidth.TabIndex = 10;
             this.EdgeWidth.TextChanged += new System.EventHandler(this.EdgeWidth_TextChanged);
+            this.EdgeWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // DredgingDiametr
             // 
@@ -165,6 +166,7 @@ namespace DiceUI
             this.DredgingDiametr.Size = new System.Drawing.Size(141, 22);
             this.DredgingDiametr.TabIndex = 9;
             this.DredgingDiametr.TextChanged += new System.EventHandler(this.DredgingDiametr_TextChanged);
+            this.DredgingDiametr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // DiceThickness
             // 
@@ -173,6 +175,7 @@ namespace DiceUI
             this.DiceThickness.Size = new System.Drawing.Size(141, 22);
             this.DiceThickness.TabIndex = 8;
             this.DiceThickness.TextChanged += new System.EventHandler(this.DiceThickness_TextChanged);
+            this.DiceThickness.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // DiceWidth
             // 
@@ -181,6 +184,7 @@ namespace DiceUI
             this.DiceWidth.Size = new System.Drawing.Size(141, 22);
             this.DiceWidth.TabIndex = 7;
             this.DiceWidth.TextChanged += new System.EventHandler(this.DiceWidth_TextChanged);
+            this.DiceWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // DiceHeight
             // 
@@ -189,6 +193,7 @@ namespace DiceUI
             this.DiceHeight.Size = new System.Drawing.Size(141, 22);
             this.DiceHeight.TabIndex = 0;
             this.DiceHeight.TextChanged += new System.EventHandler(this.DiceHeight_TextChanged);
+            this.DiceHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // EdgeWidthlabel
             // 
