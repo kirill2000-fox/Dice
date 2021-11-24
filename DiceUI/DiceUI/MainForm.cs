@@ -12,11 +12,12 @@ namespace DiceUI
 {
     public partial class MainForm : Form
     {
+        private readonly NameParameters _parameter = new NameParameters();
         public MainForm()
         {
             InitializeComponent();
         }
-
+        
         private void MainForm_Load(object sender, EventArgs e)
         {
 
@@ -25,54 +26,58 @@ namespace DiceUI
         /// <summary>
         /// Метод для проверки условий
         /// </summary>
-        private void CheckValue(object sender, EventArgs e)
+        private void CheckValue(TextBox textBox, Parameters parameter)
         {
+            textBox.BackColor = Color.White;
 
-            /// <summary>
-            /// переменная для преобразования текста
-            /// </summary>
-            double preob;
+            if (textBox.Text == "")
+                return;
 
-            /// <summary>
-            /// textBox, который вызвал событие изменения текста
-            /// </summary>
-            TextBox tb = sender as TextBox;
+            double value;
+            if (!double.TryParse(textBox.Text, out value))
+            {
+                textBox.BackColor = Color.Crimson;
+                return;
+            }
 
-            // Если возможно преобразовать или поле пустое
-            if (double.TryParse(tb.Text, out preob) || string.IsNullOrEmpty(tb.Text))
-                tb.BackColor = SystemColors.Window;//оставляем поле чистым
-            else tb.BackColor = Color.Crimson;//иначе делаем красным.
-            
+            try
+            {
+                _parameter.SetValue(parameter, value);
+            }
+            catch (ArgumentException)
+            {
+                textBox.BackColor = Color.Crimson;
+            }
         }
         private void DiceHeight_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceHeight, "Значение должно быть от 60 мм до 120 мм");
-
+            CheckValue(DiceHeight, Parameters.DiceHeight);
         }
 
         private void DiceWidth_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceWidth, "Значение должно быть от 30 мм до 0.5*А мм");
-            CheckValue(sender, e);
+            CheckValue(DiceWidth, Parameters.DiceWidth);
         }
 
         private void DiceThickness_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceThickness, "Значение должно быть от 10 мм до 30 мм");
-            CheckValue(sender, e);
+            CheckValue(DiceThickness, Parameters.DiceThickness);
         }
 
         private void DredgingDiametr_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DredgingDiametr, "Значение должно быть от 8 мм до 15 мм");
-            CheckValue(sender, e);
-            
+            CheckValue(DredgingDiametr, Parameters.DredgingDiametr);
+
         }
 
         private void EdgeWidth_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(EdgeWidth, "Значение должно быть от 3 мм до 1.5*А мм");
-            CheckValue(sender, e);
+            CheckValue(EdgeWidth, Parameters.EdgeWidth);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)

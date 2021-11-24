@@ -196,7 +196,7 @@ namespace DiceUI
             this.DiceWidth.Name = "DiceWidth";
             this.DiceWidth.Size = new System.Drawing.Size(139, 20);
             this.DiceWidth.TabIndex = 7;
-            this.DiceWidth.TextChanged += new System.EventHandler(this.DiceWidth_TextChanged);
+            
             this.DiceWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // DiceHeight
