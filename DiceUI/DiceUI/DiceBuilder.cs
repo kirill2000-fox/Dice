@@ -33,7 +33,10 @@ namespace DiceUI
             //Создание каемки
             CreateEdge(part);
             //Создание выемки
-            CreateDredging(part); 
+            CreateDredging(part);
+            //Войти в режим редактирования эскиза
+           
+
 
             /// <summary>
             /// Построение прямоугольника
@@ -41,16 +44,7 @@ namespace DiceUI
             /// <param name="iPart"></param>
             void CreateRectangle(ksPart iPart)
             {
-                if (_diceParameters.DiceHeight != 0 &&
-                    _diceParameters.DiceWidth != 0)
-                {
-                    //Получение глубины выдавливания
-                    var height = _diceParameters.DiceThickness;
-                    //Выдавливание
-                    object iSketch = null;
-                    ExtrusionOperation(iPart, iSketch, height, false);
-
-                }
+                
             }
 
             /// <summary>
@@ -59,16 +53,7 @@ namespace DiceUI
             /// <param name="iPart"></param>
             void CreateEdge(ksPart iPart)
             {
-                if (_diceParameters.DiceHeight != 0 &&
-                    _diceParameters.DiceWidth != 0)
-                {
-                    //Получение глубины выдавливания
-                    var height = _diceParameters.DiceThickness;
-                    //Выдавливание
-                    object iSketch = null;
-                    ExtrusionOperation(iPart, iSketch, height, false);
-
-                }
+                
             }
 
             /// <summary>
@@ -76,16 +61,7 @@ namespace DiceUI
             /// </summary>
             void CreateDredging(ksPart iPart)
             {
-                if (_diceParameters.DiceHeight != 0 &&
-                    _diceParameters.DiceWidth != 0)
-                {
-                    //Получение глубины выдавливания
-                    var height = _diceParameters.DiceThickness;
-                    //Выдавливание
-                    object iSketch = null;
-                    ExtrusionOperation(iPart, iSketch, height, false);
-
-                }
+                
             }
 
         }
@@ -100,5 +76,6 @@ namespace DiceUI
 			extrusionDefinition.SetSketch(iSketch);
 			extrusion.Create();
         }
+
     }
 }
