@@ -72,7 +72,7 @@ namespace DiceUI
             }
 
             /// <summary>
-            /// Построение каемки
+            /// Построение выемки
             /// </summary>
             void CreateDredging(ksPart iPart)
             {
