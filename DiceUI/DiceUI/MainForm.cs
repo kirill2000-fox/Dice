@@ -6,7 +6,7 @@ namespace DiceUI
 {
     public partial class MainForm : Form
     {
-        private readonly NameParameters _parameter = new NameParameters();
+        private readonly Parameters _parameter = new Parameters();
         public MainForm()
         {
             InitializeComponent();
@@ -20,7 +20,7 @@ namespace DiceUI
         /// <summary>
         /// Метод для проверки условий
         /// </summary>
-        private void CheckValue(TextBox textBox, Parameters parameter)
+        private void CheckValue(TextBox textBox, NameParameters nameParameters)
         {
             textBox.BackColor = Color.White;
 
@@ -36,7 +36,7 @@ namespace DiceUI
 
             try
             {
-                _parameter.SetValue(parameter, value);
+                _parameter.SetValue(nameParameters, value);
             }
             catch (ArgumentException)
             {
@@ -46,32 +46,32 @@ namespace DiceUI
         private void DiceHeight_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceHeight, "Значение должно быть от 60 мм до 120 мм");
-            CheckValue(DiceHeight, Parameters.DiceHeight);
+            CheckValue(DiceHeight, NameParameters.DiceHeight);
         }
 
         private void DiceWidth_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceWidth, "Значение должно быть от 30 мм до 0.5*А мм");
-            CheckValue(DiceWidth, Parameters.DiceWidth);
+            CheckValue(DiceWidth, NameParameters.DiceWidth);
         }
 
         private void DiceThickness_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceThickness, "Значение должно быть от 10 мм до 30 мм");
-            CheckValue(DiceThickness, Parameters.DiceThickness);
+            CheckValue(DiceThickness, NameParameters.DiceThickness);
         }
 
         private void DredgingDiametr_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DredgingDiametr, "Значение должно быть от 8 мм до 15 мм");
-            CheckValue(DredgingDiametr, Parameters.DredgingDiametr);
+            CheckValue(DredgingDiametr, NameParameters.DredgingDiametr);
 
         }
 
         private void EdgeWidth_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(EdgeWidth, "Значение должно быть от 3 мм до 1.5*А мм");
-            CheckValue(EdgeWidth, Parameters.EdgeWidth);
+            CheckValue(EdgeWidth, NameParameters.EdgeWidth);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -94,6 +94,11 @@ namespace DiceUI
                     e.Handled = true;
                 }
             }
+        }
+
+        private void BuildObjectbutton_Click(object sender, EventArgs e)
+        {
+            KompasConnector connector = new KompasConnector(_parameter);
         }
     }
 }

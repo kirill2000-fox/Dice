@@ -6,7 +6,7 @@ using Kompas6Constants3D;
 
 namespace DiceUI
 {
-    public class DiceManager
+    public class KompasConnector
     {
         private DiceBuilder _diceBuilder;
 
@@ -28,7 +28,7 @@ namespace DiceUI
 
             return _kompasObject;
         }
-        public DiceManager(Parameters parameters)
+        public KompasConnector(Parameters parameters)
         {
             InitializeDice(parameters);
         }
