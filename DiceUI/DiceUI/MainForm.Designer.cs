@@ -39,11 +39,11 @@ namespace DiceUI
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.BuildObjectbutton = new System.Windows.Forms.Button();
-            this.EdgeWidth = new System.Windows.Forms.TextBox();
-            this.DredgingDiametr = new System.Windows.Forms.TextBox();
-            this.DiceThickness = new System.Windows.Forms.TextBox();
-            this.DiceWidth = new System.Windows.Forms.TextBox();
-            this.DiceHeight = new System.Windows.Forms.TextBox();
+            this.EdgeWidthTextbox = new System.Windows.Forms.TextBox();
+            this.DredgingDiametrTextbox = new System.Windows.Forms.TextBox();
+            this.DiceThicknessTextbox = new System.Windows.Forms.TextBox();
+            this.DiceWidthTextbox = new System.Windows.Forms.TextBox();
+            this.DiceHeightTextbox = new System.Windows.Forms.TextBox();
             this.EdgeWidthlabel = new System.Windows.Forms.Label();
             this.DredgingDiametrlabel = new System.Windows.Forms.Label();
             this.DiceThicknesslabel = new System.Windows.Forms.Label();
@@ -74,11 +74,11 @@ namespace DiceUI
             this.splitContainer1.Panel1.Controls.Add(this.label3);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.BuildObjectbutton);
-            this.splitContainer1.Panel1.Controls.Add(this.EdgeWidth);
-            this.splitContainer1.Panel1.Controls.Add(this.DredgingDiametr);
-            this.splitContainer1.Panel1.Controls.Add(this.DiceThickness);
-            this.splitContainer1.Panel1.Controls.Add(this.DiceWidth);
-            this.splitContainer1.Panel1.Controls.Add(this.DiceHeight);
+            this.splitContainer1.Panel1.Controls.Add(this.EdgeWidthTextbox);
+            this.splitContainer1.Panel1.Controls.Add(this.DredgingDiametrTextbox);
+            this.splitContainer1.Panel1.Controls.Add(this.DiceThicknessTextbox);
+            this.splitContainer1.Panel1.Controls.Add(this.DiceWidthTextbox);
+            this.splitContainer1.Panel1.Controls.Add(this.DiceHeightTextbox);
             this.splitContainer1.Panel1.Controls.Add(this.EdgeWidthlabel);
             this.splitContainer1.Panel1.Controls.Add(this.DredgingDiametrlabel);
             this.splitContainer1.Panel1.Controls.Add(this.DiceThicknesslabel);
@@ -164,54 +164,54 @@ namespace DiceUI
             this.BuildObjectbutton.UseVisualStyleBackColor = true;
             this.BuildObjectbutton.Click += new System.EventHandler(this.BuildObjectbutton_Click);
             // 
-            // EdgeWidth
+            // EdgeWidthTextbox
             // 
-            this.EdgeWidth.Location = new System.Drawing.Point(163, 241);
-            this.EdgeWidth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.EdgeWidth.Name = "EdgeWidth";
-            this.EdgeWidth.Size = new System.Drawing.Size(184, 22);
-            this.EdgeWidth.TabIndex = 10;
-            this.EdgeWidth.TextChanged += new System.EventHandler(this.EdgeWidth_TextChanged);
-            this.EdgeWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.EdgeWidthTextbox.Location = new System.Drawing.Point(163, 241);
+            this.EdgeWidthTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.EdgeWidthTextbox.Name = "EdgeWidthTextbox";
+            this.EdgeWidthTextbox.Size = new System.Drawing.Size(184, 22);
+            this.EdgeWidthTextbox.TabIndex = 10;
+            this.EdgeWidthTextbox.TextChanged += new System.EventHandler(this.EdgeWidth_TextChanged);
+            this.EdgeWidthTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
-            // DredgingDiametr
+            // DredgingDiametrTextbox
             // 
-            this.DredgingDiametr.Location = new System.Drawing.Point(163, 188);
-            this.DredgingDiametr.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DredgingDiametr.Name = "DredgingDiametr";
-            this.DredgingDiametr.Size = new System.Drawing.Size(184, 22);
-            this.DredgingDiametr.TabIndex = 9;
-            this.DredgingDiametr.TextChanged += new System.EventHandler(this.DredgingDiametr_TextChanged);
-            this.DredgingDiametr.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.DredgingDiametrTextbox.Location = new System.Drawing.Point(163, 188);
+            this.DredgingDiametrTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DredgingDiametrTextbox.Name = "DredgingDiametrTextbox";
+            this.DredgingDiametrTextbox.Size = new System.Drawing.Size(184, 22);
+            this.DredgingDiametrTextbox.TabIndex = 9;
+            this.DredgingDiametrTextbox.TextChanged += new System.EventHandler(this.DredgingDiametr_TextChanged);
+            this.DredgingDiametrTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
-            // DiceThickness
+            // DiceThicknessTextbox
             // 
-            this.DiceThickness.Location = new System.Drawing.Point(163, 139);
-            this.DiceThickness.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DiceThickness.Name = "DiceThickness";
-            this.DiceThickness.Size = new System.Drawing.Size(184, 22);
-            this.DiceThickness.TabIndex = 8;
-            this.DiceThickness.TextChanged += new System.EventHandler(this.DiceThickness_TextChanged);
-            this.DiceThickness.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.DiceThicknessTextbox.Location = new System.Drawing.Point(163, 139);
+            this.DiceThicknessTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DiceThicknessTextbox.Name = "DiceThicknessTextbox";
+            this.DiceThicknessTextbox.Size = new System.Drawing.Size(184, 22);
+            this.DiceThicknessTextbox.TabIndex = 8;
+            this.DiceThicknessTextbox.TextChanged += new System.EventHandler(this.DiceThickness_TextChanged);
+            this.DiceThicknessTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
-            // DiceWidth
+            // DiceWidthTextbox
             // 
-            this.DiceWidth.Location = new System.Drawing.Point(163, 92);
-            this.DiceWidth.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DiceWidth.Name = "DiceWidth";
-            this.DiceWidth.Size = new System.Drawing.Size(184, 22);
-            this.DiceWidth.TabIndex = 7;
-            this.DiceWidth.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.DiceWidthTextbox.Location = new System.Drawing.Point(163, 92);
+            this.DiceWidthTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DiceWidthTextbox.Name = "DiceWidthTextbox";
+            this.DiceWidthTextbox.Size = new System.Drawing.Size(184, 22);
+            this.DiceWidthTextbox.TabIndex = 7;
+            this.DiceWidthTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
-            // DiceHeight
+            // DiceHeightTextbox
             // 
-            this.DiceHeight.Location = new System.Drawing.Point(163, 44);
-            this.DiceHeight.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DiceHeight.Name = "DiceHeight";
-            this.DiceHeight.Size = new System.Drawing.Size(184, 22);
-            this.DiceHeight.TabIndex = 0;
-            this.DiceHeight.TextChanged += new System.EventHandler(this.DiceHeight_TextChanged);
-            this.DiceHeight.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.DiceHeightTextbox.Location = new System.Drawing.Point(163, 44);
+            this.DiceHeightTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DiceHeightTextbox.Name = "DiceHeightTextbox";
+            this.DiceHeightTextbox.Size = new System.Drawing.Size(184, 22);
+            this.DiceHeightTextbox.TabIndex = 0;
+            this.DiceHeightTextbox.TextChanged += new System.EventHandler(this.DiceHeight_TextChanged);
+            this.DiceHeightTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // EdgeWidthlabel
             // 
@@ -301,11 +301,11 @@ namespace DiceUI
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button BuildObjectbutton;
-        private System.Windows.Forms.TextBox EdgeWidth;
-        private System.Windows.Forms.TextBox DredgingDiametr;
-        private System.Windows.Forms.TextBox DiceThickness;
-        private System.Windows.Forms.TextBox DiceWidth;
-        private System.Windows.Forms.TextBox DiceHeight;
+        private System.Windows.Forms.TextBox EdgeWidthTextbox;
+        private System.Windows.Forms.TextBox DredgingDiametrTextbox;
+        private System.Windows.Forms.TextBox DiceThicknessTextbox;
+        private System.Windows.Forms.TextBox DiceWidthTextbox;
+        private System.Windows.Forms.TextBox DiceHeightTextbox;
         private System.Windows.Forms.Label EdgeWidthlabel;
         private System.Windows.Forms.Label DredgingDiametrlabel;
         private System.Windows.Forms.Label DiceThicknesslabel;
