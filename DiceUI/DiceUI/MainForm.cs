@@ -55,17 +55,29 @@ namespace DiceUI
             {
                 _parameters[nameParameters].Value = value;
 
+                //ширина
                 if (nameParameters == ParametersEnum.DiceHeight)
                 {
-                    // TODO Width
                     var widthMax = value / 2.0;
                     DiceHeightMaxTextBox.Text = widthMax.ToString();
 
                     var width = _parameters[ParametersEnum.DiceWidth];
                     _parameters[ParametersEnum.DiceWidth] = new Parameter(width.Name, width.Min, widthMax, width.Value);
 
-                    // TODO Ширина коемеи
                 }
+                
+
+                //каемка
+                if (nameParameters == ParametersEnum.DiceHeight)
+                {
+                    var edgeMax = value / 5.0;
+                    DiceEdgeMaxTextBox.Text = edgeMax.ToString();
+                    
+                    var edge = _parameters[ParametersEnum.DiceWidth];
+                    _parameters[ParametersEnum.DiceWidth] = new Parameter(edge.Name, edge.Min, edgeMax, edge.Value);
+
+                }
+                
             }
             catch (ArgumentException)
             {
@@ -133,6 +145,16 @@ namespace DiceUI
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label4_Click(object sender, EventArgs e)
         {
 
         }
