@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using Core;
 
 namespace DiceUI
 {
     public partial class MainForm : Form
     {
-        private readonly Parameters _parameter = new Parameters();
+        private readonly DiceParameters _parameters = new DiceParameters();
+        private readonly KompasConnector _kompasConnector = new KompasConnector();
+
         public MainForm()
         {
             InitializeComponent();
@@ -34,7 +37,7 @@ namespace DiceUI
         /// <summary>
         /// Метод для проверки условий
         /// </summary>
-        private void CheckValue(TextBox textBox, NameParameters nameParameters)
+        private void CheckValue(TextBox textBox, ParametersEnum nameParameters)
         {
             textBox.BackColor = Color.White;
 
@@ -50,7 +53,15 @@ namespace DiceUI
 
             try
             {
-                _parameter.SetValue(nameParameters, value);
+                _parameters[nameParameters] = value;
+                // TODO Width
+                var widthMax = value / 2.0;
+                DiceHeightMaxTextBox.Text = widthMax.ToString();
+
+                var width = _parameters[ParametersEnum.DiceWidth] as Parameter;
+                _parameters[ParametersEnum.DiceWidth] = new Parameter(width.Name, width.Min, widthMax, width.Value);
+
+                // TODO Ширина коемеи
             }
             catch (ArgumentException)
             {
@@ -60,32 +71,32 @@ namespace DiceUI
         private void DiceHeight_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceHeightTextbox, "Значение должно быть от 60 мм до 120 мм");
-            CheckValue(DiceHeightTextbox, NameParameters.DiceHeight);
+            CheckValue(DiceHeightTextbox, ParametersEnum.DiceHeight);
         }
 
         private void DiceWidth_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceWidthTextbox, "Значение должно быть от 30 мм до 0.5*А мм");
-            CheckValue(DiceWidthTextbox, NameParameters.DiceWidth);
+            CheckValue(DiceWidthTextbox, ParametersEnum.DiceWidth);
         }
 
         private void DiceThickness_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DiceThicknessTextbox, "Значение должно быть от 10 мм до 30 мм");
-            CheckValue(DiceThicknessTextbox, NameParameters.DiceThickness);
+            CheckValue(DiceThicknessTextbox, ParametersEnum.DiceThickness);
         }
 
         private void DredgingDiametr_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(DredgingDiametrTextbox, "Значение должно быть от 8 мм до 15 мм");
-            CheckValue(DredgingDiametrTextbox, NameParameters.DredgingDiametr);
+            CheckValue(DredgingDiametrTextbox, ParametersEnum.DredgingDiameter);
 
         }
 
         private void EdgeWidth_TextChanged(object sender, EventArgs e)
         {
             toolTip1.SetToolTip(EdgeWidthTextbox, "Значение должно быть от 3 мм до 1.5*А мм");
-            CheckValue(EdgeWidthTextbox, NameParameters.EdgeWidth);
+            CheckValue(EdgeWidthTextbox, ParametersEnum.EdgeWidth);
         }
 
         private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
@@ -112,7 +123,14 @@ namespace DiceUI
 
         private void BuildObjectbutton_Click(object sender, EventArgs e)
         {
-            KompasConnector connector = new KompasConnector(_parameter);
+            _kompasConnector.OpenKompas();
+            var builder = new DiceBuilder(_kompasConnector, _parameters);
+            builder.BuildDice();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,15 +1,15 @@
-﻿namespace DiceUI
-{
-    public enum NameParameters
-    {
-        /// <summary>
-        /// Высота кости
-        /// </summary>
-        DiceHeight,
+﻿using System.ComponentModel;
 
-        /// <summary>
-        /// Ширина кости
-        /// </summary>
+namespace Core
+{
+    /// <summary>
+    /// Типы параметров
+    /// </summary>
+    public enum ParametersEnum
+    {
+        [Description("Высота кости")]
+        DiceHeight,
+        [Description("Ширина кости")]
         DiceWidth,
 
         /// <summary>
@@ -20,7 +20,7 @@
         /// <summary>
         /// Диаметр выемки
         /// </summary>
-        DredgingDiametr,
+        DredgingDiameter,
 
         /// <summary>
         /// Ширина каемки
