@@ -53,15 +53,19 @@ namespace DiceUI
 
             try
             {
-                _parameters[nameParameters] = value;
-                // TODO Width
-                var widthMax = value / 2.0;
-                DiceHeightMaxTextBox.Text = widthMax.ToString();
+                _parameters[nameParameters].Value = value;
 
-                var width = _parameters[ParametersEnum.DiceWidth] as Parameter;
-                _parameters[ParametersEnum.DiceWidth] = new Parameter(width.Name, width.Min, widthMax, width.Value);
+                if (nameParameters == ParametersEnum.DiceHeight)
+                {
+                    // TODO Width
+                    var widthMax = value / 2.0;
+                    DiceHeightMaxTextBox.Text = widthMax.ToString();
 
-                // TODO Ширина коемеи
+                    var width = _parameters[ParametersEnum.DiceWidth];
+                    _parameters[ParametersEnum.DiceWidth] = new Parameter(width.Name, width.Min, widthMax, width.Value);
+
+                    // TODO Ширина коемеи
+                }
             }
             catch (ArgumentException)
             {

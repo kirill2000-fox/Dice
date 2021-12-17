@@ -50,7 +50,7 @@ namespace DiceUI
             //Создание каемки
             CreateEdge();
             //Создание выемки
-            CreateDredging();
+            //CreateDredging();
             //Войти в режим редактирования эскиза
         }
 
@@ -69,12 +69,12 @@ namespace DiceUI
             var rectangleParam = (ksRectangleParam)_connector
                 .Kompas
                 .GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
-
+            //_diceParameters = new DiceParameters();
             rectangleParam.x = 0;
-            rectangleParam.y = 0;
+            rectangleParam.y = -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
             rectangleParam.ang = 0;
-            rectangleParam.width = 60;
-            rectangleParam.height = 30;
+            rectangleParam.width = _diceParameters[ParametersEnum.DiceHeight].Value;
+            rectangleParam.height = _diceParameters[ParametersEnum.DiceWidth].Value;
             rectangleParam.style = 1;
 
             doc2D.ksRectangle(rectangleParam);
@@ -83,9 +83,11 @@ namespace DiceUI
             sketchDefinition.EndEdit();
 
             //Выдавливание детали
-            //PressOutSketch(sketchDefinition, ((Parameter)_diceParameters[ParametersEnum.DiceHeight]).Value);
-            PressOutSketch(sketchDefinition, 20);
+            var dice = PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value);
 
+            var dredging = CreateDredging();
+
+            //CreateCutExtrusion(30, dice);
         }
 
         /// <summary>
@@ -121,7 +123,7 @@ namespace DiceUI
         /// </summary>
         /// <param name="sketchDefinition">Эскиз</param>
         /// <param name="thickness">Толщина</param>
-        private void PressOutSketch(
+        private ksEntity PressOutSketch(
             ksSketchDefinition sketchDefinition,
             double thickness)
         {
@@ -145,23 +147,58 @@ namespace DiceUI
 
             //Создать объект в модели
             extrusionEntity.Create();
+
+            return extrusionEntity;
         }
 
         /// <summary>
         /// Построение каемки
         /// </summary>
         /// <param name="iPart"></param>
-        void CreateEdge()
+        private void CreateEdge()
         {
-
+            
         }
 
         /// <summary>
         /// Построение выемки
         /// </summary>
-        void CreateDredging()
+        private ksEntity CreateDredging()
         {
+            //Выбор плоскости для построения
+            var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOZ);
 
+            //Войти в режим редактирования эскиза
+            var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
+
+            //Построение круга
+            var circleParam = (ksCircleParam)_connector
+                .Kompas
+                .GetParamStruct((short)StructType2DEnum.ko_CircleParam);
+
+            doc2D.ksCircle(_diceParameters[ParametersEnum.DiceHeight].Value / 2,
+                -_diceParameters[ParametersEnum.DiceThickness].Value,
+                _diceParameters[ParametersEnum.DredgingDiameter].Value / 2,
+                1);
+
+            //Выйти из режима редактирования эскиза
+            sketchDefinition.EndEdit();
+
+            //Выдавливание детали
+            //PressOutSketch(sketchDefinition, ((Parameter)_diceParameters[ParametersEnum.DiceHeight]).Value);
+            return PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8);
+        }
+
+        private void CreateCutExtrusion(double length, ksEntity sketch)
+        {
+            ksEntity cutExtrusion = _connector.KsPart.NewEntity(26);
+            ksCutExtrusionDefinition cutExtrusionDefinition =
+                cutExtrusion.GetDefinition();
+
+
+            cutExtrusionDefinition.SetSideParam(false, 0, length);
+            cutExtrusionDefinition.SetSketch(sketch);
+            cutExtrusion.Create();
         }
     }
 }

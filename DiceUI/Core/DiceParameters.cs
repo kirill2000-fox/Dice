@@ -17,14 +17,14 @@ namespace Core
         public DiceParameters()
         {
             // TODO: Min Max Value
+            ParametersList.Add(new Parameter(ParametersEnum.DiceWidth, 30, 60, 30));
             ParametersList.Add(new Parameter(ParametersEnum.DiceHeight, 60, 120, 60));
-            ParametersList.Add(new Parameter(ParametersEnum.DiceWidth, 60, 120, 60));
-            ParametersList.Add(new Parameter(ParametersEnum.DiceThickness, 60, 120, 60));
-            ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter, 60, 120, 60));
-            ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 60, 120, 60));
+            ParametersList.Add(new Parameter(ParametersEnum.DiceThickness, 10, 30, 10));
+            ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter, 8, 12, 8));
+            ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 3, 24, 3));
         }
 
-        public object this[ParametersEnum index]
+        public Parameter this[ParametersEnum index]
         {
             get
             {
@@ -32,10 +32,9 @@ namespace Core
             }
             set
             {
-                // TODO
-                //ParametersList.FirstOrDefault(param => param.Name == index) = (Parameter)value;
-
-                //first = new Parameter(first.Name, first.Min, first.Max, first.Value);
+                var oldParameter = ParametersList.First(parameter => parameter.Name == index);
+                var i = ParametersList.IndexOf(oldParameter);
+                ParametersList[i] = value;
             }
         }
     }
