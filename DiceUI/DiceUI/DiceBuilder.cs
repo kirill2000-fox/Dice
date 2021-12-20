@@ -17,18 +17,6 @@ namespace DiceUI
             _diceParameters = parameters;
         }
 
-        //public void BuildEngineValve()
-        //{
-        //    BuildRect();
-        //    BuildEdge();
-        //    BuildDredging();
-        //}
-        //private void BuildPlate()
-        //{
-        //    ksEntity planeXOY = _part.GetDefaultEntity(1);
-        //    var length = _parameters.ThicknessPlate + _parameters.LengthChamfer;
-        //    CreateCylinder(planeXOY, _parameters.DiameterPlate, length);
-        //}
         //Выдавливание
         private void ExtrusionOperation(ksPart iPart, object iSketch, double height, bool b)
         {
@@ -50,44 +38,7 @@ namespace DiceUI
             //Создание каемки
             CreateEdge();
             //Создание выемки
-            //CreateDredging();
-            //Войти в режим редактирования эскиза
-        }
-
-        /// <summary>
-        /// Построение прямоугольника
-        /// </summary>
-        void CreateRectangle()
-        {
-            //Выбор плоскости для построения
-            var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOY);
-
-            //Войти в режим редактирования эскиза
-            var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
-
-            //Построение прямоугольника
-            var rectangleParam = (ksRectangleParam)_connector
-                .Kompas
-                .GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
-            //_diceParameters = new DiceParameters();
-            rectangleParam.x = 0;
-            rectangleParam.y = -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
-            rectangleParam.ang = 0;
-            rectangleParam.width = _diceParameters[ParametersEnum.DiceHeight].Value;
-            rectangleParam.height = _diceParameters[ParametersEnum.DiceWidth].Value;
-            rectangleParam.style = 1;
-
-            doc2D.ksRectangle(rectangleParam);
-
-            //Выйти из режима редактирования эскиза
-            sketchDefinition.EndEdit();
-
-            //Выдавливание детали
-            var dice = PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value,true);
-
-            var dredging = CreateDredging();
-
-            //CreateCutExtrusion(30, dice);
+            CreateDredging();
         }
 
         /// <summary>
@@ -151,6 +102,85 @@ namespace DiceUI
         }
 
         /// <summary>
+        /// Выдавливание по эскизу
+        /// </summary>
+        /// <param name="sketchDefinition">Эскиз</param>
+        /// <param name="thickness">Толщина</param>
+        /// <param name="side">Направление</param>
+        private ksEntity PressInsideSketch(
+            ksCutExtrusionDefinition sketchDefinition, double thickness, bool side)
+        {
+            //Создание интерфейса объекта
+            var entityCutExtr = (ksEntity)_connector
+                .KsPart
+                .NewEntity((short)Obj3dType.o3d_bossExtrusion);
+            var extrusionDefinition = (ksBossExtrusionDefinition)entityCutExtr
+                .GetDefinition();
+            
+            if (entityCutExtr != null)
+            {
+                ksCutExtrusionDefinition cutExtrDef = (ksCutExtrusionDefinition)entityCutExtr.GetDefinition();
+                if (cutExtrDef != null)
+                {
+                    cutExtrDef.cut = true;
+                    cutExtrDef.directionType = (short)Direction_Type.dtReverse;
+
+                    cutExtrDef.SetSideParam(false, (short)End_Type.etBlind, thickness);
+
+                }
+            }
+
+            //Установить параметры выдавливания в одном направлении
+            //side - направление, true - прямое направление
+            //0 выдавливание на глубину)
+            //глубина выдавливания
+            extrusionDefinition.SetSideParam(side, 0, thickness);
+
+            //Изменить указатель на интерфейс эскиза элемента
+            extrusionDefinition.SetSketch(sketchDefinition);
+
+            //Создать объект в модели
+            entityCutExtr.Create();
+
+            return entityCutExtr;
+        }
+
+        /// <summary>
+        /// Построение прямоугольника
+        /// </summary>
+        void CreateRectangle()
+        {
+            //Выбор плоскости для построения
+            var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOY);
+
+            //Войти в режим редактирования эскиза
+            var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
+
+            //Построение прямоугольника
+            var rectangleParam = (ksRectangleParam)_connector
+                .Kompas
+                .GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
+            //_diceParameters = new DiceParameters();
+            rectangleParam.x = 0;
+            rectangleParam.y = -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            rectangleParam.ang = 0;
+            rectangleParam.width = _diceParameters[ParametersEnum.DiceHeight].Value;
+            rectangleParam.height = _diceParameters[ParametersEnum.DiceWidth].Value;
+            rectangleParam.style = 1;
+
+            doc2D.ksRectangle(rectangleParam);
+
+            //Выйти из режима редактирования эскиза
+            sketchDefinition.EndEdit();
+
+            //Выдавливание детали
+            var dice = PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value, true);
+
+            var dredging = CreateDredging();
+            
+        }
+
+        /// <summary>
         /// Построение каемки
         /// </summary>
         /// <param name="iPart"></param>
@@ -184,8 +214,9 @@ namespace DiceUI
             sketchDefinition.EndEdit();
 
             //Выдавливание фигуры
-            //PressOutSketch(sketchDefinition, ((Parameter)_diceParameters[ParametersEnum.DiceHeight]).Value);
-            return PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8, true);
+            
+            return PressInsideSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8, true);
+            
         }
 
         private void CreateCutExtrusion(double length, ksEntity sketch)
