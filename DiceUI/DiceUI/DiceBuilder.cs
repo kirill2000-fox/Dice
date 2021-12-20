@@ -83,7 +83,7 @@ namespace DiceUI
             sketchDefinition.EndEdit();
 
             //Выдавливание детали
-            var dice = PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value);
+            var dice = PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value,true);
 
             var dredging = CreateDredging();
 
@@ -123,24 +123,23 @@ namespace DiceUI
         /// </summary>
         /// <param name="sketchDefinition">Эскиз</param>
         /// <param name="thickness">Толщина</param>
+        /// <param name="side">Направление</param>
         private ksEntity PressOutSketch(
             ksSketchDefinition sketchDefinition,
-            double thickness)
+            double thickness, bool side)
         {
-            //Создать новый интерфейс объекта и получить указатель на него
+            //Создание интерфейса объекта
             var extrusionEntity = (ksEntity)_connector
                 .KsPart
                 .NewEntity((short)Obj3dType.o3d_bossExtrusion);
-
-            //Интерфейс приклеенного элемента выдавливания
             var extrusionDefinition = (ksBossExtrusionDefinition)extrusionEntity
                 .GetDefinition();
 
             //Установить параметры выдавливания в одном направлении
-            //side - направление (true - прямое направление)
-            //тип выдавливания (0 - строго на глубину)
+            //side - направление, true - прямое направление
+            //0 выдавливание на глубину)
             //глубина выдавливания
-            extrusionDefinition.SetSideParam(true, 0, thickness);
+            extrusionDefinition.SetSideParam(side, 0, thickness);
 
             //Изменить указатель на интерфейс эскиза элемента
             extrusionDefinition.SetSketch(sketchDefinition);
@@ -165,10 +164,10 @@ namespace DiceUI
         /// </summary>
         private ksEntity CreateDredging()
         {
-            //Выбор плоскости для построения
+            //Плоскость построения
             var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOZ);
 
-            //Войти в режим редактирования эскиза
+            //Редактирование эскиза
             var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
 
             //Построение круга
@@ -181,12 +180,12 @@ namespace DiceUI
                 _diceParameters[ParametersEnum.DredgingDiameter].Value / 2,
                 1);
 
-            //Выйти из режима редактирования эскиза
+            //Выход из редактирования
             sketchDefinition.EndEdit();
 
-            //Выдавливание детали
+            //Выдавливание фигуры
             //PressOutSketch(sketchDefinition, ((Parameter)_diceParameters[ParametersEnum.DiceHeight]).Value);
-            return PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8);
+            return PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8, true);
         }
 
         private void CreateCutExtrusion(double length, ksEntity sketch)
