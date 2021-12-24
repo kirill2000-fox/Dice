@@ -175,9 +175,6 @@ namespace DiceUI
 
             //Выдавливание детали
             var dice = PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value, true);
-
-            var dredging = CreateDredging();
-            
         }
 
         /// <summary>
@@ -186,13 +183,64 @@ namespace DiceUI
         /// <param name="iPart"></param>
         private void CreateEdge()
         {
-            
+            double flaskDiameter = _diceParameters[ParametersEnum.EdgeWidth].Value;
+
+            var sketchDef = CreateSketch(Obj3dType.o3d_planeXOZ);
+            var doc2d = (ksDocument2D)sketchDef.BeginEdit();
+            // Параметры дуги
+            var radArc = flaskDiameter / 2;
+            var arcCordСenter = new double[] { 0, 0 };
+            var arcCord = new double[] { 0, flaskDiameter / 2, 0, -flaskDiameter / 2 };
+            short direction = 1;
+            // Построение дуги
+            doc2d.ksArcByPoint(arcCordСenter[0], arcCordСenter[1], radArc, arcCord[0],
+                arcCord[1], arcCord[2], arcCord[3], direction, 1);
+            // Параметры вспомогательного отрезка
+            var auxiliaryLineX = new double[] { 0, 0 };
+            var auxiliaryLineY = new double[] { -20, 20 };
+            // Построение вспомогательного отрезка
+            doc2d.ksLineSeg(auxiliaryLineX[0], auxiliaryLineY[0],
+                auxiliaryLineX[1], auxiliaryLineY[1], 3);
+            sketchDef.EndEdit();
+
+            CreateRotation(sketchDef);
+        }
+
+        /// <summary>
+        /// Метод для создания элемента вращения
+        /// </summary>
+        /// <param name="sketchDef">Эскиз по которому будет построен 
+        /// элемент вращения</param>
+        private void CreateRotation(ksSketchDefinition sketchDef)
+        {
+            ksObj3dTypeEnum type = ksObj3dTypeEnum.o3d_bossRotated;
+            var rotationEntity = (ksEntity)_connector.KsPart.
+                NewEntity((short)type);
+            var rotationDef = (ksBossRotatedDefinition)
+                rotationEntity.GetDefinition();
+            var angleRotation = 360;
+            rotationDef.SetSideParam(true, angleRotation);
+            rotationDef.SetSketch(sketchDef);
+
+            rotationEntity.Create();
+
+            ksEntity ksEntityBossExtrusion =
+                _connector.KsPart.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+            ksCutExtrusionDefinition ksBossExtrusionDefinition =
+                (ksCutExtrusionDefinition)ksEntityBossExtrusion.
+                    GetDefinition();
+            ksBossExtrusionDefinition.SetSideParam(false,
+                (short)End_Type.etBlind, 10,
+                2, false);
+            ksBossExtrusionDefinition.SetSketch(rotationEntity);
+            ksEntityBossExtrusion.name = "Вращение";
+            ksEntityBossExtrusion.Create();
         }
 
         /// <summary>
         /// Построение выемки
         /// </summary>
-        private ksEntity CreateDredging()
+        private void CreateDredging()
         {
             //Плоскость построения
             var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOZ);
@@ -214,21 +262,29 @@ namespace DiceUI
             sketchDefinition.EndEdit();
 
             //Выдавливание фигуры
-            
-            return PressInsideSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8, true);
-            
+            CreateExtrusionOffsetCutMethod(sketchDefinition, "Выемка");
         }
 
-        private void CreateCutExtrusion(double length, ksEntity sketch)
+        /// <summary>
+        /// Выдавливание вырезанием
+        /// </summary>
+        /// <param name="ksEntity"></param>
+        /// <param name="name">Имя</param>
+        private void CreateExtrusionOffsetCutMethod
+            (ksSketchDefinition ksEntity, string name)
         {
-            ksEntity cutExtrusion = _connector.KsPart.NewEntity(26);
-            ksCutExtrusionDefinition cutExtrusionDefinition =
-                cutExtrusion.GetDefinition();
-
-
-            cutExtrusionDefinition.SetSideParam(false, 0, length);
-            cutExtrusionDefinition.SetSketch(sketch);
-            cutExtrusion.Create();
+            ksEntity ksEntityBossExtrusion;
+            ksEntityBossExtrusion =
+                _connector.KsPart.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+            ksCutExtrusionDefinition ksBossExtrusionDefinition =
+                (ksCutExtrusionDefinition)ksEntityBossExtrusion.
+                    GetDefinition();
+            ksBossExtrusionDefinition.SetSideParam(false,
+                (short)End_Type.etBlind, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8,
+                2, false);
+            ksBossExtrusionDefinition.SetSketch(ksEntity);
+            ksEntityBossExtrusion.name = name;
+            ksEntityBossExtrusion.Create();
         }
     }
 }

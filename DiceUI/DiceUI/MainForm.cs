@@ -44,8 +44,7 @@ namespace DiceUI
             if (textBox.Text == "")
                 return;
 
-            double value;
-            if (!double.TryParse(textBox.Text, out value))
+            if (!double.TryParse(textBox.Text, out var value))
             {
                 textBox.BackColor = Color.Crimson;
                 return;
@@ -64,20 +63,12 @@ namespace DiceUI
                     var width = _parameters[ParametersEnum.DiceWidth];
                     _parameters[ParametersEnum.DiceWidth] = new Parameter(width.Name, width.Min, widthMax, width.Value);
 
-                }
-                
-
-                //каемка
-                if (nameParameters == ParametersEnum.DiceHeight)
-                {
                     var edgeMax = value / 5.0;
                     DiceEdgeMaxTextBox.Text = edgeMax.ToString();
-                    
-                    var edge = _parameters[ParametersEnum.DiceWidth];
-                    _parameters[ParametersEnum.DiceWidth] = new Parameter(edge.Name, edge.Min, edgeMax, edge.Value);
 
+                    var edge = _parameters[ParametersEnum.EdgeWidth];
+                    _parameters[ParametersEnum.EdgeWidth] = new Parameter(edge.Name, edge.Min, edgeMax, edge.Value);
                 }
-                
             }
             catch (ArgumentException)
             {

@@ -32,6 +32,7 @@ namespace DiceUI
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.DiceEdgeMaxTextBox = new System.Windows.Forms.TextBox();
             this.DiceHeightMaxTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -52,7 +53,6 @@ namespace DiceUI
             this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.DiceEdgeMaxTextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -95,13 +95,25 @@ namespace DiceUI
             this.splitContainer1.SplitterDistance = 358;
             this.splitContainer1.TabIndex = 0;
             // 
+            // DiceEdgeMaxTextBox
+            // 
+            this.DiceEdgeMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.DiceEdgeMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DiceEdgeMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.DiceEdgeMaxTextBox.Location = new System.Drawing.Point(83, 261);
+            this.DiceEdgeMaxTextBox.Name = "DiceEdgeMaxTextBox";
+            this.DiceEdgeMaxTextBox.ReadOnly = true;
+            this.DiceEdgeMaxTextBox.Size = new System.Drawing.Size(17, 15);
+            this.DiceEdgeMaxTextBox.TabIndex = 21;
+            // 
             // DiceHeightMaxTextBox
             // 
             this.DiceHeightMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DiceHeightMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(90, 115);
             this.DiceHeightMaxTextBox.Name = "DiceHeightMaxTextBox";
             this.DiceHeightMaxTextBox.ReadOnly = true;
-            this.DiceHeightMaxTextBox.Size = new System.Drawing.Size(31, 15);
+            this.DiceHeightMaxTextBox.Size = new System.Drawing.Size(17, 15);
             this.DiceHeightMaxTextBox.TabIndex = 18;
             this.DiceHeightMaxTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
@@ -131,9 +143,9 @@ namespace DiceUI
             this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label4.Location = new System.Drawing.Point(12, 261);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 17);
+            this.label4.Size = new System.Drawing.Size(97, 17);
             this.label4.TabIndex = 15;
-            this.label4.Text = "(от 3   до            )";
+            this.label4.Text = "(от 3   до      )";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
@@ -142,9 +154,9 @@ namespace DiceUI
             this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label3.Location = new System.Drawing.Point(12, 115);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(129, 17);
+            this.label3.Size = new System.Drawing.Size(105, 17);
             this.label3.TabIndex = 14;
-            this.label3.Text = "(от  30   до    60   )";
+            this.label3.Text = "(от  30  до      )";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label2
@@ -280,16 +292,6 @@ namespace DiceUI
             this.pictureBox1.Size = new System.Drawing.Size(579, 401);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
-            // 
-            // DiceEdgeMaxTextBox
-            // 
-            this.DiceEdgeMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.DiceEdgeMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DiceEdgeMaxTextBox.Location = new System.Drawing.Point(90, 263);
-            this.DiceEdgeMaxTextBox.Name = "DiceEdgeMaxTextBox";
-            this.DiceEdgeMaxTextBox.ReadOnly = true;
-            this.DiceEdgeMaxTextBox.Size = new System.Drawing.Size(30, 15);
-            this.DiceEdgeMaxTextBox.TabIndex = 21;
             // 
             // MainForm
             // 
