@@ -20,7 +20,7 @@ namespace Core
             ParametersList.Add(new Parameter(ParametersEnum.DiceWidth, 30, 60, 30));
             ParametersList.Add(new Parameter(ParametersEnum.DiceHeight, 60, 120, 60));
             ParametersList.Add(new Parameter(ParametersEnum.DiceThickness, 10, 30, 10));
-            ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter, 8, 12, 8));
+            ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter, 8, 15, 8));
             ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 3, 24, 3));
         }
 

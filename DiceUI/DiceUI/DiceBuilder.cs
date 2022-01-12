@@ -35,6 +35,7 @@ namespace DiceUI
         {
             //Создание прямоугольника
             CreateRectangle();
+            
             //Создание каемки
             CreateEdge();
             //Создание выемки
@@ -101,49 +102,6 @@ namespace DiceUI
             return extrusionEntity;
         }
 
-        /// <summary>
-        /// Выдавливание по эскизу
-        /// </summary>
-        /// <param name="sketchDefinition">Эскиз</param>
-        /// <param name="thickness">Толщина</param>
-        /// <param name="side">Направление</param>
-        private ksEntity PressInsideSketch(
-            ksCutExtrusionDefinition sketchDefinition, double thickness, bool side)
-        {
-            //Создание интерфейса объекта
-            var entityCutExtr = (ksEntity)_connector
-                .KsPart
-                .NewEntity((short)Obj3dType.o3d_bossExtrusion);
-            var extrusionDefinition = (ksBossExtrusionDefinition)entityCutExtr
-                .GetDefinition();
-            
-            if (entityCutExtr != null)
-            {
-                ksCutExtrusionDefinition cutExtrDef = (ksCutExtrusionDefinition)entityCutExtr.GetDefinition();
-                if (cutExtrDef != null)
-                {
-                    cutExtrDef.cut = true;
-                    cutExtrDef.directionType = (short)Direction_Type.dtReverse;
-
-                    cutExtrDef.SetSideParam(false, (short)End_Type.etBlind, thickness);
-
-                }
-            }
-
-            //Установить параметры выдавливания в одном направлении
-            //side - направление, true - прямое направление
-            //0 выдавливание на глубину)
-            //глубина выдавливания
-            extrusionDefinition.SetSideParam(side, 0, thickness);
-
-            //Изменить указатель на интерфейс эскиза элемента
-            extrusionDefinition.SetSketch(sketchDefinition);
-
-            //Создать объект в модели
-            entityCutExtr.Create();
-
-            return entityCutExtr;
-        }
 
         /// <summary>
         /// Построение прямоугольника
@@ -178,9 +136,30 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Построение каемки
+        /// Построение ВЫЕМКИ
         /// </summary>
-        /// <param name="iPart"></param>
+        /// <param name="document2D">Интерфейс графического документа</param>
+        /// <param name="width">Ширина эллипса</param>
+        /// <param name="height">Высота эллипса</param>
+        /// <returns></returns>
+        private int CreateEllips(ksDocument2D document2D, double width, double height)
+        {
+            KompasObject kompas = _connector.Kompas;
+            ksEllipseParam param = kompas.GetParamStruct(22);
+            param.A = width;
+            param.B = height;
+            param.angle = 0;
+            param.style = 1;
+            param.xc = 0;
+            param.yc = 0;
+
+            return document2D.ksEllipse(param);
+        }
+        /// <summary>
+        /// Построение ВЫЕМКИ(шарика)
+        /// </summary>
+        /// <param name="sketchDef"></param>
+        /// <param name="name">Имя</param>
         private void CreateEdge()
         {
             double flaskDiameter = _diceParameters[ParametersEnum.EdgeWidth].Value;
@@ -191,7 +170,7 @@ namespace DiceUI
             var radArc = flaskDiameter / 2;
             var arcCordСenter = new double[] { 0, 0 };
             var arcCord = new double[] { 0, flaskDiameter / 2, 0, -flaskDiameter / 2 };
-            short direction = 1;
+            short direction = 11;
             // Построение дуги
             doc2d.ksArcByPoint(arcCordСenter[0], arcCordСenter[1], radArc, arcCord[0],
                 arcCord[1], arcCord[2], arcCord[3], direction, 1);
@@ -204,6 +183,11 @@ namespace DiceUI
             sketchDef.EndEdit();
 
             CreateRotation(sketchDef);
+            //Выход из редактирования
+            sketchDef.EndEdit();
+
+            //Выдавливание фигуры
+            CreateCutRotation(sketchDef, "Выемка");
         }
 
         /// <summary>
@@ -230,7 +214,7 @@ namespace DiceUI
                 (ksCutExtrusionDefinition)ksEntityBossExtrusion.
                     GetDefinition();
             ksBossExtrusionDefinition.SetSideParam(false,
-                (short)End_Type.etBlind, 10,
+                (short)End_Type.etBlind, 30,
                 2, false);
             ksBossExtrusionDefinition.SetSketch(rotationEntity);
             ksEntityBossExtrusion.name = "Вращение";
@@ -238,7 +222,22 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Построение выемки
+        /// Вырезание вращением
+        /// </summary>
+        /// <param name="sketchDef"></param>
+        /// <param name="name">Имя</param>
+        private void CreateCutRotation(ksSketchDefinition sketchDef, string name)
+        {
+            ksEntity cutRotated = _connector.KsPart.NewEntity(29);
+            ksCutRotatedDefinition cutRotatedDefinition =
+                cutRotated.GetDefinition();
+            cutRotatedDefinition.SetSideParam(false, 360D);
+            cutRotatedDefinition.SetSketch(sketchDef);
+            cutRotated.Create();
+        }
+
+        /// <summary>
+        /// Построение КАЕМКИ
         /// </summary>
         private void CreateDredging()
         {
