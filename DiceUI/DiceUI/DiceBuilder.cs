@@ -40,6 +40,7 @@ namespace DiceUI
             CreateEdge();
             //Создание выемки
             CreateDredging();
+            CreateEllips();
         }
 
         /// <summary>
@@ -138,23 +139,28 @@ namespace DiceUI
         /// <summary>
         /// Построение ВЫЕМКИ
         /// </summary>
-        /// <param name="document2D">Интерфейс графического документа</param>
-        /// <param name="width">Ширина эллипса</param>
-        /// <param name="height">Высота эллипса</param>
-        /// <returns></returns>
-        private int CreateEllips(ksDocument2D document2D, double width, double height)
+        /// <param name="sketchDef"></param>
+        /// <param name="name">Имя</param>
+        void CreateEllips()
         {
+            //Выбор плоскости для построения
+            var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOY);
+
+            //Войти в режим редактирования эскиза
+            var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
+
             KompasObject kompas = _connector.Kompas;
             ksEllipseParam param = kompas.GetParamStruct(22);
-            param.A = width;
-            param.B = height;
+            param.A = _diceParameters[ParametersEnum.EdgeWidth].Value;
             param.angle = 0;
             param.style = 1;
             param.xc = 0;
             param.yc = 0;
-
-            return document2D.ksEllipse(param);
+            doc2D.ksEllipse(param);
+            //Выдавливание фигуры
+            CreateCutRotation(sketchDefinition, "Выемка");
         }
+
         /// <summary>
         /// Построение ВЫЕМКИ(шарика)
         /// </summary>
@@ -224,15 +230,15 @@ namespace DiceUI
         /// <summary>
         /// Вырезание вращением
         /// </summary>
-        /// <param name="sketchDef"></param>
+        /// <param name="sketchDefinition"></param>
         /// <param name="name">Имя</param>
-        private void CreateCutRotation(ksSketchDefinition sketchDef, string name)
+        private void CreateCutRotation(ksSketchDefinition sketchDefinition, string name)
         {
             ksEntity cutRotated = _connector.KsPart.NewEntity(29);
             ksCutRotatedDefinition cutRotatedDefinition =
                 cutRotated.GetDefinition();
             cutRotatedDefinition.SetSideParam(false, 360D);
-            cutRotatedDefinition.SetSketch(sketchDef);
+            cutRotatedDefinition.SetSketch(sketchDefinition);
             cutRotated.Create();
         }
 
