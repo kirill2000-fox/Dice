@@ -1,4 +1,5 @@
-﻿using Core;
+﻿using System.Linq;
+using Core;
 using DiceUI;
 using Kompas6API5;
 using Kompas6Constants;
@@ -16,18 +17,7 @@ namespace DiceUI
             _connector = connector;
             _diceParameters = parameters;
         }
-
-        //Выдавливание
-        private void ExtrusionOperation(ksPart iPart, object iSketch, double height, bool b)
-        {
-            ksEntity extrusion = iPart.NewEntity(24);
-            ksBaseExtrusionDefinition extrusionDefinition = extrusion.GetDefinition();
-
-            extrusionDefinition.SetSideParam(true, 0, height);
-            extrusionDefinition.SetSketch(iSketch);
-            extrusion.Create();
-        }
-
+        
         /// <summary>
         /// Построение кости
         /// </summary>
@@ -40,7 +30,7 @@ namespace DiceUI
             CreateEdge();
             //Создание выемки
             CreateDredging();
-            CreateEllips();
+            
         }
 
         /// <summary>
@@ -137,31 +127,6 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Построение ВЫЕМКИ
-        /// </summary>
-        /// <param name="sketchDef"></param>
-        /// <param name="name">Имя</param>
-        void CreateEllips()
-        {
-            //Выбор плоскости для построения
-            var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOY);
-
-            //Войти в режим редактирования эскиза
-            var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
-
-            KompasObject kompas = _connector.Kompas;
-            ksEllipseParam param = kompas.GetParamStruct(22);
-            param.A = _diceParameters[ParametersEnum.EdgeWidth].Value;
-            param.angle = 0;
-            param.style = 1;
-            param.xc = 0;
-            param.yc = 0;
-            doc2D.ksEllipse(param);
-            //Выдавливание фигуры
-            CreateCutRotation(sketchDefinition, "Выемка");
-        }
-
-        /// <summary>
         /// Построение ВЫЕМКИ(шарика)
         /// </summary>
         /// <param name="sketchDef"></param>
@@ -169,20 +134,54 @@ namespace DiceUI
         private void CreateEdge()
         {
             double flaskDiameter = _diceParameters[ParametersEnum.EdgeWidth].Value;
-
-            var sketchDef = CreateSketch(Obj3dType.o3d_planeXOZ);
-            var doc2d = (ksDocument2D)sketchDef.BeginEdit();
             // Параметры дуги
             var radArc = flaskDiameter / 2;
-            var arcCordСenter = new double[] { 0, 0 };
-            var arcCord = new double[] { 0, flaskDiameter / 2, 0, -flaskDiameter / 2 };
+            var width = _diceParameters.ParametersList
+                .First(parameter =>
+                    parameter.Name == ParametersEnum.DiceWidth).Value;
+            var height = _diceParameters.ParametersList
+                .First(parameter =>
+                    parameter.Name == ParametersEnum.DiceHeight).Value;
+            var x1 = height * 0.25 - flaskDiameter;
+            var y1 = width * 0.5 - flaskDiameter;
+            var x2 = height * 0.75 + flaskDiameter;
+            var y2 = width * 0.5 - flaskDiameter;
+
+            CreateArc(x1, y1, flaskDiameter, radArc);
+            CreateArc(x2, y2, flaskDiameter, radArc);
+
+        }
+        /// <summary>
+        /// Построение однной выемки
+        /// </summary>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="flaskDiameter"></param>
+        /// <param name="radArc"></param>
+        private void CreateArc(double x, double y, double flaskDiameter, double radArc)
+        {
+            ksEntity planeXoy = _connector.KsPart.GetDefaultEntity((int)Obj3dType.o3d_planeXOY);
+            ksEntity plane = _connector.KsPart.NewEntity((int)Obj3dType.o3d_planeOffset);
+            ksPlaneOffsetDefinition planeOffsetDefinition = plane.GetDefinition();
+            planeOffsetDefinition.direction = true;
+            planeOffsetDefinition.offset = _diceParameters.ParametersList
+                .First(parameter => parameter.Name == ParametersEnum.DiceThickness).Value;
+            planeOffsetDefinition.SetPlane(planeXoy);
+            plane.Create();
+            ksEntity sketch = _connector.KsPart.NewEntity((int)Obj3dType.o3d_sketch);
+            ksSketchDefinition sketchDef = sketch.GetDefinition();
+            sketchDef.SetPlane(plane);
+            sketch.Create();
+            var doc2d = (ksDocument2D)sketchDef.BeginEdit();
+            var arcCordСenter = new double[] { x, y };
+            var arcCord = new double[] { x, y + flaskDiameter / 2, x, y - flaskDiameter / 2 };
             short direction = 11;
             // Построение дуги
             doc2d.ksArcByPoint(arcCordСenter[0], arcCordСenter[1], radArc, arcCord[0],
                 arcCord[1], arcCord[2], arcCord[3], direction, 1);
             // Параметры вспомогательного отрезка
-            var auxiliaryLineX = new double[] { 0, 0 };
-            var auxiliaryLineY = new double[] { -20, 20 };
+            var auxiliaryLineX = new double[] { arcCord[0], arcCord[2] };
+            var auxiliaryLineY = new double[] { arcCord[1], arcCord[3] };
             // Построение вспомогательного отрезка
             doc2d.ksLineSeg(auxiliaryLineX[0], auxiliaryLineY[0],
                 auxiliaryLineX[1], auxiliaryLineY[1], 3);
