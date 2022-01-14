@@ -100,7 +100,7 @@ namespace DiceUI
             this.DiceEdgeMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.DiceEdgeMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DiceEdgeMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.DiceEdgeMaxTextBox.Location = new System.Drawing.Point(83, 261);
+            this.DiceEdgeMaxTextBox.Location = new System.Drawing.Point(81, 261);
             this.DiceEdgeMaxTextBox.Name = "DiceEdgeMaxTextBox";
             this.DiceEdgeMaxTextBox.ReadOnly = true;
             this.DiceEdgeMaxTextBox.Size = new System.Drawing.Size(17, 15);
@@ -110,12 +110,11 @@ namespace DiceUI
             // 
             this.DiceHeightMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DiceHeightMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(90, 115);
+            this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(88, 115);
             this.DiceHeightMaxTextBox.Name = "DiceHeightMaxTextBox";
             this.DiceHeightMaxTextBox.ReadOnly = true;
             this.DiceHeightMaxTextBox.Size = new System.Drawing.Size(17, 15);
             this.DiceHeightMaxTextBox.TabIndex = 18;
-            this.DiceHeightMaxTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label6
             // 
@@ -143,9 +142,9 @@ namespace DiceUI
             this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label4.Location = new System.Drawing.Point(12, 261);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 17);
+            this.label4.Size = new System.Drawing.Size(101, 17);
             this.label4.TabIndex = 15;
-            this.label4.Text = "(от 3   до      )";
+            this.label4.Text = "(от 3  до        )";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label3
@@ -156,8 +155,7 @@ namespace DiceUI
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(105, 17);
             this.label3.TabIndex = 14;
-            this.label3.Text = "(от  30  до      )";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label3.Text = "(от 30  до       )";
             // 
             // label2
             // 
@@ -217,6 +215,7 @@ namespace DiceUI
             this.DiceWidthTextbox.Name = "DiceWidthTextbox";
             this.DiceWidthTextbox.Size = new System.Drawing.Size(184, 22);
             this.DiceWidthTextbox.TabIndex = 7;
+            this.DiceWidthTextbox.TextChanged += new System.EventHandler(this.DiceWidth_TextChanged);
             this.DiceWidthTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // DiceHeightTextbox

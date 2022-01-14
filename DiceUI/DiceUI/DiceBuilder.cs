@@ -26,9 +26,10 @@ namespace DiceUI
             //Создание прямоугольника
             CreateRectangle();
             
-            //Создание каемки
-            CreateEdge();
             //Создание выемки
+            CreateEdge();
+
+            //Создание каемки
             CreateDredging();
             
         }
@@ -92,7 +93,6 @@ namespace DiceUI
 
             return extrusionEntity;
         }
-
 
         /// <summary>
         /// Построение прямоугольника
