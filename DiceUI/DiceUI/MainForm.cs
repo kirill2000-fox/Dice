@@ -34,7 +34,6 @@ namespace DiceUI
             EdgeWidthTextbox.Text = "3";
         }
 
-
         /// <summary>
         /// Метод для проверки условий
         /// </summary>
@@ -44,7 +43,12 @@ namespace DiceUI
             _parameters.Errors.Remove(nameParameters);
 
             if (textBox.Text == "")
+            {
+                textBox.BackColor = Color.Crimson;
+                _parameters.Errors.Add(nameParameters,
+                    "Введено не числовое значение");
                 return;
+            }
 
             if (!double.TryParse(textBox.Text, out var value))
             {
