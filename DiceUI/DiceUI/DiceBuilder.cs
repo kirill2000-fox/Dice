@@ -133,7 +133,8 @@ namespace DiceUI
         /// <param name="name">Имя</param>
         private void CreateEdge()
         {
-            double flaskDiameter = _diceParameters[ParametersEnum.EdgeWidth].Value;
+            double flaskDiameter = _diceParameters.ParametersList
+                .First(parameter => parameter.Name == ParametersEnum.DredgingDiameter).Value;
             // Параметры дуги
             var radArc = flaskDiameter / 2;
             var width = _diceParameters.ParametersList
@@ -142,23 +143,21 @@ namespace DiceUI
             var height = _diceParameters.ParametersList
                 .First(parameter =>
                     parameter.Name == ParametersEnum.DiceHeight).Value;
-            var x1 = height * 0.25 - flaskDiameter;
-            var y1 = width * 0.5 - flaskDiameter;
-            var x2 = height * 0.75 + flaskDiameter;
-            var y2 = width * 0.5 - flaskDiameter;
+            var x1 = height * 0.25;
+            var y1 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            var x2 = height * 0.75;
+            var y2 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
 
-            CreateArc(x1, y1, flaskDiameter, radArc);
-            CreateArc(x2, y2, flaskDiameter, radArc);
-
+            CreateArc(x1, y1, radArc);
+            CreateArc(x2, y2, radArc);
         }
         /// <summary>
         /// Построение однной выемки
         /// </summary>
         /// <param name="x"></param>
         /// <param name="y"></param>
-        /// <param name="flaskDiameter"></param>
         /// <param name="radArc"></param>
-        private void CreateArc(double x, double y, double flaskDiameter, double radArc)
+        private void CreateArc(double x, double y, double radArc)
         {
             ksEntity planeXoy = _connector.KsPart.GetDefaultEntity((int)Obj3dType.o3d_planeXOY);
             ksEntity plane = _connector.KsPart.NewEntity((int)Obj3dType.o3d_planeOffset);
@@ -174,8 +173,8 @@ namespace DiceUI
             sketch.Create();
             var doc2d = (ksDocument2D)sketchDef.BeginEdit();
             var arcCordСenter = new double[] { x, y };
-            var arcCord = new double[] { x, y + flaskDiameter / 2, x, y - flaskDiameter / 2 };
-            short direction = 11;
+            var arcCord = new double[] { x, arcCordСenter[1] + radArc, x, arcCordСenter[1] - radArc };
+            short direction = 1;
             // Построение дуги
             doc2d.ksArcByPoint(arcCordСenter[0], arcCordСenter[1], radArc, arcCord[0],
                 arcCord[1], arcCord[2], arcCord[3], direction, 1);
@@ -194,6 +193,7 @@ namespace DiceUI
             //Выдавливание фигуры
             CreateCutRotation(sketchDef, "Выемка");
         }
+
 
         /// <summary>
         /// Метод для создания элемента вращения
@@ -259,7 +259,7 @@ namespace DiceUI
 
             doc2D.ksCircle(_diceParameters[ParametersEnum.DiceHeight].Value / 2,
                 -_diceParameters[ParametersEnum.DiceThickness].Value,
-                _diceParameters[ParametersEnum.DredgingDiameter].Value / 2,
+                _diceParameters[ParametersEnum.EdgeWidth].Value / 2,
                 1);
 
             //Выход из редактирования
@@ -268,6 +268,7 @@ namespace DiceUI
             //Выдавливание фигуры
             CreateExtrusionOffsetCutMethod(sketchDefinition, "Выемка");
         }
+
 
         /// <summary>
         /// Выдавливание вырезанием
@@ -285,7 +286,7 @@ namespace DiceUI
                     GetDefinition();
             ksBossExtrusionDefinition.SetSideParam(false,
                 (short)End_Type.etBlind, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8,
-                2, false);
+                0.1, false);
             ksBossExtrusionDefinition.SetSketch(ksEntity);
             ksEntityBossExtrusion.name = name;
             ksEntityBossExtrusion.Create();

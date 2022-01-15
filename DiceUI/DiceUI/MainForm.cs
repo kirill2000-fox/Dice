@@ -128,16 +128,37 @@ namespace DiceUI
             }
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки "Построить".
+        /// Запуск построение модели
+        /// Предупреждение о построении
+        /// </summary>
         private void BuildObjectbutton_Click(object sender, EventArgs e)
         {
-            _kompasConnector.OpenKompas();
-            var builder = new DiceBuilder(_kompasConnector, _parameters);
-            builder.BuildDice();
-        }
+            if hasError 
+            {
 
-        private void label4_Click(object sender, EventArgs e)
-        {
+            }
+            const string message =
+                "Один из параметров выходит за пределы допустимого значения" +
+                "модель построиться на базовым параметрам, вы хотите продолжить?";
+            const string caption = "Form Closing";
+            var result = MessageBox.Show(message, caption,
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
 
+            if (result == DialogResult.No)
+            {
+                Close();
+            }
+            else
+            {
+                _kompasConnector.OpenKompas();
+                var builder = new DiceBuilder(_kompasConnector, _parameters);
+                builder.BuildDice();
+            }
+            
         }
+        
     }
 }
