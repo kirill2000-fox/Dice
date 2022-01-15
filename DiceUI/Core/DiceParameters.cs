@@ -12,11 +12,21 @@ namespace Core
         public List<Parameter> ParametersList { get; set; } = new List<Parameter>();
 
         /// <summary>
+        /// Словарь ошибок параметров
+        /// </summary>
+        public Dictionary<ParametersEnum, string> Errors = new Dictionary<ParametersEnum, string>();
+
+        /// <summary>
+        /// Флаг существования ошибки
+        /// </summary>
+        public bool HasError => Errors.Any();
+
+        /// <summary>
         /// Создает экземпляр класса <see cref="DiceParameters"/>
         /// </summary>
         public DiceParameters()
         {
-            // TODO: Min Max Value
+            
             ParametersList.Add(new Parameter(ParametersEnum.DiceWidth, 30, 60, 30));
             ParametersList.Add(new Parameter(ParametersEnum.DiceHeight, 60, 120, 60));
             ParametersList.Add(new Parameter(ParametersEnum.DiceThickness, 10, 30, 10));

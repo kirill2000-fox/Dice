@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using Core;
 
@@ -40,6 +41,7 @@ namespace DiceUI
         private void CheckValue(TextBox textBox, ParametersEnum nameParameters)
         {
             textBox.BackColor = Color.White;
+            _parameters.Errors.Remove(nameParameters);
 
             if (textBox.Text == "")
                 return;
@@ -47,6 +49,8 @@ namespace DiceUI
             if (!double.TryParse(textBox.Text, out var value))
             {
                 textBox.BackColor = Color.Crimson;
+                _parameters.Errors.Add(nameParameters,
+                    "Введено не числовое значение");
                 return;
             }
 
@@ -70,9 +74,10 @@ namespace DiceUI
                     _parameters[ParametersEnum.EdgeWidth] = new Parameter(edge.Name, edge.Min, edgeMax, edge.Value);
                 }
             }
-            catch (ArgumentException)
+            catch (ArgumentException e)
             {
                 textBox.BackColor = Color.Crimson;
+                _parameters.Errors.Add(nameParameters, e.Message);
             }
         }
         private void DiceHeight_TextChanged(object sender, EventArgs e)
@@ -135,29 +140,21 @@ namespace DiceUI
         /// </summary>
         private void BuildObjectbutton_Click(object sender, EventArgs e)
         {
-            if hasError 
+            if (_parameters.HasError)
             {
+                const string message =
+                    "Один из параметров выходит за пределы допустимого значения!";
+                const string caption = "Form Closing";
+                var result = MessageBox.Show(message, caption,
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
+            }
 
-            }
-            const string message =
-                "Один из параметров выходит за пределы допустимого значения" +
-                "модель построиться на базовым параметрам, вы хотите продолжить?";
-            const string caption = "Form Closing";
-            var result = MessageBox.Show(message, caption,
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Question);
+            _kompasConnector.OpenKompas();
+            var builder = new DiceBuilder(_kompasConnector, _parameters);
+            builder.BuildDice();
 
-            if (result == DialogResult.No)
-            {
-                Close();
-            }
-            else
-            {
-                _kompasConnector.OpenKompas();
-                var builder = new DiceBuilder(_kompasConnector, _parameters);
-                builder.BuildDice();
-            }
-            
         }
         
     }
