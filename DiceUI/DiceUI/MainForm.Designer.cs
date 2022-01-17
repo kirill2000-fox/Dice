@@ -100,7 +100,7 @@ namespace DiceUI
             this.DiceEdgeMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.DiceEdgeMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DiceEdgeMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.DiceEdgeMaxTextBox.Location = new System.Drawing.Point(81, 261);
+            this.DiceEdgeMaxTextBox.Location = new System.Drawing.Point(92, 261);
             this.DiceEdgeMaxTextBox.Name = "DiceEdgeMaxTextBox";
             this.DiceEdgeMaxTextBox.ReadOnly = true;
             this.DiceEdgeMaxTextBox.Size = new System.Drawing.Size(17, 15);
@@ -108,9 +108,10 @@ namespace DiceUI
             // 
             // DiceHeightMaxTextBox
             // 
+            this.DiceHeightMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.DiceHeightMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DiceHeightMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(88, 115);
+            this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(92, 115);
             this.DiceHeightMaxTextBox.Name = "DiceHeightMaxTextBox";
             this.DiceHeightMaxTextBox.ReadOnly = true;
             this.DiceHeightMaxTextBox.Size = new System.Drawing.Size(17, 15);
@@ -122,9 +123,9 @@ namespace DiceUI
             this.label6.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label6.Location = new System.Drawing.Point(12, 159);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(93, 17);
+            this.label6.Size = new System.Drawing.Size(109, 17);
             this.label6.TabIndex = 17;
-            this.label6.Text = "(от 10 до 30)";
+            this.label6.Text = "( от 10  до  30 )";
             // 
             // label5
             // 
@@ -132,9 +133,9 @@ namespace DiceUI
             this.label5.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label5.Location = new System.Drawing.Point(13, 212);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(85, 17);
+            this.label5.Size = new System.Drawing.Size(105, 17);
             this.label5.TabIndex = 16;
-            this.label5.Text = "(от 8 до 15)";
+            this.label5.Text = "( от 8   до  15 )";
             // 
             // label4
             // 
@@ -142,9 +143,9 @@ namespace DiceUI
             this.label4.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label4.Location = new System.Drawing.Point(12, 261);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 17);
+            this.label4.Size = new System.Drawing.Size(109, 17);
             this.label4.TabIndex = 15;
-            this.label4.Text = "(от 3  до        )";
+            this.label4.Text = "( от 3   до        )";
             // 
             // label3
             // 
@@ -152,9 +153,9 @@ namespace DiceUI
             this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label3.Location = new System.Drawing.Point(12, 115);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 17);
+            this.label3.Size = new System.Drawing.Size(109, 17);
             this.label3.TabIndex = 14;
-            this.label3.Text = "(от 30  до       )";
+            this.label3.Text = "( от 30  до       )";
             // 
             // label2
             // 
@@ -162,9 +163,9 @@ namespace DiceUI
             this.label2.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.label2.Location = new System.Drawing.Point(12, 64);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(101, 17);
+            this.label2.Size = new System.Drawing.Size(113, 17);
             this.label2.TabIndex = 13;
-            this.label2.Text = "(от 60 до 120)";
+            this.label2.Text = "( от 60  до 120 )";
             // 
             // BuildObjectbutton
             // 
