@@ -2,7 +2,7 @@
 
 namespace Core
 {
-    public class Parameter
+    public class Parameter : ICloneable
     {
         private double _max;
 
@@ -21,7 +21,7 @@ namespace Core
             {
                 if (value < Min || value > Max)
                 {
-                    throw new ArgumentException($"Value should be more then {Min} and less then {Max}");
+                    throw new ArgumentException($"Значение должно быть больше {Min} и меньше {Max}");
                 }
 
                 _value = value;
@@ -36,6 +36,29 @@ namespace Core
             Min = min;
             Max = max;
             Value = value;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var parameter = obj as Parameter;
+
+            if (parameter == null)
+            {
+                return false;
+            }
+
+            if (parameter.Name == Name && parameter.Min == Min && parameter.Max == Max &&
+                parameter.Value == Value)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
     }
 }
