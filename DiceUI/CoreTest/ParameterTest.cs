@@ -71,12 +71,12 @@ namespace CoreTest
                 "Не присвоилось значение!");
             }
 
-            //[TestCase(ParametersEnum.BoxWidth,
-            //500,
-            //TestName = "Проверка некорректного присвоения" +
-            //" значения параметра BoxWidth." +
-            //"Должен флаг HasError быть в true и" +
-            //" ErrorStrung не должна быть пуста")]
+            [TestCase(ParametersEnum.BoxWidth,
+            500,
+            TestName = "Проверка некорректного присвоения" +
+            " значения параметра BoxWidth." +
+            "Должен флаг HasError быть в true и" +
+            " ErrorStrung не должна быть пуста")]
             public void TestSetValueParameter_IncorrectValue(ParametersEnum parameterEnum, int value)
             {
                 var parameters = Parameters;
