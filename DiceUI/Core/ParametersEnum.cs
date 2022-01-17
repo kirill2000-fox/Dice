@@ -8,23 +8,18 @@ namespace Core
     public enum ParametersEnum
     {
         [Description("Высота кости")]
-        DiceHeight,
+        DiceHeight = 0,
+
         [Description("Ширина кости")]
-        DiceWidth,
+        DiceWidth = 1,
 
-        /// <summary>
-        /// Толщина кости
-        /// </summary>
-        DiceThickness,
+        [Description("Толщина кости")]
+        DiceThickness = 2,
 
-        /// <summary>
-        /// Диаметр выемки
-        /// </summary>
-        DredgingDiameter,
+        [Description("Диаметр выемки")]
+        DredgingDiameter = 3,
 
-        /// <summary>
-        /// Ширина каемки
-        /// </summary>
-        EdgeWidth,
+        [Description("Ширина каемки")]
+        EdgeWidth = 4
     }
 }
