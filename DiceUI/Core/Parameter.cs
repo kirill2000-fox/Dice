@@ -4,11 +4,7 @@ namespace Core
 {
     public class Parameter : ICloneable
     {
-        private double _max;
-
         private double _value;
-
-        private ParametersEnum _name;
 
         public double Min { get; private set; }
 

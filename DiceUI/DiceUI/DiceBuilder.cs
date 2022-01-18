@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using Core;
-using DiceUI;
 using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;
@@ -31,7 +30,6 @@ namespace DiceUI
 
             //Создание каемки
             CreateDredging();
-            
         }
 
         /// <summary>
