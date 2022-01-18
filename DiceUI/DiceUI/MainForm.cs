@@ -62,7 +62,6 @@ namespace DiceUI
             {
                 _parameters[nameParameters].Value = value;
 
-                //ширина
                 if (nameParameters == ParametersEnum.DiceHeight)
                 {
                     var widthMax = value / 2.0;
@@ -128,7 +127,7 @@ namespace DiceUI
                 return;
             }
 
-            if (!(Char.IsDigit(e.KeyChar)))
+            if (!char.IsDigit(e.KeyChar))
             {
                 if ((e.KeyChar != (char)Keys.Back))
                 {
@@ -158,8 +157,6 @@ namespace DiceUI
             _kompasConnector.OpenKompas();
             var builder = new DiceBuilder(_kompasConnector, _parameters);
             builder.BuildDice();
-
         }
-        
     }
 }

@@ -121,7 +121,7 @@ namespace DiceUI
             sketchDefinition.EndEdit();
 
             //Выдавливание детали
-            var dice = PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value, true);
+            PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value, true);
         }
 
         /// <summary>

@@ -1,14 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 namespace Core
 {
     /// <summary>
-    /// Параметры
+    /// Класс, хранящий параметры кости
     /// </summary>
     public class DiceParameters
     {
+        /// <summary>
+        /// Список параметров
+        /// </summary>
         public List<Parameter> ParametersList { get; set; } = new List<Parameter>();
 
         /// <summary>
@@ -23,6 +25,7 @@ namespace Core
 
         /// <summary>
         /// Создает экземпляр класса <see cref="DiceParameters"/>
+        /// Список параметров со значениями по умолчанию
         /// </summary>
         public DiceParameters()
         {
@@ -33,6 +36,12 @@ namespace Core
             ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 3, 24, 3));
         }
 
+        /// <summary>
+        /// Индексатор, который позволяет получать элементы списка по значению
+        /// <see cref="ParametersEnum"/>
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
         public Parameter this[ParametersEnum index]
         {
             get

@@ -4,12 +4,24 @@ namespace Core
 {
     public class Parameter : ICloneable
     {
+        /// <summary>
+        /// Текущее значение параметра
+        /// </summary>
         private double _value;
 
+        /// <summary>
+        /// Минимальное значение параметра
+        /// </summary>
         public double Min { get; private set; }
 
+        /// <summary>
+        /// Максимальное значение параметра
+        /// </summary>
         public double Max { get; private set; }
 
+        /// <summary>
+        /// Проверка на корректность введенных данных
+        /// </summary>
         public double Value
         {
             get => _value;
@@ -24,8 +36,18 @@ namespace Core
             }
         }
 
+        /// <summary>
+        /// Наименование параметра
+        /// </summary>
         public ParametersEnum Name { get; private set; }
 
+        /// <summary>
+        /// Создает экземпляр класса <see cref="Parameter"/>
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="min"></param>
+        /// <param name="max"></param>
+        /// <param name="value"></param>
         public Parameter(ParametersEnum name, double min, double max, double value)
         {
             Name = name;
@@ -34,6 +56,7 @@ namespace Core
             Value = value;
         }
 
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             var parameter = obj as Parameter;
@@ -52,6 +75,7 @@ namespace Core
             return false;
         }
 
+        /// <inheritdoc/>
         public object Clone()
         {
             return this.MemberwiseClone();
