@@ -3,7 +3,7 @@ using NUnit.Framework;
 
 namespace CoreTest
 {
-    public class Tests
+    public class DiceParametersTest
     {
         private DiceParameters _testParameters
         {
