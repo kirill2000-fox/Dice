@@ -5,10 +5,7 @@ namespace CoreTest
 {
     public class DiceParametersTest
     {
-        private DiceParameters _testParameters
-        {
-            get => new DiceParameters();
-        }
+        private DiceParameters _testParameters => new DiceParameters();
 
         [TestCase(TestName = "Позитивный тест геттера ParametersList")]
         public void TestParametersListGet_GoodScenario()

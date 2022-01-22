@@ -44,9 +44,9 @@ namespace Core
         /// <summary>
         /// Создает экземпляр класса <see cref="Parameter"/>
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="min"></param>
-        /// <param name="max"></param>
+        /// <param name="name">Имя</param>
+        /// <param name="min">Минимальное значение</param>
+        /// <param name="max">Максимальное значение</param>
         /// <param name="value"></param>
         public Parameter(ParametersEnum name, double min, double max, double value)
         {
