@@ -111,7 +111,7 @@ namespace DiceUI
             this.DiceHeightMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
             this.DiceHeightMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DiceHeightMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(92, 115);
+            this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(92, 161);
             this.DiceHeightMaxTextBox.Name = "DiceHeightMaxTextBox";
             this.DiceHeightMaxTextBox.ReadOnly = true;
             this.DiceHeightMaxTextBox.Size = new System.Drawing.Size(17, 15);
@@ -121,7 +121,7 @@ namespace DiceUI
             // 
             this.label6.AutoSize = true;
             this.label6.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label6.Location = new System.Drawing.Point(12, 159);
+            this.label6.Location = new System.Drawing.Point(12, 113);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(109, 17);
             this.label6.TabIndex = 17;
@@ -151,7 +151,7 @@ namespace DiceUI
             // 
             this.label3.AutoSize = true;
             this.label3.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.label3.Location = new System.Drawing.Point(12, 115);
+            this.label3.Location = new System.Drawing.Point(12, 161);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(109, 17);
             this.label3.TabIndex = 14;
@@ -200,7 +200,7 @@ namespace DiceUI
             // 
             // DiceThicknessTextbox
             // 
-            this.DiceThicknessTextbox.Location = new System.Drawing.Point(163, 139);
+            this.DiceThicknessTextbox.Location = new System.Drawing.Point(163, 93);
             this.DiceThicknessTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DiceThicknessTextbox.Name = "DiceThicknessTextbox";
             this.DiceThicknessTextbox.Size = new System.Drawing.Size(184, 22);
@@ -210,7 +210,7 @@ namespace DiceUI
             // 
             // DiceWidthTextbox
             // 
-            this.DiceWidthTextbox.Location = new System.Drawing.Point(163, 92);
+            this.DiceWidthTextbox.Location = new System.Drawing.Point(163, 138);
             this.DiceWidthTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DiceWidthTextbox.Name = "DiceWidthTextbox";
             this.DiceWidthTextbox.Size = new System.Drawing.Size(184, 22);
@@ -249,7 +249,7 @@ namespace DiceUI
             // DiceThicknesslabel
             // 
             this.DiceThicknesslabel.AutoSize = true;
-            this.DiceThicknesslabel.Location = new System.Drawing.Point(12, 142);
+            this.DiceThicknesslabel.Location = new System.Drawing.Point(12, 96);
             this.DiceThicknesslabel.Name = "DiceThicknesslabel";
             this.DiceThicknesslabel.Size = new System.Drawing.Size(132, 17);
             this.DiceThicknesslabel.TabIndex = 3;
@@ -258,7 +258,7 @@ namespace DiceUI
             // DiceWidthlabel
             // 
             this.DiceWidthlabel.AutoSize = true;
-            this.DiceWidthlabel.Location = new System.Drawing.Point(12, 95);
+            this.DiceWidthlabel.Location = new System.Drawing.Point(12, 141);
             this.DiceWidthlabel.Name = "DiceWidthlabel";
             this.DiceWidthlabel.Size = new System.Drawing.Size(123, 17);
             this.DiceWidthlabel.TabIndex = 2;
@@ -302,7 +302,6 @@ namespace DiceUI
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "MainForm";
             this.Text = "MainForm";
-            this.Load += new System.EventHandler(this.MainForm_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);

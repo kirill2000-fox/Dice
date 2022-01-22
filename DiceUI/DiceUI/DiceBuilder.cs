@@ -11,6 +11,9 @@ namespace DiceUI
         private KompasConnector _connector;
         private DiceParameters _diceParameters;
 
+        /// <summary>
+        /// Конструктор
+        /// </summary>
         public DiceBuilder(KompasConnector connector, DiceParameters parameters)
         {
             _connector = connector;
@@ -26,10 +29,10 @@ namespace DiceUI
             CreateRectangle();
             
             //Создание выемки
-            CreateEdge();
+            CreateDredging();
 
             //Создание каемки
-            CreateDredging();
+            CreateEdge();
         }
 
         /// <summary>
@@ -107,7 +110,6 @@ namespace DiceUI
             var rectangleParam = (ksRectangleParam)_connector
                 .Kompas
                 .GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
-            //_diceParameters = new DiceParameters();
             rectangleParam.x = 0;
             rectangleParam.y = -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
             rectangleParam.ang = 0;
@@ -125,11 +127,9 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Построение ВЫЕМКИ(шарика)
+        /// Построение выемки
         /// </summary>
-        /// <param name="sketchDef"></param>
-        /// <param name="name">Имя</param>
-        private void CreateEdge()
+        private void CreateDredging()
         {
             double flaskDiameter = _diceParameters.ParametersList
                 .First(parameter => parameter.Name == ParametersEnum.DredgingDiameter).Value;
@@ -149,12 +149,13 @@ namespace DiceUI
             CreateArc(x1, y1, radArc);
             CreateArc(x2, y2, radArc);
         }
+
         /// <summary>
         /// Построение однной выемки
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
-        /// <param name="radArc"></param>
+        /// <param name="x"> координаты центра дуги</param>
+        /// <param name="y">координаты центра дуги</param>
+        /// <param name="radArc">радиус дуги</param>
         private void CreateArc(double x, double y, double radArc)
         {
             ksEntity planeXoy = _connector.KsPart.GetDefaultEntity((int)Obj3dType.o3d_planeXOY);
@@ -173,13 +174,16 @@ namespace DiceUI
             var arcCordСenter = new double[] { x, y };
             var arcCord = new double[] { x, arcCordСenter[1] + radArc, x, arcCordСenter[1] - radArc };
             short direction = 1;
-            // Построение дуги
+
+            //Построение дуги
             doc2d.ksArcByPoint(arcCordСenter[0], arcCordСenter[1], radArc, arcCord[0],
                 arcCord[1], arcCord[2], arcCord[3], direction, 1);
-            // Параметры вспомогательного отрезка
+
+            //Параметры вспомогательного отрезка
             var auxiliaryLineX = new double[] { arcCord[0], arcCord[2] };
             var auxiliaryLineY = new double[] { arcCord[1], arcCord[3] };
-            // Построение вспомогательного отрезка
+
+            //Построение вспомогательного отрезка
             doc2d.ksLineSeg(auxiliaryLineX[0], auxiliaryLineY[0],
                 auxiliaryLineX[1], auxiliaryLineY[1], 3);
             sketchDef.EndEdit();
@@ -227,7 +231,8 @@ namespace DiceUI
         /// <summary>
         /// Вырезание вращением
         /// </summary>
-        /// <param name="sketchDefinition"></param>
+        /// <param name="sketchDefinition">Эскиз по которому будет построен 
+        /// элемент вращения</param>
         /// <param name="name">Имя</param>
         private void CreateCutRotation(ksSketchDefinition sketchDefinition, string name)
         {
@@ -240,9 +245,9 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Построение КАЕМКИ
+        /// Построение каемки
         /// </summary>
-        private void CreateDredging()
+        private void CreateEdge()
         {
             //Плоскость построения
             var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOZ);
@@ -255,6 +260,7 @@ namespace DiceUI
                 .Kompas
                 .GetParamStruct((short)StructType2DEnum.ko_CircleParam);
 
+            //Построение окружности
             doc2D.ksCircle(_diceParameters[ParametersEnum.DiceHeight].Value / 2,
                 -_diceParameters[ParametersEnum.DiceThickness].Value,
                 _diceParameters[ParametersEnum.EdgeWidth].Value / 2,
