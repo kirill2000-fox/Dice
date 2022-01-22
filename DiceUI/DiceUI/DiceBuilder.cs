@@ -282,9 +282,7 @@ namespace DiceUI
         private void CreateExtrusionOffsetCutMethod
             (ksSketchDefinition ksEntity, string name)
         {
-            ksEntity ksEntityBossExtrusion;
-            ksEntityBossExtrusion =
-                _connector.KsPart.NewEntity((short)Obj3dType.o3d_cutExtrusion);
+            ksEntity ksEntityBossExtrusion = _connector.KsPart.NewEntity((short)Obj3dType.o3d_cutExtrusion);
             ksCutExtrusionDefinition ksBossExtrusionDefinition =
                 (ksCutExtrusionDefinition)ksEntityBossExtrusion.
                     GetDefinition();

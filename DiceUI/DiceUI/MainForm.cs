@@ -161,7 +161,7 @@ namespace DiceUI
                 const string message =
                     "Один из параметров выходит за пределы допустимого значения!";
                 const string caption = "Form Closing";
-                var result = MessageBox.Show(message, caption,
+                MessageBox.Show(message, caption,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
                 return;

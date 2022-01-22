@@ -12,7 +12,7 @@ namespace Core
         DiceHeight = 0,
 
         /// <summary>
-        /// Ширина
+        /// Ширина кости
         /// </summary>
         DiceWidth = 1,
 
