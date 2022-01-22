@@ -5,6 +5,7 @@ using Kompas6Constants3D;
 
 namespace DiceUI
 {
+    //TODO: вынести в отдельный проект.
     public class KompasConnector
     {
         /// <summary>

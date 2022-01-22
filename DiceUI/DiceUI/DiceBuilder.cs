@@ -6,14 +6,18 @@ using Kompas6Constants3D;
 
 namespace DiceUI
 {
+    //TODO: вынести в отдельный проект.
+    //TODO: XML
     public class DiceBuilder
     {
+        //TODO: XML
         private KompasConnector _connector;
         private DiceParameters _diceParameters;
 
         /// <summary>
         /// Конструктор
         /// </summary>
+        /// //TODO: XML
         public DiceBuilder(KompasConnector connector, DiceParameters parameters)
         {
             _connector = connector;

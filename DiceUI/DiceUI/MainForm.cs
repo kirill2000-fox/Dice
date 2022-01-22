@@ -5,6 +5,7 @@ using Core;
 
 namespace DiceUI
 {
+    //TODO: XML
     public partial class MainForm : Form
     {
         private readonly DiceParameters _parameters = new DiceParameters();
@@ -38,6 +39,7 @@ namespace DiceUI
 
             if (textBox.Text == "")
             {
+                //TODO: дубль
                 textBox.BackColor = Color.Crimson;
                 _parameters.Errors.Add(nameParameters,
                     "Введено не числовое значение");
@@ -61,12 +63,14 @@ namespace DiceUI
                     var widthMax = value / 2.0;
                     DiceHeightMaxTextBox.Text = widthMax.ToString();
 
+                    //TODO: RSDN
                     var width = _parameters[ParametersEnum.DiceWidth];
                     _parameters[ParametersEnum.DiceWidth] = new Parameter(width.Name, width.Min, widthMax, width.Value);
 
                     var edgeMax = value / 5.0;
                     DiceEdgeMaxTextBox.Text = edgeMax.ToString();
 
+                    //TODO: RSDN
                     var edge = _parameters[ParametersEnum.EdgeWidth];
                     _parameters[ParametersEnum.EdgeWidth] = new Parameter(edge.Name, edge.Min, edgeMax, edge.Value);
                 }
@@ -78,6 +82,7 @@ namespace DiceUI
             }
         }
 
+        //TODO: дубль
         /// <summary>
         /// Метод вызывающий показывающий значение диапазона высоты
         /// </summary>
@@ -160,6 +165,7 @@ namespace DiceUI
             {
                 const string message =
                     "Один из параметров выходит за пределы допустимого значения!";
+                //TODO: Единообразно.
                 const string caption = "Form Closing";
                 MessageBox.Show(message, caption,
                     MessageBoxButtons.OK,

@@ -51,6 +51,7 @@ namespace Core
             set
             {
                 var oldParameter = ParametersList.First(parameter => parameter.Name == index);
+                //TODO: RSDN
                 var i = ParametersList.IndexOf(oldParameter);
                 ParametersList[i] = value;
             }

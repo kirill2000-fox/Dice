@@ -1,4 +1,4 @@
-using System;
+п»їusing System;
 using Core;
 using NUnit.Framework;
 
@@ -10,7 +10,8 @@ namespace CoreTest
         private readonly Parameter _testParameter =
             new Parameter(ParametersEnum.DiceHeight, 30, 60, 30);
 
-        [TestCase(TestName = "Позитивный тест геттера Name")]
+        //TODO: РєРѕРґРёСЂРѕРІРєР°
+        [TestCase(TestName = "ГЏГ®Г§ГЁГІГЁГўГ­Г»Г© ГІГҐГ±ГІ ГЈГҐГІГІГҐГ°Г  Name")]
         public void TestNameGet_GoodScenario()
         {
             // Arrange
@@ -23,7 +24,7 @@ namespace CoreTest
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(TestName = "Позитивный тест геттера Min")]
+        [TestCase(TestName = "ГЏГ®Г§ГЁГІГЁГўГ­Г»Г© ГІГҐГ±ГІ ГЈГҐГІГІГҐГ°Г  Min")]
         public void TestMinGet_GoodScenario()
         {
             // Arrange
@@ -36,7 +37,7 @@ namespace CoreTest
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(TestName = "Позитивный тест геттера Max")]
+        [TestCase(TestName = "ГЏГ®Г§ГЁГІГЁГўГ­Г»Г© ГІГҐГ±ГІ ГЈГҐГІГІГҐГ°Г  Max")]
         public void TestMaxGet_GoodScenario()
         {
             // Arrange
@@ -49,7 +50,7 @@ namespace CoreTest
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(TestName = "Позитивный тест геттера и сеттера Value")]
+        [TestCase(TestName = "ГЏГ®Г§ГЁГІГЁГўГ­Г»Г© ГІГҐГ±ГІ ГЈГҐГІГІГҐГ°Г  ГЁ Г±ГҐГІГІГҐГ°Г  Value")]
         public void TestValueGetSet_GoodScenario()
         {
             // Arrange
@@ -64,8 +65,8 @@ namespace CoreTest
             Assert.AreEqual(expected, actual);
         }
 
-        [TestCase(10, TestName = "При установке значения меньше минимума выбрасывает исключение")]
-        [TestCase(70, TestName = "При установке значения больше максимума выбрасывает исключение")]
+        [TestCase(10, TestName = "ГЏГ°ГЁ ГіГ±ГІГ Г­Г®ГўГЄГҐ Г§Г­Г Г·ГҐГ­ГЁГї Г¬ГҐГ­ГјГёГҐ Г¬ГЁГ­ГЁГ¬ГіГ¬Г  ГўГ»ГЎГ°Г Г±Г»ГўГ ГҐГІ ГЁГ±ГЄГ«ГѕГ·ГҐГ­ГЁГҐ")]
+        [TestCase(70, TestName = "ГЏГ°ГЁ ГіГ±ГІГ Г­Г®ГўГЄГҐ Г§Г­Г Г·ГҐГ­ГЁГї ГЎГ®Г«ГјГёГҐ Г¬Г ГЄГ±ГЁГ¬ГіГ¬Г  ГўГ»ГЎГ°Г Г±Г»ГўГ ГҐГІ ГЁГ±ГЄГ«ГѕГ·ГҐГ­ГЁГҐ")]
         public void TestValueSet_ThrownExceptions(int value)
         {
             // Act
@@ -75,7 +76,7 @@ namespace CoreTest
             Assert.Throws<ArgumentException>(() => parameter.Value = value);
         }
 
-        [TestCase(TestName = "При сравнении одинаковых объектов возращается истина")]
+        [TestCase(TestName = "ГЏГ°ГЁ Г±Г°Г ГўГ­ГҐГ­ГЁГЁ Г®Г¤ГЁГ­Г ГЄГ®ГўГ»Гµ Г®ГЎГєГҐГЄГІГ®Гў ГўГ®Г§Г°Г Г№Г ГҐГІГ±Гї ГЁГ±ГІГЁГ­Г ")]
         public void TestEqualsAndClone_GoodScenario_ReturnTrue()
         {
             // Arrange
@@ -89,7 +90,7 @@ namespace CoreTest
             Assert.IsTrue(isEqual);
         }
 
-        [TestCase(TestName = "При сравнении различных объектов возращается ложь")]
+        [TestCase(TestName = "ГЏГ°ГЁ Г±Г°Г ГўГ­ГҐГ­ГЁГЁ Г°Г Г§Г«ГЁГ·Г­Г»Гµ Г®ГЎГєГҐГЄГІГ®Гў ГўГ®Г§Г°Г Г№Г ГҐГІГ±Гї Г«Г®Г¦Гј")]
         public void TestEquals_DifferentValues_ReturnFalse()
         {
             // Arrange
@@ -104,7 +105,7 @@ namespace CoreTest
             Assert.IsFalse(isEqual);
         }
 
-        [TestCase(TestName = "При сравнении с нулевым объектом возращается ложь")]
+        [TestCase(TestName = "ГЏГ°ГЁ Г±Г°Г ГўГ­ГҐГ­ГЁГЁ Г± Г­ГіГ«ГҐГўГ»Г¬ Г®ГЎГєГҐГЄГІГ®Г¬ ГўГ®Г§Г°Г Г№Г ГҐГІГ±Гї Г«Г®Г¦Гј")]
         public void TestEquals_NullValue_ReturnFalse()
         {
             // Act
