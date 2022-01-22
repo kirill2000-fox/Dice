@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-
+﻿
 namespace Core
 {
     /// <summary>
@@ -7,19 +6,29 @@ namespace Core
     /// </summary>
     public enum ParametersEnum
     {
-        [Description("Высота кости")]
+        /// <summary>
+        /// Высота кости
+        /// </summary>
         DiceHeight = 0,
 
-        [Description("Ширина кости")]
+        /// <summary>
+        /// Ширина
+        /// </summary>
         DiceWidth = 1,
 
-        [Description("Толщина кости")]
+        /// <summary>
+        /// Толщина кости
+        /// </summary>
         DiceThickness = 2,
-
-        [Description("Диаметр выемки")]
+        
+        /// <summary>
+        /// Диаметр выемки
+        /// </summary>
         DredgingDiameter = 3,
 
-        [Description("Ширина каемки")]
+        /// <summary>
+        /// Ширина каемки
+        /// </summary>
         EdgeWidth = 4
     }
 }
