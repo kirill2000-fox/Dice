@@ -2,6 +2,9 @@
 
 namespace Core
 {
+    /// <summary>
+    /// Класс, хранящий информацию о параметре кости
+    /// </summary>
     public class Parameter : ICloneable
     {
         /// <summary>
@@ -29,7 +32,8 @@ namespace Core
             {
                 if (value < Min || value > Max)
                 {
-                    throw new ArgumentException($"Значение должно быть больше {Min} и меньше {Max}");
+                    throw new ArgumentException($"Значение должно быть больше {Min} " +
+                                                $"и меньше {Max}");
                 }
 
                 _value = value;

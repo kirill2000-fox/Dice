@@ -8,6 +8,9 @@ namespace DiceUI
 {
     //TODO: вынести в отдельный проект.
     //TODO: XML
+    /// <summary>
+    /// Класс построения кости
+    /// </summary>
     public class DiceBuilder
     {
         //TODO: XML
@@ -15,7 +18,7 @@ namespace DiceUI
         private DiceParameters _diceParameters;
 
         /// <summary>
-        /// Конструктор
+        /// Конструктор класса DiceBuilder
         /// </summary>
         /// //TODO: XML
         public DiceBuilder(KompasConnector connector, DiceParameters parameters)

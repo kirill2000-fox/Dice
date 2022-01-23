@@ -6,11 +6,20 @@ using Core;
 namespace DiceUI
 {
     //TODO: XML
+    /// <summary>
+    /// Главная форма
+    /// </summary>
     public partial class MainForm : Form
     {
+        /// <summary>
+        /// Параметры кости
+        /// </summary>
         private readonly DiceParameters _parameters = new DiceParameters();
         private readonly KompasConnector _kompasConnector = new KompasConnector();
 
+        /// <summary>
+        /// Конструктор класса MainForm
+        /// </summary>
         public MainForm()
         {
             InitializeComponent();
@@ -65,14 +74,16 @@ namespace DiceUI
 
                     //TODO: RSDN
                     var width = _parameters[ParametersEnum.DiceWidth];
-                    _parameters[ParametersEnum.DiceWidth] = new Parameter(width.Name, width.Min, widthMax, width.Value);
+                    _parameters[ParametersEnum.DiceWidth] = new Parameter
+                        (width.Name, width.Min, widthMax, width.Value);
 
                     var edgeMax = value / 5.0;
                     DiceEdgeMaxTextBox.Text = edgeMax.ToString();
 
                     //TODO: RSDN
                     var edge = _parameters[ParametersEnum.EdgeWidth];
-                    _parameters[ParametersEnum.EdgeWidth] = new Parameter(edge.Name, edge.Min, edgeMax, edge.Value);
+                    _parameters[ParametersEnum.EdgeWidth] = new Parameter
+                        (edge.Name, edge.Min, edgeMax, edge.Value);
                 }
             }
             catch (ArgumentException e)
@@ -88,7 +99,8 @@ namespace DiceUI
         /// </summary>
         private void DiceHeight_TextChanged(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(DiceHeightTextbox, "Значение должно быть от 60 мм до 120 мм");
+            toolTip1.SetToolTip(DiceHeightTextbox, "Значение должно быть " +
+                                                   "от 60 мм до 120 мм");
             CheckValue(DiceHeightTextbox, ParametersEnum.DiceHeight);
         }
 
@@ -97,7 +109,8 @@ namespace DiceUI
         /// </summary>
         private void DiceWidth_TextChanged(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(DiceWidthTextbox, "Значение должно быть от 30 мм до 0.5*А мм");
+            toolTip1.SetToolTip(DiceWidthTextbox, "Значение должно быть " +
+                                                  "от 30 мм до 0.5*А мм");
             CheckValue(DiceWidthTextbox, ParametersEnum.DiceWidth);
         }
 
@@ -106,7 +119,8 @@ namespace DiceUI
         /// </summary>
         private void DiceThickness_TextChanged(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(DiceThicknessTextbox, "Значение должно быть от 10 мм до 30 мм");
+            toolTip1.SetToolTip(DiceThicknessTextbox, "Значение должно быть " +
+                                                      "от 10 мм до 30 мм");
             CheckValue(DiceThicknessTextbox, ParametersEnum.DiceThickness);
         }
 
@@ -115,7 +129,8 @@ namespace DiceUI
         /// </summary>
         private void DredgingDiametr_TextChanged(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(DredgingDiametrTextbox, "Значение должно быть от 8 мм до 15 мм");
+            toolTip1.SetToolTip(DredgingDiametrTextbox, "Значение должно быть " +
+                                                        "от 8 мм до 15 мм");
             CheckValue(DredgingDiametrTextbox, ParametersEnum.DredgingDiameter);
 
         }
@@ -125,7 +140,8 @@ namespace DiceUI
         /// </summary>
         private void EdgeWidth_TextChanged(object sender, EventArgs e)
         {
-            toolTip1.SetToolTip(EdgeWidthTextbox, "Значение должно быть от 3 мм до 1.5*А мм");
+            toolTip1.SetToolTip(EdgeWidthTextbox, "Значение должно быть " +
+                                                  "от 3 мм до 1.5*А мм");
             CheckValue(EdgeWidthTextbox, ParametersEnum.EdgeWidth);
         }
 
@@ -166,7 +182,7 @@ namespace DiceUI
                 const string message =
                     "Один из параметров выходит за пределы допустимого значения!";
                 //TODO: Единообразно.
-                const string caption = "Form Closing";
+                const string caption = "Ошибка!";
                 MessageBox.Show(message, caption,
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Error);
