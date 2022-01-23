@@ -6,7 +6,7 @@ using Kompas6Constants3D;
 
 namespace DiceBuilder
 {
-    //TODO: вынести в отдельный проект.
+    //TODO: вынести в отдельный проект.(Исправлено)
     //TODO: XML(ИСПРАВЛЕНО)
     /// <summary>
     /// Класс построения кости

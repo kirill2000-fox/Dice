@@ -46,17 +46,9 @@ namespace DiceUI
             textBox.BackColor = Color.White;
             _parameters.Errors.Remove(nameParameters);
 
-            if (textBox.Text == "")
+            if (textBox.Text == "" || !double.TryParse(textBox.Text, out var value))
             {
-                //TODO: дубль
-                textBox.BackColor = Color.Crimson;
-                _parameters.Errors.Add(nameParameters,
-                    "Введено не числовое значение");
-                return;
-            }
-
-            if (!double.TryParse(textBox.Text, out var value))
-            {
+                //TODO: дубль(исправлено)
                 textBox.BackColor = Color.Crimson;
                 _parameters.Errors.Add(nameParameters,
                     "Введено не числовое значение");
