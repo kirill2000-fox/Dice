@@ -72,7 +72,7 @@ namespace DiceUI
                     var widthMax = value / 2.0;
                     DiceHeightMaxTextBox.Text = widthMax.ToString();
 
-                    //TODO: RSDN
+                    //TODO: RSDN (ИСПРАВЛЕНО)
                     var width = _parameters[ParametersEnum.DiceWidth];
                     _parameters[ParametersEnum.DiceWidth] = new Parameter
                         (width.Name, width.Min, widthMax, width.Value);
@@ -80,7 +80,7 @@ namespace DiceUI
                     var edgeMax = value / 5.0;
                     DiceEdgeMaxTextBox.Text = edgeMax.ToString();
 
-                    //TODO: RSDN
+                    //TODO: RSDN (ИСПРАВЛЕНО)
                     var edge = _parameters[ParametersEnum.EdgeWidth];
                     _parameters[ParametersEnum.EdgeWidth] = new Parameter
                         (edge.Name, edge.Min, edgeMax, edge.Value);
@@ -181,7 +181,7 @@ namespace DiceUI
             {
                 const string message =
                     "Один из параметров выходит за пределы допустимого значения!";
-                //TODO: Единообразно.
+                //TODO: Единообразно.(ИСПРАВЛЕНО)
                 const string caption = "Ошибка!";
                 MessageBox.Show(message, caption,
                     MessageBoxButtons.OK,

@@ -7,7 +7,7 @@ using Kompas6Constants3D;
 namespace DiceUI
 {
     //TODO: вынести в отдельный проект.
-    //TODO: XML
+    //TODO: XML(ИСПРАВЛЕНО)
     /// <summary>
     /// Класс построения кости
     /// </summary>
