@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTest", "CoreTest\CoreTest.csproj", "{4DEA1074-FC81-40A2-9E42-07F377919EDE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KompasConnector1", "KompasConnector1\KompasConnector1.csproj", "{B65EF3C6-F668-4050-8F01-C95936D56323}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KompasConnector", "KompasConnector1\KompasConnector.csproj", "{B65EF3C6-F668-4050-8F01-C95936D56323}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

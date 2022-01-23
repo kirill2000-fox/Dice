@@ -2,10 +2,10 @@
 using Kompas6API5;
 using Kompas6Constants3D;
 
-namespace KompasConnector1
+namespace KompasConnector
 {
-    //TODO: вынести в отдельный проект.
-    public class KompasConnector1
+    //TODO: вынести в отдельный проект.(Исправлено)
+    public class KompasConnector
     {
         /// <summary>
         /// Интерфейс API Компас-3D

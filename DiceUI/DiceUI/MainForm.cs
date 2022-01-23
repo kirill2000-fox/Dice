@@ -15,7 +15,7 @@ namespace DiceUI
         /// Параметры кости
         /// </summary>
         private readonly DiceParameters _parameters = new DiceParameters();
-        private readonly KompasConnector _kompasConnector = new KompasConnector();
+        private readonly KompasConnector.KompasConnector _kompasConnector = new KompasConnector.KompasConnector();
 
         /// <summary>
         /// Конструктор класса MainForm

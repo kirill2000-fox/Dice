@@ -14,14 +14,14 @@ namespace DiceUI
     public class DiceBuilder
     {
         //TODO: XML
-        private KompasConnector _connector;
+        private KompasConnector.KompasConnector _connector;
         private DiceParameters _diceParameters;
 
         /// <summary>
         /// Конструктор класса DiceBuilder
         /// </summary>
         /// //TODO: XML
-        public DiceBuilder(KompasConnector connector, DiceParameters parameters)
+        public DiceBuilder(KompasConnector.KompasConnector connector, DiceParameters parameters)
         {
             _connector = connector;
             _diceParameters = parameters;
