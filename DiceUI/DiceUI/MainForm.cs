@@ -190,7 +190,7 @@ namespace DiceUI
             }
 
             _kompasConnector.OpenKompas();
-            var builder = new DiceBuilder(_kompasConnector, _parameters);
+            var builder = new DiceBuilder.DiceBuilder(_kompasConnector, _parameters);
             builder.BuildDice();
         }
     }

@@ -42,5 +42,6 @@ namespace KompasConnector
             doc3D.Create();
             KsPart = (ksPart)doc3D.GetPart((short)Part_Type.pTop_Part);
         }
+        
     }
 }

@@ -4,7 +4,7 @@ using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;
 
-namespace DiceUI
+namespace DiceBuilder
 {
     //TODO: вынести в отдельный проект.
     //TODO: XML(ИСПРАВЛЕНО)
@@ -26,7 +26,7 @@ namespace DiceUI
             _connector = connector;
             _diceParameters = parameters;
         }
-        
+
         /// <summary>
         /// Построение кости
         /// </summary>
@@ -34,7 +34,7 @@ namespace DiceUI
         {
             //Создание прямоугольника
             CreateRectangle();
-            
+
             //Создание выемки
             CreateDredging();
 
