@@ -41,11 +41,11 @@ namespace DiceBuilder
         {
             //Создание прямоугольника
             CreateRectangle();
-            //Создание Квадратной выемки
-            CreateEdgeSquare();
+            
             //Создание выемки
             CreateDredging();
-            
+            //Создание Квадратной выемки
+            CreateEdgeSquare();
             //Создание каемки
             CreateEdge();
 
@@ -293,7 +293,8 @@ namespace DiceBuilder
             rectangleParam.style = 1;
 
             doc2d.ksRectangle(rectangleParam);
-
+            //Выдавливание фигуры
+            CreateExtrusionOffsetCutMethod(sketchDefinition, "Квадратная Выемка");
             //Выход из редактирования
             sketchDefinition.EndEdit();
 
@@ -334,10 +335,10 @@ namespace DiceBuilder
         /// <summary>
         /// Выдавливание вырезанием
         /// </summary>
-        /// <param name="ksEntity"></param>
+        /// <param name="sketchDefinition"></param>
         /// <param name="name">Имя</param>
         private void CreateExtrusionOffsetCutMethod
-            (ksSketchDefinition ksEntity, string name)
+            (ksSketchDefinition sketchDefinition, string name)
         {
             ksEntity ksEntityBossExtrusion = _connector.KsPart.NewEntity((short)Obj3dType.o3d_cutExtrusion);
             ksCutExtrusionDefinition ksBossExtrusionDefinition =
@@ -346,7 +347,7 @@ namespace DiceBuilder
             ksBossExtrusionDefinition.SetSideParam(false,
                 (short)End_Type.etBlind, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8,
                 0.1, false);
-            ksBossExtrusionDefinition.SetSketch(ksEntity);
+            ksBossExtrusionDefinition.SetSketch(sketchDefinition);
             ksEntityBossExtrusion.name = name;
             ksEntityBossExtrusion.Create();
         }
