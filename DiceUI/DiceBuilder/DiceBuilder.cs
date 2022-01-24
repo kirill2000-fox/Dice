@@ -44,9 +44,12 @@ namespace DiceBuilder
 
             //Создание выемки
             CreateDredging();
-
+            //Создание Квадратной выемки
+            CreateEdgeSquare();
             //Создание каемки
             CreateEdge();
+
+            
         }
 
         /// <summary>
@@ -165,7 +168,7 @@ namespace DiceBuilder
         }
 
         /// <summary>
-        /// Построение однной выемки
+        /// Построение одной выемки
         /// </summary>
         /// <param name="x"> координаты центра дуги</param>
         /// <param name="y">координаты центра дуги</param>
@@ -259,6 +262,38 @@ namespace DiceBuilder
         }
 
         /// <summary>
+        /// Построение КВАДРАТНОЙ выемки
+        /// </summary>
+        private void CreateEdgeSquare()
+        {
+            //Выбор плоскости для построения
+            var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOY);
+
+            //Войти в режим редактирования эскиза
+            var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
+
+            //Построение прямоугольника
+
+            var rectangleParam = (ksRectangleParam)_connector
+                .Kompas
+                .GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
+            rectangleParam.x = 8;
+            rectangleParam.y = 8;
+            rectangleParam.ang = 0;
+            rectangleParam.width = 16;
+            rectangleParam.height = 16;
+            rectangleParam.style = 1;
+
+            doc2D.ksRectangle(rectangleParam);
+
+            //Выйти из режима редактирования эскиза
+            sketchDefinition.EndEdit();
+
+            //Выдавливание фигуры
+            CreateExtrusionOffsetCutMethod(sketchDefinition, "Выемка");
+        }
+
+        /// <summary>
         /// Построение каемки
         /// </summary>
         private void CreateEdge()
@@ -284,10 +319,9 @@ namespace DiceBuilder
             sketchDefinition.EndEdit();
 
             //Выдавливание фигуры
-            CreateExtrusionOffsetCutMethod(sketchDefinition, "Выемка");
+            CreateExtrusionOffsetCutMethod(sketchDefinition, "Каемка");
         }
-
-
+        
         /// <summary>
         /// Выдавливание вырезанием
         /// </summary>
