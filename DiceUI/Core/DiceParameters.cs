@@ -9,6 +9,28 @@ namespace Core
     public class DiceParameters
     {
         /// <summary>
+        /// Поле определяющее будет ли вырез кубическим
+        /// </summary>
+	    private bool _cubeDredging;
+        /// <summary>
+        /// Поле определяющее будет ли каёмка кубической
+        /// </summary>
+        private bool _cubeEdge;
+	    /// <summary>
+        /// Устанавливает форму вырезов
+        /// </summary>
+        public bool CubeDredging
+        {
+	        set => _cubeDredging = value;
+	        get => _cubeDredging;
+        }
+
+	    public bool CubeEdge
+	    {
+		    set => _cubeEdge = value;
+		    get => _cubeEdge;
+	    }
+        /// <summary>
         /// Список параметров
         /// </summary>
         public List<Parameter> ParametersList { get; set; } = new List<Parameter>();
@@ -34,6 +56,7 @@ namespace Core
             ParametersList.Add(new Parameter(ParametersEnum.DiceThickness, 10, 30, 10));
             ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter, 8, 15, 8));
             ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 3, 24, 3));
+            CubeDredging = false;
         }
 
         /// <summary>

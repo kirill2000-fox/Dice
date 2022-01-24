@@ -41,14 +41,29 @@ namespace DiceBuilder
         {
             //Создание прямоугольника
             CreateRectangle();
-            
-            //Создание выемки
-            CreateDredging();
-            //Создание Квадратной выемки
-            CreateEdgeSquare();
-            //Создание каемки
-            CreateEdge();
 
+	        //TODO: Вынести в отдельный метод задающий размеры.
+            if (_diceParameters.CubeDredging)
+            {
+	            //Создание Квадратной выемки
+	            CreateCubeDredging();
+            }
+            else
+            {
+	            //Создание выемки
+	            СreateSphereDredging();
+            }
+
+            //TODO: Здесь тоже
+            if (_diceParameters.CubeEdge)
+            {
+                CreateCubeEdge();
+            }
+            else
+            {
+	            //Создание каемки
+	            CreateCylinderEdge();
+            }
             
         }
 
@@ -115,6 +130,7 @@ namespace DiceBuilder
         /// <summary>
         /// Построение прямоугольника
         /// </summary>
+        //TODO: Унифицировать для многоразового использования
         void CreateRectangle()
         {
             //Выбор плоскости для построения
@@ -143,10 +159,11 @@ namespace DiceBuilder
             PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value, true);
         }
 
+
         /// <summary>
-        /// Построение выемки
+        /// Построение cферической выемки
         /// </summary>
-        private void CreateDredging()
+        private void СreateSphereDredging()
         {
             double flaskDiameter = _diceParameters.ParametersList
                 .First(parameter => parameter.Name == ParametersEnum.DredgingDiameter).Value;
@@ -264,14 +281,27 @@ namespace DiceBuilder
         /// <summary>
         /// Построение КВАДРАТНОЙ выемки
         /// </summary>
-        private void CreateEdgeSquare()
+        private void CreateCubeDredging()
         {
+	        double flaskDiameter = _diceParameters.ParametersList
+		        .First(parameter => parameter.Name == ParametersEnum.DredgingDiameter).Value;
+	        var width = _diceParameters.ParametersList
+		        .First(parameter =>
+			        parameter.Name == ParametersEnum.DiceWidth).Value;
+	        var height = _diceParameters.ParametersList
+		        .First(parameter =>
+			        parameter.Name == ParametersEnum.DiceHeight).Value;
+	        var thickness = _diceParameters.ParametersList
+		        .First(parameter => parameter.Name == ParametersEnum.DiceThickness).Value;
+
+
+            var offsetPosition = thickness - flaskDiameter;
+
             ksEntity planeXoy = _connector.KsPart.GetDefaultEntity((int)Obj3dType.o3d_planeXOY);
             ksEntity plane = _connector.KsPart.NewEntity((int)Obj3dType.o3d_planeOffset);
             ksPlaneOffsetDefinition planeOffsetDefinition = plane.GetDefinition();
             planeOffsetDefinition.direction = true;
-            planeOffsetDefinition.offset = _diceParameters.ParametersList
-                .First(parameter => parameter.Name == ParametersEnum.DiceThickness).Value;
+            planeOffsetDefinition.offset = offsetPosition;
             planeOffsetDefinition.SetPlane(planeXoy);
             plane.Create();
             ksEntity sketch = _connector.KsPart.NewEntity((int)Obj3dType.o3d_sketch);
@@ -279,34 +309,44 @@ namespace DiceBuilder
             sketchDefinition.SetPlane(plane);
             sketch.Create();
             var doc2d = (ksDocument2D)sketchDefinition.BeginEdit();
-            
-            //Построение прямоугольника
 
-            var rectangleParam = (ksRectangleParam)_connector
+
+            var x1 = height * 0.25;
+            var y1 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            var x2 = height * 0.75;
+            var y2 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+
+            //Построение прямоугольника
+            //TODO: Можно вынести в отдельный метод. Построение правильного многоугольника
+            var rectangleParam = (ksRegularPolygonParam)_connector
                 .Kompas
-                .GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
-            rectangleParam.x = 8;
-            rectangleParam.y = 8;
+                .GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
+            rectangleParam.count = 4;
+            rectangleParam.xc = x1;
+            rectangleParam.yc = y1;
             rectangleParam.ang = 0;
-            rectangleParam.width = 16;
-            rectangleParam.height = 16;
+            rectangleParam.radius = flaskDiameter/2;
+            rectangleParam.describe = true;
             rectangleParam.style = 1;
 
-            doc2d.ksRectangle(rectangleParam);
-            //Выдавливание фигуры
-            CreateExtrusionOffsetCutMethod(sketchDefinition, "Квадратная Выемка");
+            doc2d.ksRegularPolygon(rectangleParam);
+
+            rectangleParam.xc = x2;
+            rectangleParam.yc = y2;
+
+            doc2d.ksRegularPolygon(rectangleParam);
+            
             //Выход из редактирования
             sketchDefinition.EndEdit();
-
             //Выдавливание фигуры
-            CreateExtrusionOffsetCutMethod(sketchDefinition, "Квадратная Выемка");
+            CreateExtrusionOffsetCutMethod(sketchDefinition, "Квадратная Выемка", flaskDiameter);
 
         }
 
         /// <summary>
         /// Построение каемки
         /// </summary>
-        private void CreateEdge()
+        private void CreateCylinderEdge()
         {
             //Плоскость построения
             var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOZ);
@@ -314,6 +354,7 @@ namespace DiceBuilder
             //Редактирование эскиза
             var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
 
+	        //TODO: Эта переменная не используется
             //Построение круга
             var circleParam = (ksCircleParam)_connector
                 .Kompas
@@ -329,24 +370,57 @@ namespace DiceBuilder
             sketchDefinition.EndEdit();
 
             //Выдавливание фигуры
-            CreateExtrusionOffsetCutMethod(sketchDefinition, "Каемка");
+            CreateExtrusionOffsetCutMethod(sketchDefinition, "Каемка",
+	            _diceParameters[ParametersEnum.DiceWidth].Value * 0.8);
         }
-        
+
+        private void CreateCubeEdge()
+        {
+	        //Плоскость построения
+	        var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOZ);
+
+	        //Редактирование эскиза
+	        var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
+
+	        var x = _diceParameters[ParametersEnum.DiceHeight].Value / 2;
+	        var y = -_diceParameters[ParametersEnum.DiceThickness].Value;
+	        var radius = _diceParameters[ParametersEnum.EdgeWidth].Value / 2;
+	        //TODO: Если пропустил выше. Вынести в отдельный метод
+            var rectangleParam = (ksRegularPolygonParam)_connector
+	            .Kompas
+	            .GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
+            rectangleParam.count = 4;
+            rectangleParam.xc = x;
+            rectangleParam.yc = y;
+            rectangleParam.ang = 0;
+            rectangleParam.radius = radius;
+            rectangleParam.describe = true;
+            rectangleParam.style = 1;
+
+            doc2D.ksRegularPolygon(rectangleParam);
+
+            //Выход из редактирования
+	        sketchDefinition.EndEdit();
+
+	        //Выдавливание фигуры
+	        CreateExtrusionOffsetCutMethod(sketchDefinition, "Каемка",
+		        _diceParameters[ParametersEnum.DiceWidth].Value * 0.8);
+        }
+
         /// <summary>
         /// Выдавливание вырезанием
         /// </summary>
         /// <param name="sketchDefinition"></param>
         /// <param name="name">Имя</param>
         private void CreateExtrusionOffsetCutMethod
-            (ksSketchDefinition sketchDefinition, string name)
+            (ksSketchDefinition sketchDefinition, string name, double depth)
         {
             ksEntity ksEntityBossExtrusion = _connector.KsPart.NewEntity((short)Obj3dType.o3d_cutExtrusion);
             ksCutExtrusionDefinition ksBossExtrusionDefinition =
                 (ksCutExtrusionDefinition)ksEntityBossExtrusion.
                     GetDefinition();
             ksBossExtrusionDefinition.SetSideParam(false,
-                (short)End_Type.etBlind, _diceParameters[ParametersEnum.DiceWidth].Value * 0.8,
-                0.1, false);
+                (short)End_Type.etBlind, depth);
             ksBossExtrusionDefinition.SetSketch(sketchDefinition);
             ksEntityBossExtrusion.name = name;
             ksEntityBossExtrusion.Create();

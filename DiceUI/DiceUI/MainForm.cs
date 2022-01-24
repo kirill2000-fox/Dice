@@ -39,6 +39,7 @@ namespace DiceUI
         /// <summary>
         /// Метод для установки дефолтных данных
         /// </summary>
+        //TODO: опустить в параметры
         private void DefaultValue()
         {
             DiceHeightTextbox.Text = "60";
@@ -46,6 +47,8 @@ namespace DiceUI
             DiceThicknessTextbox.Text = "10";
             DredgingDiameterTextbox.Text = "8";
             EdgeWidthTextbox.Text = "3";
+            comboBoxDredgingForm.SelectedIndex = 0;
+            comboBoxEdgeType.SelectedIndex = 0;
         }
         /// <summary>
         /// Словарь текстобкса и параметра
@@ -240,5 +243,15 @@ namespace DiceUI
             var builder = new DiceBuilder.DiceBuilder(_kompasConnector, _parameters);
             builder.BuildDice();
         }
-    }
+
+		private void comboBoxDredgingForm_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			_parameters.CubeDredging = comboBoxDredgingForm.SelectedIndex == 1;
+		}
+
+		private void comboBoxEdgeType_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			_parameters.CubeEdge = comboBoxEdgeType.SelectedIndex == 1;
+		}
+	}
 }

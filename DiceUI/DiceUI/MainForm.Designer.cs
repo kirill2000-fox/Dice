@@ -32,6 +32,10 @@ namespace DiceUI
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.comboBoxEdgeType = new System.Windows.Forms.ComboBox();
+            this.labelEdgeType = new System.Windows.Forms.Label();
+            this.comboBoxDredgingForm = new System.Windows.Forms.ComboBox();
+            this.labelDredgingForm = new System.Windows.Forms.Label();
             this.DiceEdgeMaxTextBox = new System.Windows.Forms.TextBox();
             this.DiceHeightMaxTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
@@ -68,6 +72,10 @@ namespace DiceUI
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.comboBoxEdgeType);
+            this.splitContainer1.Panel1.Controls.Add(this.labelEdgeType);
+            this.splitContainer1.Panel1.Controls.Add(this.comboBoxDredgingForm);
+            this.splitContainer1.Panel1.Controls.Add(this.labelDredgingForm);
             this.splitContainer1.Panel1.Controls.Add(this.DiceEdgeMaxTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.DiceHeightMaxTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
@@ -92,8 +100,62 @@ namespace DiceUI
             // 
             this.splitContainer1.Panel2.Controls.Add(this.pictureBox1);
             this.splitContainer1.Size = new System.Drawing.Size(1136, 426);
-            this.splitContainer1.SplitterDistance = 358;
+            this.splitContainer1.SplitterDistance = 357;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // comboBoxEdgeType
+            // 
+            this.comboBoxEdgeType.AutoCompleteCustomSource.AddRange(new string[] {
+            "Сфера",
+            "Куб"});
+            this.comboBoxEdgeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxEdgeType.FormattingEnabled = true;
+            this.comboBoxEdgeType.Items.AddRange(new object[] {
+            "Цилиндр",
+            "Куб"});
+            this.comboBoxEdgeType.Location = new System.Drawing.Point(141, 383);
+            this.comboBoxEdgeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxEdgeType.Name = "comboBoxEdgeType";
+            this.comboBoxEdgeType.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxEdgeType.TabIndex = 25;
+            this.comboBoxEdgeType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdgeType_SelectedIndexChanged);
+            // 
+            // labelEdgeType
+            // 
+            this.labelEdgeType.AutoSize = true;
+            this.labelEdgeType.Location = new System.Drawing.Point(16, 383);
+            this.labelEdgeType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelEdgeType.Name = "labelEdgeType";
+            this.labelEdgeType.Size = new System.Drawing.Size(109, 17);
+            this.labelEdgeType.TabIndex = 24;
+            this.labelEdgeType.Text = "Форма каемки:";
+            // 
+            // comboBoxDredgingForm
+            // 
+            this.comboBoxDredgingForm.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDredgingForm.FormattingEnabled = true;
+            this.comboBoxDredgingForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.comboBoxDredgingForm.ItemHeight = 16;
+            this.comboBoxDredgingForm.Items.AddRange(new object[] {
+            "Сфера",
+            "Куб"});
+            this.comboBoxDredgingForm.Location = new System.Drawing.Point(141, 336);
+            this.comboBoxDredgingForm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxDredgingForm.MaxDropDownItems = 2;
+            this.comboBoxDredgingForm.Name = "comboBoxDredgingForm";
+            this.comboBoxDredgingForm.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxDredgingForm.TabIndex = 23;
+            this.comboBoxDredgingForm.SelectedIndexChanged += new System.EventHandler(this.comboBoxDredgingForm_SelectedIndexChanged);
+            // 
+            // labelDredgingForm
+            // 
+            this.labelDredgingForm.AutoSize = true;
+            this.labelDredgingForm.Location = new System.Drawing.Point(17, 340);
+            this.labelDredgingForm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelDredgingForm.Name = "labelDredgingForm";
+            this.labelDredgingForm.Size = new System.Drawing.Size(111, 17);
+            this.labelDredgingForm.TabIndex = 22;
+            this.labelDredgingForm.Text = "Форма выемок:";
             // 
             // DiceEdgeMaxTextBox
             // 
@@ -101,6 +163,7 @@ namespace DiceUI
             this.DiceEdgeMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DiceEdgeMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.DiceEdgeMaxTextBox.Location = new System.Drawing.Point(92, 261);
+            this.DiceEdgeMaxTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DiceEdgeMaxTextBox.Name = "DiceEdgeMaxTextBox";
             this.DiceEdgeMaxTextBox.ReadOnly = true;
             this.DiceEdgeMaxTextBox.Size = new System.Drawing.Size(17, 15);
@@ -112,6 +175,7 @@ namespace DiceUI
             this.DiceHeightMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.DiceHeightMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
             this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(92, 161);
+            this.DiceHeightMaxTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DiceHeightMaxTextBox.Name = "DiceHeightMaxTextBox";
             this.DiceHeightMaxTextBox.ReadOnly = true;
             this.DiceHeightMaxTextBox.Size = new System.Drawing.Size(17, 15);
@@ -188,7 +252,7 @@ namespace DiceUI
             this.EdgeWidthTextbox.TextChanged += new System.EventHandler(this.EdgeWidth_TextChanged);
             this.EdgeWidthTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
-            // DredgingDiametrTextbox
+            // DredgingDiameterTextbox
             // 
             this.DredgingDiameterTextbox.Location = new System.Drawing.Point(163, 188);
             this.DredgingDiameterTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -200,7 +264,7 @@ namespace DiceUI
             // 
             // DiceThicknessTextbox
             // 
-            this.DiceThicknessTextbox.Location = new System.Drawing.Point(163, 93);
+            this.DiceThicknessTextbox.Location = new System.Drawing.Point(163, 94);
             this.DiceThicknessTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.DiceThicknessTextbox.Name = "DiceThicknessTextbox";
             this.DiceThicknessTextbox.Size = new System.Drawing.Size(184, 22);
@@ -258,7 +322,7 @@ namespace DiceUI
             // DiceWidthlabel
             // 
             this.DiceWidthlabel.AutoSize = true;
-            this.DiceWidthlabel.Location = new System.Drawing.Point(12, 141);
+            this.DiceWidthlabel.Location = new System.Drawing.Point(12, 142);
             this.DiceWidthlabel.Name = "DiceWidthlabel";
             this.DiceWidthlabel.Size = new System.Drawing.Size(123, 17);
             this.DiceWidthlabel.TabIndex = 2;
@@ -336,5 +400,9 @@ namespace DiceUI
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.TextBox DiceHeightMaxTextBox;
         private System.Windows.Forms.TextBox DiceEdgeMaxTextBox;
-    }
+		private System.Windows.Forms.ComboBox comboBoxDredgingForm;
+		private System.Windows.Forms.Label labelDredgingForm;
+		private System.Windows.Forms.Label labelEdgeType;
+		private System.Windows.Forms.ComboBox comboBoxEdgeType;
+	}
 }
