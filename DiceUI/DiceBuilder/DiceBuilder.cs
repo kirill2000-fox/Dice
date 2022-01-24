@@ -20,7 +20,7 @@ namespace DiceBuilder
         /// <summary>
         /// Конструктор класса DiceBuilder
         /// </summary>
-        /// //TODO: XML
+        /// //TODO: XML(Исправлено)
         public DiceBuilder(KompasConnector.KompasConnector connector, DiceParameters parameters)
         {
             _connector = connector;

@@ -10,7 +10,7 @@ namespace CoreTest
         private readonly Parameter _testParameter =
             new Parameter(ParametersEnum.DiceHeight, 30, 60, 30);
 
-        //TODO: кодировка
+        //TODO: кодировка(Исправлено)
         [TestCase(TestName = "Позитивный тест геттера Name")]
         public void TestNameGet_GoodScenario()
         {

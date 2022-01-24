@@ -5,7 +5,7 @@ using Core;
 
 namespace DiceUI
 {
-    //TODO: XML
+    //TODO: XML (исправлено)
     /// <summary>
     /// Главная форма
     /// </summary>
@@ -87,7 +87,7 @@ namespace DiceUI
 
         //TODO: дубль
         /// <summary>
-        /// Метод вызывающий показывающий значение диапазона высоты
+        /// Метод показывающий значение диапазона высоты
         /// </summary>
         private void DiceHeight_TextChanged(object sender, EventArgs e)
         {
@@ -97,7 +97,7 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Метод вызывающий показывающий значение диапазона ширины
+        /// Метод показывающий значение диапазона ширины
         /// </summary>
         private void DiceWidth_TextChanged(object sender, EventArgs e)
         {
@@ -107,7 +107,7 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Метод вызывающий показывающий значение диапазона толщины
+        /// Метод показывающий значение диапазона толщины
         /// </summary>
         private void DiceThickness_TextChanged(object sender, EventArgs e)
         {
@@ -117,7 +117,7 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Метод вызывающий показывающий значение диапазона диаметра выемки
+        /// Метод показывающий значение диапазона диаметра выемки
         /// </summary>
         private void DredgingDiametr_TextChanged(object sender, EventArgs e)
         {
@@ -128,7 +128,7 @@ namespace DiceUI
         }
 
         /// <summary>
-        /// Метод вызывающий показывающий значение диапазона размера каемкии
+        /// Метод показывающий значение диапазона размера каемкии
         /// </summary>
         private void EdgeWidth_TextChanged(object sender, EventArgs e)
         {
