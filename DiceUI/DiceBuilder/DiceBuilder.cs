@@ -41,11 +41,11 @@ namespace DiceBuilder
         {
             //Создание прямоугольника
             CreateRectangle();
-
-            //Создание выемки
-            CreateDredging();
             //Создание Квадратной выемки
             CreateEdgeSquare();
+            //Создание выемки
+            CreateDredging();
+            
             //Создание каемки
             CreateEdge();
 
@@ -266,12 +266,20 @@ namespace DiceBuilder
         /// </summary>
         private void CreateEdgeSquare()
         {
-            //Выбор плоскости для построения
-            var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOY);
-
-            //Войти в режим редактирования эскиза
-            var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
-
+            ksEntity planeXoy = _connector.KsPart.GetDefaultEntity((int)Obj3dType.o3d_planeXOY);
+            ksEntity plane = _connector.KsPart.NewEntity((int)Obj3dType.o3d_planeOffset);
+            ksPlaneOffsetDefinition planeOffsetDefinition = plane.GetDefinition();
+            planeOffsetDefinition.direction = true;
+            planeOffsetDefinition.offset = _diceParameters.ParametersList
+                .First(parameter => parameter.Name == ParametersEnum.DiceThickness).Value;
+            planeOffsetDefinition.SetPlane(planeXoy);
+            plane.Create();
+            ksEntity sketch = _connector.KsPart.NewEntity((int)Obj3dType.o3d_sketch);
+            ksSketchDefinition sketchDefinition = sketch.GetDefinition();
+            sketchDefinition.SetPlane(plane);
+            sketch.Create();
+            var doc2d = (ksDocument2D)sketchDefinition.BeginEdit();
+            
             //Построение прямоугольника
 
             var rectangleParam = (ksRectangleParam)_connector
@@ -284,13 +292,14 @@ namespace DiceBuilder
             rectangleParam.height = 16;
             rectangleParam.style = 1;
 
-            doc2D.ksRectangle(rectangleParam);
+            doc2d.ksRectangle(rectangleParam);
 
-            //Выйти из режима редактирования эскиза
+            //Выход из редактирования
             sketchDefinition.EndEdit();
 
             //Выдавливание фигуры
-            CreateExtrusionOffsetCutMethod(sketchDefinition, "Выемка");
+            CreateExtrusionOffsetCutMethod(sketchDefinition, "Квадратная Выемка");
+
         }
 
         /// <summary>
