@@ -13,9 +13,16 @@ namespace DiceBuilder
     /// </summary>
     public class DiceBuilder
     {
-        //TODO: XML
-        private KompasConnector.KompasConnector _connector;
-        private DiceParameters _diceParameters;
+        //TODO: XML(Исправлено)
+        /// <summary>
+        /// Соединение с КОМПАС-3D
+        /// </summary>
+        private readonly KompasConnector.KompasConnector _connector;
+
+        /// <summary>
+        /// Экземпляр класса параметров
+        /// </summary>
+        private readonly DiceParameters _diceParameters;
 
         /// <summary>
         /// Конструктор класса DiceBuilder

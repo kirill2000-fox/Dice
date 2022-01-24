@@ -41,7 +41,7 @@ namespace DiceUI
             this.label2 = new System.Windows.Forms.Label();
             this.BuildObjectbutton = new System.Windows.Forms.Button();
             this.EdgeWidthTextbox = new System.Windows.Forms.TextBox();
-            this.DredgingDiametrTextbox = new System.Windows.Forms.TextBox();
+            this.DredgingDiameterTextbox = new System.Windows.Forms.TextBox();
             this.DiceThicknessTextbox = new System.Windows.Forms.TextBox();
             this.DiceWidthTextbox = new System.Windows.Forms.TextBox();
             this.DiceHeightTextbox = new System.Windows.Forms.TextBox();
@@ -77,7 +77,7 @@ namespace DiceUI
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             this.splitContainer1.Panel1.Controls.Add(this.BuildObjectbutton);
             this.splitContainer1.Panel1.Controls.Add(this.EdgeWidthTextbox);
-            this.splitContainer1.Panel1.Controls.Add(this.DredgingDiametrTextbox);
+            this.splitContainer1.Panel1.Controls.Add(this.DredgingDiameterTextbox);
             this.splitContainer1.Panel1.Controls.Add(this.DiceThicknessTextbox);
             this.splitContainer1.Panel1.Controls.Add(this.DiceWidthTextbox);
             this.splitContainer1.Panel1.Controls.Add(this.DiceHeightTextbox);
@@ -190,13 +190,13 @@ namespace DiceUI
             // 
             // DredgingDiametrTextbox
             // 
-            this.DredgingDiametrTextbox.Location = new System.Drawing.Point(163, 188);
-            this.DredgingDiametrTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DredgingDiametrTextbox.Name = "DredgingDiametrTextbox";
-            this.DredgingDiametrTextbox.Size = new System.Drawing.Size(184, 22);
-            this.DredgingDiametrTextbox.TabIndex = 9;
-            this.DredgingDiametrTextbox.TextChanged += new System.EventHandler(this.DredgingDiametr_TextChanged);
-            this.DredgingDiametrTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
+            this.DredgingDiameterTextbox.Location = new System.Drawing.Point(163, 188);
+            this.DredgingDiameterTextbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DredgingDiameterTextbox.Name = "DredgingDiameterTextbox";
+            this.DredgingDiameterTextbox.Size = new System.Drawing.Size(184, 22);
+            this.DredgingDiameterTextbox.TabIndex = 9;
+            this.DredgingDiameterTextbox.TextChanged += new System.EventHandler(this.DredgingDiameter);
+            this.DredgingDiameterTextbox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TextBox_KeyPress);
             // 
             // DiceThicknessTextbox
             // 
@@ -317,7 +317,7 @@ namespace DiceUI
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Button BuildObjectbutton;
         private System.Windows.Forms.TextBox EdgeWidthTextbox;
-        private System.Windows.Forms.TextBox DredgingDiametrTextbox;
+        private System.Windows.Forms.TextBox DredgingDiameterTextbox;
         private System.Windows.Forms.TextBox DiceThicknessTextbox;
         private System.Windows.Forms.TextBox DiceWidthTextbox;
         private System.Windows.Forms.TextBox DiceHeightTextbox;

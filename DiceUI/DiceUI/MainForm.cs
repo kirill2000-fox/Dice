@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 using Core;
 
@@ -24,8 +26,16 @@ namespace DiceUI
         {
             InitializeComponent();
             DefaultValue();
+            TextBoxDictionary = new Dictionary<ParametersEnum, TextBox>()
+            {
+                {ParametersEnum.DiceHeight, DiceHeightTextbox },
+                {ParametersEnum.DiceWidth, DiceWidthTextbox },
+                {ParametersEnum.DiceThickness, DiceThicknessTextbox},
+                {ParametersEnum.DredgingDiameter, DredgingDiameterTextbox},
+                {ParametersEnum.EdgeWidth, EdgeWidthTextbox}
+            };
         }
-        
+
         /// <summary>
         /// Метод для установки дефолтных данных
         /// </summary>
@@ -34,9 +44,13 @@ namespace DiceUI
             DiceHeightTextbox.Text = "60";
             DiceWidthTextbox.Text = "30";
             DiceThicknessTextbox.Text = "10";
-            DredgingDiametrTextbox.Text = "8";
+            DredgingDiameterTextbox.Text = "8";
             EdgeWidthTextbox.Text = "3";
         }
+        /// <summary>
+        /// Словарь текстобкса и параметра
+        /// </summary>
+        public Dictionary<ParametersEnum, TextBox> TextBoxDictionary { get; set; }
 
         /// <summary>
         /// Метод для проверки условий
@@ -85,62 +99,103 @@ namespace DiceUI
             }
         }
 
-        //TODO: дубль
-        /// <summary>
-        /// Метод показывающий значение диапазона высоты
-        /// </summary>
-        private void DiceHeight_TextChanged(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(DiceHeightTextbox, "Значение должно быть " +
-                                                   "от 60 мм до 120 мм");
-            CheckValue(DiceHeightTextbox, ParametersEnum.DiceHeight);
-        }
+        //private void TextBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    var textbox = (TextBox)sender;
+            
+        //    if (double.TryParse(textbox.Text, NumberStyles.Float,
+        //        CultureInfo.InvariantCulture, out double value))
+        //    {
+        //        if (textbox == TextBoxDictionary[ParametersEnum.DiceHeight])
+        //        {
+        //            toolTip1.SetToolTip(DiceHeightTextbox, "Значение должно быть " +
+        //                                                   "от 60 мм до 120 мм");
+        //            CheckValue(DiceHeightTextbox, ParametersEnum.DiceHeight);
+        //        }
+        //        else if (textbox == TextBoxDictionary[ParametersEnum.DiceWidth])
+        //        {
+        //            toolTip1.SetToolTip(DiceWidthTextbox, "Значение должно быть " +
+        //                                                  "от 30 мм до 0.5*А мм");
+        //            CheckValue(DiceWidthTextbox, ParametersEnum.DiceWidth);
+        //        }
 
-        /// <summary>
-        /// Метод показывающий значение диапазона ширины
-        /// </summary>
-        private void DiceWidth_TextChanged(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(DiceWidthTextbox, "Значение должно быть " +
-                                                  "от 30 мм до 0.5*А мм");
-            CheckValue(DiceWidthTextbox, ParametersEnum.DiceWidth);
-        }
+        //        else if (textbox == TextBoxDictionary[ParametersEnum.DiceThickness])
+        //        {
+        //            toolTip1.SetToolTip(DiceThicknessTextbox, "Значение должно быть " +
+        //                                                      "от 10 мм до 30 мм");
+        //            CheckValue(DiceThicknessTextbox, ParametersEnum.DiceThickness);
+        //        }
+        //        else if (textbox == TextBoxDictionary[ParametersEnum.DredgingDiameter])
+        //        {
+        //            toolTip1.SetToolTip(DredgingDiameterTextbox, "Значение должно быть " +
+        //                                                         "от 8 мм до 15 мм");
+        //            CheckValue(DredgingDiameterTextbox, ParametersEnum.DredgingDiameter);
+        //        }
+        //        else if (textbox == TextBoxDictionary[ParametersEnum.EdgeWidth])
+        //        {
+        //            toolTip1.SetToolTip(EdgeWidthTextbox, "Значение должно быть " +
+        //                                                  "от 3 мм до 1.5*А мм");
+        //            CheckValue(EdgeWidthTextbox, ParametersEnum.EdgeWidth);
+        //        }
+        //    }
 
-        /// <summary>
-        /// Метод показывающий значение диапазона толщины
-        /// </summary>
-        private void DiceThickness_TextChanged(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(DiceThicknessTextbox, "Значение должно быть " +
-                                                      "от 10 мм до 30 мм");
-            CheckValue(DiceThicknessTextbox, ParametersEnum.DiceThickness);
-        }
+            //TODO: дубль
+            /// <summary>
+            /// Метод показывающий значение диапазона высоты
+            /// </summary>
+            private void DiceHeight_TextChanged(object sender, EventArgs e)
+            {
+                toolTip1.SetToolTip(DiceHeightTextbox, "Значение должно быть " +
+                                                       "от 60 мм до 120 мм");
+                CheckValue(DiceHeightTextbox, ParametersEnum.DiceHeight);
+            }
 
-        /// <summary>
-        /// Метод показывающий значение диапазона диаметра выемки
-        /// </summary>
-        private void DredgingDiametr_TextChanged(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(DredgingDiametrTextbox, "Значение должно быть " +
-                                                        "от 8 мм до 15 мм");
-            CheckValue(DredgingDiametrTextbox, ParametersEnum.DredgingDiameter);
+            /// <summary>
+            /// Метод показывающий значение диапазона ширины
+            /// </summary>
+            private void DiceWidth_TextChanged(object sender, EventArgs e)
+            {
+                toolTip1.SetToolTip(DiceWidthTextbox, "Значение должно быть " +
+                                                      "от 30 мм до 0.5*А мм");
+                CheckValue(DiceWidthTextbox, ParametersEnum.DiceWidth);
+            }
 
-        }
+            /// <summary>
+            /// Метод показывающий значение диапазона толщины
+            /// </summary>
+            private void DiceThickness_TextChanged(object sender, EventArgs e)
+            {
+                toolTip1.SetToolTip(DiceThicknessTextbox, "Значение должно быть " +
+                                                          "от 10 мм до 30 мм");
+                CheckValue(DiceThicknessTextbox, ParametersEnum.DiceThickness);
+            }
 
-        /// <summary>
-        /// Метод показывающий значение диапазона размера каемкии
-        /// </summary>
-        private void EdgeWidth_TextChanged(object sender, EventArgs e)
-        {
-            toolTip1.SetToolTip(EdgeWidthTextbox, "Значение должно быть " +
-                                                  "от 3 мм до 1.5*А мм");
-            CheckValue(EdgeWidthTextbox, ParametersEnum.EdgeWidth);
-        }
+            /// <summary>
+            /// Метод показывающий значение диапазона диаметра выемки
+            /// </summary>
+            private void DredgingDiameter(object sender, EventArgs e)
+            {
+                toolTip1.SetToolTip(DredgingDiameterTextbox, "Значение должно быть " +
+                                                            "от 8 мм до 15 мм");
+                CheckValue(DredgingDiameterTextbox, ParametersEnum.DredgingDiameter);
 
-        /// <summary>
-        /// Метод ограничивающий ввод определнных символов
-        /// </summary>
-        private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
+            }
+
+            /// <summary>
+            /// Метод показывающий значение диапазона размера каемкии
+            /// </summary>
+            private void EdgeWidth_TextChanged(object sender, EventArgs e)
+            {
+                toolTip1.SetToolTip(EdgeWidthTextbox, "Значение должно быть " +
+                                                      "от 3 мм до 1.5*А мм");
+                CheckValue(EdgeWidthTextbox, ParametersEnum.EdgeWidth);
+            }
+
+
+            /// <summary>
+            /// Метод ограничивающий ввод определнных символов
+            /// </summary>
+            private void TextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '.' || e.KeyChar == ',')
             {
