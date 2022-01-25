@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.InteropServices;
 using Kompas6API5;
 using Kompas6Constants3D;
 
@@ -25,14 +26,18 @@ namespace KompasConnector
         /// </summary>
         public void OpenKompas()
         {
-            try
+            var activekompas = GetActiveKompas(out var kompas);
+            if (!activekompas)
             {
-                var t = Type.GetTypeFromProgID("KOMPAS.Application.5");
-                Kompas = (KompasObject)Activator.CreateInstance(t);
-            }
-            catch (Exception)
-            {
-                throw new ArgumentException(@"Ошибка в запуске программы");
+                try
+                {
+                    var t = Type.GetTypeFromProgID("KOMPAS.Application.5");
+                    Kompas = (KompasObject) Activator.CreateInstance(t);
+                }
+                catch (Exception)
+                {
+                    throw new ArgumentException(@"Ошибка в запуске программы");
+                }
             }
 
             Kompas.Visible = true;
@@ -42,6 +47,19 @@ namespace KompasConnector
             doc3D.Create();
             KsPart = (ksPart)doc3D.GetPart((short)Part_Type.pTop_Part);
         }
-        
+
+        private bool GetActiveKompas(out KompasObject kompas)
+        {
+            kompas = null;
+            try
+            {
+                kompas = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
+                return true;
+            }
+            catch (COMException)
+            {
+                return false;
+            }
+        }
     }
 }
