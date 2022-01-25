@@ -102,45 +102,6 @@ namespace DiceUI
             }
         }
 
-        //private void TextBox_TextChanged(object sender, EventArgs e)
-        //{
-        //    var textbox = (TextBox)sender;
-            
-        //    if (double.TryParse(textbox.Text, NumberStyles.Float,
-        //        CultureInfo.InvariantCulture, out double value))
-        //    {
-        //        if (textbox == TextBoxDictionary[ParametersEnum.DiceHeight])
-        //        {
-        //            toolTip1.SetToolTip(DiceHeightTextbox, "Значение должно быть " +
-        //                                                   "от 60 мм до 120 мм");
-        //            CheckValue(DiceHeightTextbox, ParametersEnum.DiceHeight);
-        //        }
-        //        else if (textbox == TextBoxDictionary[ParametersEnum.DiceWidth])
-        //        {
-        //            toolTip1.SetToolTip(DiceWidthTextbox, "Значение должно быть " +
-        //                                                  "от 30 мм до 0.5*А мм");
-        //            CheckValue(DiceWidthTextbox, ParametersEnum.DiceWidth);
-        //        }
-
-        //        else if (textbox == TextBoxDictionary[ParametersEnum.DiceThickness])
-        //        {
-        //            toolTip1.SetToolTip(DiceThicknessTextbox, "Значение должно быть " +
-        //                                                      "от 10 мм до 30 мм");
-        //            CheckValue(DiceThicknessTextbox, ParametersEnum.DiceThickness);
-        //        }
-        //        else if (textbox == TextBoxDictionary[ParametersEnum.DredgingDiameter])
-        //        {
-        //            toolTip1.SetToolTip(DredgingDiameterTextbox, "Значение должно быть " +
-        //                                                         "от 8 мм до 15 мм");
-        //            CheckValue(DredgingDiameterTextbox, ParametersEnum.DredgingDiameter);
-        //        }
-        //        else if (textbox == TextBoxDictionary[ParametersEnum.EdgeWidth])
-        //        {
-        //            toolTip1.SetToolTip(EdgeWidthTextbox, "Значение должно быть " +
-        //                                                  "от 3 мм до 1.5*А мм");
-        //            CheckValue(EdgeWidthTextbox, ParametersEnum.EdgeWidth);
-        //        }
-        //    }
 
             //TODO: дубль
             /// <summary>

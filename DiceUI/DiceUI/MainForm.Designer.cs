@@ -113,17 +113,17 @@ namespace DiceUI
             this.comboBoxEdgeType.Items.AddRange(new object[] {
             "Цилиндр",
             "Куб"});
-            this.comboBoxEdgeType.Location = new System.Drawing.Point(141, 383);
-            this.comboBoxEdgeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxEdgeType.Location = new System.Drawing.Point(163, 380);
+            this.comboBoxEdgeType.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxEdgeType.Name = "comboBoxEdgeType";
-            this.comboBoxEdgeType.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxEdgeType.Size = new System.Drawing.Size(184, 24);
             this.comboBoxEdgeType.TabIndex = 25;
             this.comboBoxEdgeType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdgeType_SelectedIndexChanged);
             // 
             // labelEdgeType
             // 
             this.labelEdgeType.AutoSize = true;
-            this.labelEdgeType.Location = new System.Drawing.Point(16, 383);
+            this.labelEdgeType.Location = new System.Drawing.Point(13, 383);
             this.labelEdgeType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEdgeType.Name = "labelEdgeType";
             this.labelEdgeType.Size = new System.Drawing.Size(109, 17);
@@ -139,18 +139,18 @@ namespace DiceUI
             this.comboBoxDredgingForm.Items.AddRange(new object[] {
             "Сфера",
             "Куб"});
-            this.comboBoxDredgingForm.Location = new System.Drawing.Point(141, 336);
-            this.comboBoxDredgingForm.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.comboBoxDredgingForm.Location = new System.Drawing.Point(163, 339);
+            this.comboBoxDredgingForm.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxDredgingForm.MaxDropDownItems = 2;
             this.comboBoxDredgingForm.Name = "comboBoxDredgingForm";
-            this.comboBoxDredgingForm.Size = new System.Drawing.Size(160, 24);
+            this.comboBoxDredgingForm.Size = new System.Drawing.Size(184, 24);
             this.comboBoxDredgingForm.TabIndex = 23;
             this.comboBoxDredgingForm.SelectedIndexChanged += new System.EventHandler(this.comboBoxDredgingForm_SelectedIndexChanged);
             // 
             // labelDredgingForm
             // 
             this.labelDredgingForm.AutoSize = true;
-            this.labelDredgingForm.Location = new System.Drawing.Point(17, 340);
+            this.labelDredgingForm.Location = new System.Drawing.Point(14, 342);
             this.labelDredgingForm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDredgingForm.Name = "labelDredgingForm";
             this.labelDredgingForm.Size = new System.Drawing.Size(111, 17);
