@@ -111,9 +111,9 @@ namespace DiceUI
             this.comboBoxEdgeType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxEdgeType.FormattingEnabled = true;
             this.comboBoxEdgeType.Items.AddRange(new object[] {
-            "Цилиндр",
-            "Куб"});
-            this.comboBoxEdgeType.Location = new System.Drawing.Point(163, 380);
+            "Цилиндрическая",
+            "Кубическая"});
+            this.comboBoxEdgeType.Location = new System.Drawing.Point(163, 331);
             this.comboBoxEdgeType.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxEdgeType.Name = "comboBoxEdgeType";
             this.comboBoxEdgeType.Size = new System.Drawing.Size(184, 24);
@@ -123,7 +123,7 @@ namespace DiceUI
             // labelEdgeType
             // 
             this.labelEdgeType.AutoSize = true;
-            this.labelEdgeType.Location = new System.Drawing.Point(12, 383);
+            this.labelEdgeType.Location = new System.Drawing.Point(12, 334);
             this.labelEdgeType.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEdgeType.Name = "labelEdgeType";
             this.labelEdgeType.Size = new System.Drawing.Size(109, 17);
@@ -137,9 +137,9 @@ namespace DiceUI
             this.comboBoxDredgingForm.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.comboBoxDredgingForm.ItemHeight = 16;
             this.comboBoxDredgingForm.Items.AddRange(new object[] {
-            "Сфера",
-            "Куб"});
-            this.comboBoxDredgingForm.Location = new System.Drawing.Point(163, 340);
+            "Сферическая",
+            "Кубическая"});
+            this.comboBoxDredgingForm.Location = new System.Drawing.Point(163, 291);
             this.comboBoxDredgingForm.Margin = new System.Windows.Forms.Padding(4);
             this.comboBoxDredgingForm.MaxDropDownItems = 2;
             this.comboBoxDredgingForm.Name = "comboBoxDredgingForm";
@@ -150,7 +150,7 @@ namespace DiceUI
             // labelDredgingForm
             // 
             this.labelDredgingForm.AutoSize = true;
-            this.labelDredgingForm.Location = new System.Drawing.Point(12, 343);
+            this.labelDredgingForm.Location = new System.Drawing.Point(12, 294);
             this.labelDredgingForm.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelDredgingForm.Name = "labelDredgingForm";
             this.labelDredgingForm.Size = new System.Drawing.Size(111, 17);
@@ -233,10 +233,10 @@ namespace DiceUI
             // 
             // BuildObjectbutton
             // 
-            this.BuildObjectbutton.Location = new System.Drawing.Point(15, 287);
+            this.BuildObjectbutton.Location = new System.Drawing.Point(16, 369);
             this.BuildObjectbutton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BuildObjectbutton.Name = "BuildObjectbutton";
-            this.BuildObjectbutton.Size = new System.Drawing.Size(164, 46);
+            this.BuildObjectbutton.Size = new System.Drawing.Size(335, 46);
             this.BuildObjectbutton.TabIndex = 12;
             this.BuildObjectbutton.Text = "Построить объект";
             this.BuildObjectbutton.UseVisualStyleBackColor = true;

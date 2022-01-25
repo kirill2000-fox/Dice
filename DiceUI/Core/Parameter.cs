@@ -7,6 +7,7 @@ namespace Core
     /// </summary>
     public class Parameter : ICloneable
     {
+
         /// <summary>
         /// Текущее значение параметра
         /// </summary>
