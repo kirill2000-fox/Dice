@@ -33,7 +33,7 @@ namespace Core
         /// <summary>
         /// Список параметров
         /// </summary>
-        public List<Parameter> ParametersList { get; set; } = new List<Parameter>();
+        public List<Parameter> ParametersList { get; } = new List<Parameter>();
 
         /// <summary>
         /// Словарь ошибок параметров

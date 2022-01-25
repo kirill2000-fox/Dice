@@ -40,7 +40,10 @@ namespace DiceBuilder
         public void BuildDice()
         {
             //Создание прямоугольника
-            CreateRectangle();
+            CreateRectangle(0, 
+	            -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05,
+	            _diceParameters[ParametersEnum.DiceHeight].Value,
+	            _diceParameters[ParametersEnum.DiceWidth].Value);
 
 	        //TODO: Вынести в отдельный метод задающий размеры.
             if (_diceParameters.CubeDredging)
@@ -127,11 +130,16 @@ namespace DiceBuilder
             return extrusionEntity;
         }
 
+
         /// <summary>
         /// Построение прямоугольника
         /// </summary>
-        //TODO: Унифицировать для многоразового использования
-        void CreateRectangle()
+        /// <param name="x"></param>
+        /// <param name="y"></param>
+        /// <param name="width"></param>
+        /// <param name="height"></param>
+        //TODO: Унифицировать для многоразового использования (Исправлено)
+        void CreateRectangle(double x, double y, double width, double height)
         {
             //Выбор плоскости для построения
             var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOY);
@@ -143,11 +151,11 @@ namespace DiceBuilder
             var rectangleParam = (ksRectangleParam)_connector
                 .Kompas
                 .GetParamStruct((short)StructType2DEnum.ko_RectangleParam);
-            rectangleParam.x = 0;
-            rectangleParam.y = -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            rectangleParam.x = x;
+            rectangleParam.y = y;
             rectangleParam.ang = 0;
-            rectangleParam.width = _diceParameters[ParametersEnum.DiceHeight].Value;
-            rectangleParam.height = _diceParameters[ParametersEnum.DiceWidth].Value;
+            rectangleParam.width = width;
+            rectangleParam.height = height;
             rectangleParam.style = 1;
 
             doc2D.ksRectangle(rectangleParam);
@@ -317,30 +325,38 @@ namespace DiceBuilder
             var y2 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
 
             //Построение прямоугольника
-            //TODO: Можно вынести в отдельный метод. Построение правильного многоугольника
-            var rectangleParam = (ksRegularPolygonParam)_connector
-                .Kompas
-                .GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
-            rectangleParam.count = 4;
-            rectangleParam.xc = x1;
-            rectangleParam.yc = y1;
-            rectangleParam.ang = 0;
-            rectangleParam.radius = flaskDiameter/2;
-            rectangleParam.describe = true;
-            rectangleParam.style = 1;
-
-            doc2d.ksRegularPolygon(rectangleParam);
-
-            rectangleParam.xc = x2;
-            rectangleParam.yc = y2;
-
-            doc2d.ksRegularPolygon(rectangleParam);
+            //TODO: Можно вынести в отдельный метод. Построение правильного многоугольника (Исправлено)
+            CreateRegularPolygonParam(x1, y1, flaskDiameter / 2, doc2d);
+            CreateRegularPolygonParam(x2, y2, flaskDiameter / 2, doc2d);
             
             //Выход из редактирования
             sketchDefinition.EndEdit();
             //Выдавливание фигуры
             CreateExtrusionOffsetCutMethod(sketchDefinition, "Квадратная Выемка", flaskDiameter);
 
+        }
+
+        /// <summary>
+        /// Построение прямоугольника
+        /// </summary>
+        /// <param name="x1"></param>
+        /// <param name="y1"></param>
+        /// <param name="radius"></param>
+        /// <param name="doc2d"></param>
+        private void CreateRegularPolygonParam(double x1, double y1, double radius, ksDocument2D doc2d)
+        {
+	        var rectangleParam = (ksRegularPolygonParam) _connector
+		        .Kompas
+		        .GetParamStruct((short) StructType2DEnum.ko_RegularPolygonParam);
+	        rectangleParam.count = 4;
+	        rectangleParam.xc = x1;
+	        rectangleParam.yc = y1;
+	        rectangleParam.ang = 0;
+	        rectangleParam.radius = radius;
+	        rectangleParam.describe = true;
+	        rectangleParam.style = 1;
+
+	        doc2d.ksRegularPolygon(rectangleParam);
         }
 
         /// <summary>
@@ -354,11 +370,7 @@ namespace DiceBuilder
             //Редактирование эскиза
             var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
 
-	        //TODO: Эта переменная не используется
-            //Построение круга
-            var circleParam = (ksCircleParam)_connector
-                .Kompas
-                .GetParamStruct((short)StructType2DEnum.ko_CircleParam);
+	        //TODO: Эта переменная не используется (Исправлено)
 
             //Построение окружности
             doc2D.ksCircle(_diceParameters[ParametersEnum.DiceHeight].Value / 2,
@@ -385,19 +397,8 @@ namespace DiceBuilder
 	        var x = _diceParameters[ParametersEnum.DiceHeight].Value / 2;
 	        var y = -_diceParameters[ParametersEnum.DiceThickness].Value;
 	        var radius = _diceParameters[ParametersEnum.EdgeWidth].Value / 2;
-	        //TODO: Если пропустил выше. Вынести в отдельный метод
-            var rectangleParam = (ksRegularPolygonParam)_connector
-	            .Kompas
-	            .GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
-            rectangleParam.count = 4;
-            rectangleParam.xc = x;
-            rectangleParam.yc = y;
-            rectangleParam.ang = 0;
-            rectangleParam.radius = radius;
-            rectangleParam.describe = true;
-            rectangleParam.style = 1;
-
-            doc2D.ksRegularPolygon(rectangleParam);
+	        //TODO: Если пропустил выше. Вынести в отдельный метод (Исправлено)
+            CreateRegularPolygonParam(x,y, radius, doc2D);
 
             //Выход из редактирования
 	        sketchDefinition.EndEdit();

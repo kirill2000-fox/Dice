@@ -35,20 +35,25 @@ namespace DiceUI
                 {ParametersEnum.EdgeWidth, EdgeWidthTextbox}
             };
 
-            DefaultValue();
+            SetStartValue();
         }
 
         /// <summary>
-        /// Метод для установки дефолтных данных
+        /// Метод для установки начальных значений параметров
         /// </summary>
-        //TODO: опустить в параметры
-        private void DefaultValue()
+        //TODO: опустить в параметры(Исправлено)
+        private void SetStartValue()
         {
-            DiceHeightTextbox.Text = "60";
-            DiceWidthTextbox.Text = "30";
-            DiceThicknessTextbox.Text = "10";
-            DredgingDiameterTextbox.Text = "8";
-            EdgeWidthTextbox.Text = "3";
+            DiceHeightTextbox.Text = _parameters[ParametersEnum.DiceHeight]
+	            .Value.ToString();
+            DiceWidthTextbox.Text = _parameters[ParametersEnum.DiceWidth]
+	            .Value.ToString();
+            DiceThicknessTextbox.Text = _parameters[ParametersEnum.DiceThickness]
+	            .Value.ToString();
+            DredgingDiameterTextbox.Text = _parameters[ParametersEnum.DredgingDiameter]
+	            .Value.ToString();
+            EdgeWidthTextbox.Text = _parameters[ParametersEnum.EdgeWidth]
+	            .Value.ToString();
             comboBoxDredgingForm.SelectedIndex = 0;
             comboBoxEdgeType.SelectedIndex = 0;
         }
