@@ -26,20 +26,19 @@ namespace KompasConnector
         /// </summary>
         public void OpenKompas()
         {
-            var activekompas = GetActiveKompas(out var kompas);
-            if (!activekompas)
+            Kompas = GetActiveKompas();
+            if (Kompas == null)
             {
                 try
                 {
-                    var t = Type.GetTypeFromProgID("KOMPAS.Application.5");
-                    Kompas = (KompasObject) Activator.CreateInstance(t);
+                    var type = Type.GetTypeFromProgID("KOMPAS.Application.5");
+                    Kompas = (KompasObject)Activator.CreateInstance(type);
                 }
-                catch (Exception)
+                catch (COMException)
                 {
-                    throw new ArgumentException(@"Ошибка в запуске программы");
+                    Kompas = null;
                 }
             }
-
             Kompas.Visible = true;
             Kompas.ActivateControllerAPI();
 
@@ -48,17 +47,16 @@ namespace KompasConnector
             KsPart = (ksPart)doc3D.GetPart((short)Part_Type.pTop_Part);
         }
 
-        private bool GetActiveKompas(out KompasObject kompas)
+        private KompasObject GetActiveKompas()
         {
-            kompas = null;
             try
             {
-                kompas = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
-                return true;
+                var kompas = (KompasObject)Marshal.GetActiveObject("KOMPAS.Application.5");
+                return kompas;
             }
             catch (COMException)
             {
-                return false;
+                return null;
             }
         }
     }

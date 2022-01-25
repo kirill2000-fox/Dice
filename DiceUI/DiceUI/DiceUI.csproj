@@ -136,8 +136,8 @@
       <Project>{F9604503-9F6F-4976-B328-E41838CD51D6}</Project>
       <Name>DiceBuilder</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KompasConnector1\KompasConnector.csproj">
-      <Project>{B65EF3C6-F668-4050-8F01-C95936D56323}</Project>
+    <ProjectReference Include="..\KompasConnector\KompasConnector.csproj">
+      <Project>{b65ef3c6-f668-4050-8f01-c95936d56323}</Project>
       <Name>KompasConnector</Name>
     </ProjectReference>
   </ItemGroup>
