@@ -40,34 +40,46 @@ namespace DiceBuilder
         public void BuildDice()
         {
             //Создание прямоугольника
-            CreateRectangle(0, 
-	            -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05,
-	            _diceParameters[ParametersEnum.DiceHeight].Value,
-	            _diceParameters[ParametersEnum.DiceWidth].Value);
+            CreateRectangle(0,
+                -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05,
+                _diceParameters[ParametersEnum.DiceHeight].Value,
+                _diceParameters[ParametersEnum.DiceWidth].Value);
 
-	        //TODO: Вынести в отдельный метод задающий размеры.
+            //Создание выемки
+            CreateDredging();
+
+            //Создание каемки
+            CreateEdge();
+        }
+
+        /// <summary>
+        /// Создание кубической выемки
+        /// </summary>
+        private void CreateDredging()
+        {
             if (_diceParameters.CubeDredging)
             {
-	            //Создание Квадратной выемки
-	            CreateCubeDredging();
+                CreateCubeDredging();
             }
             else
             {
-	            //Создание выемки
-	            СreateSphereDredging();
+                СreateSphereDredging();
             }
+        }
 
-            //TODO: Здесь тоже
+        /// <summary>
+        /// Создание кубической каемки
+        /// </summary>
+        private void CreateEdge()
+        {
             if (_diceParameters.CubeEdge)
             {
                 CreateCubeEdge();
             }
             else
             {
-	            //Создание каемки
-	            CreateCylinderEdge();
+                CreateCylinderEdge();
             }
-            
         }
 
         /// <summary>
@@ -75,7 +87,7 @@ namespace DiceBuilder
         /// </summary>
         /// <param name="planeType">Выбор плоскости</param>
         /// <returns>ksSketchDefinition</returns>
-        public ksSketchDefinition CreateSketch(Obj3dType planeType)
+        private ksSketchDefinition CreateSketch(Obj3dType planeType)
         {
             //Элемент модели по умолчанию
             var plane = (ksEntity)_connector
@@ -130,7 +142,6 @@ namespace DiceBuilder
             return extrusionEntity;
         }
 
-
         /// <summary>
         /// Построение прямоугольника
         /// </summary>
@@ -138,7 +149,6 @@ namespace DiceBuilder
         /// <param name="y"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        //TODO: Унифицировать для многоразового использования (Исправлено)
         void CreateRectangle(double x, double y, double width, double height)
         {
             //Выбор плоскости для построения
@@ -324,10 +334,9 @@ namespace DiceBuilder
             var x2 = height * 0.75;
             var y2 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
 
-            //Построение прямоугольника
-            //TODO: Можно вынести в отдельный метод. Построение правильного многоугольника (Исправлено)
-            CreateRegularPolygonParam(x1, y1, flaskDiameter / 2, doc2d);
-            CreateRegularPolygonParam(x2, y2, flaskDiameter / 2, doc2d);
+            //Построение многоугольника
+            CreatePolygon(x1, y1, flaskDiameter / 2, doc2d);
+            CreatePolygon(x2, y2, flaskDiameter / 2, doc2d);
             
             //Выход из редактирования
             sketchDefinition.EndEdit();
@@ -337,26 +346,26 @@ namespace DiceBuilder
         }
 
         /// <summary>
-        /// Построение прямоугольника
+        /// Построение многоугольника
         /// </summary>
-        /// <param name="x1"></param>
-        /// <param name="y1"></param>
+        /// <param name="x"></param>
+        /// <param name="y"></param>
         /// <param name="radius"></param>
         /// <param name="doc2d"></param>
-        private void CreateRegularPolygonParam(double x1, double y1, double radius, ksDocument2D doc2d)
+        private void CreatePolygon(double x, double y, double radius, ksDocument2D doc2d)
         {
-	        var rectangleParam = (ksRegularPolygonParam) _connector
-		        .Kompas
-		        .GetParamStruct((short) StructType2DEnum.ko_RegularPolygonParam);
-	        rectangleParam.count = 4;
-	        rectangleParam.xc = x1;
-	        rectangleParam.yc = y1;
-	        rectangleParam.ang = 0;
-	        rectangleParam.radius = radius;
-	        rectangleParam.describe = true;
-	        rectangleParam.style = 1;
+            var rectangleParam = (ksRegularPolygonParam)_connector
+                .Kompas
+                .GetParamStruct((short)StructType2DEnum.ko_RegularPolygonParam);
+            rectangleParam.count = 4;
+            rectangleParam.xc = x;
+            rectangleParam.yc = y;
+            rectangleParam.ang = 0;
+            rectangleParam.radius = radius;
+            rectangleParam.describe = true;
+            rectangleParam.style = 1;
 
-	        doc2d.ksRegularPolygon(rectangleParam);
+            doc2d.ksRegularPolygon(rectangleParam);
         }
 
         /// <summary>
@@ -369,8 +378,6 @@ namespace DiceBuilder
 
             //Редактирование эскиза
             var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
-
-	        //TODO: Эта переменная не используется (Исправлено)
 
             //Построение окружности
             doc2D.ksCircle(_diceParameters[ParametersEnum.DiceHeight].Value / 2,
@@ -392,13 +399,14 @@ namespace DiceBuilder
 	        var sketchDefinition = CreateSketch(Obj3dType.o3d_planeXOZ);
 
 	        //Редактирование эскиза
-	        var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
+	        var doc2d = (ksDocument2D)sketchDefinition.BeginEdit();
 
 	        var x = _diceParameters[ParametersEnum.DiceHeight].Value / 2;
 	        var y = -_diceParameters[ParametersEnum.DiceThickness].Value;
 	        var radius = _diceParameters[ParametersEnum.EdgeWidth].Value / 2;
-	        //TODO: Если пропустил выше. Вынести в отдельный метод (Исправлено)
-            CreateRegularPolygonParam(x,y, radius, doc2D);
+            
+            CreatePolygon(x, y, radius, doc2d);
+            
 
             //Выход из редактирования
 	        sketchDefinition.EndEdit();

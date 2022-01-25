@@ -51,6 +51,15 @@ namespace Core
         /// </summary>
         public DiceParameters()
         {
+            SetDefaultValues();
+        }
+
+        /// <summary>
+        /// Метод для установки дефолтных данных
+        /// </summary>
+        public void SetDefaultValues()
+        {
+            ParametersList.Clear();
             ParametersList.Add(new Parameter(ParametersEnum.DiceWidth, 30, 60, 30));
             ParametersList.Add(new Parameter(ParametersEnum.DiceHeight, 60, 120, 60));
             ParametersList.Add(new Parameter(ParametersEnum.DiceThickness, 10, 30, 10));
