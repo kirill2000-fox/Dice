@@ -41,7 +41,6 @@ namespace DiceUI
         /// <summary>
         /// Метод для установки начальных значений параметров
         /// </summary>
-        //TODO: опустить в параметры(Исправлено)
         private void SetStartValue()
         {
             DiceHeightTextbox.Text = _parameters[ParametersEnum.DiceHeight]
