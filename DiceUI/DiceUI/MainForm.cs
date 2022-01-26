@@ -208,11 +208,17 @@ namespace DiceUI
                
         }
 
+        /// <summary>
+        /// Метод показывающий значение поля комбобокс
+        /// </summary>
 		private void comboBoxDredgingForm_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_parameters.CubeDredging = comboBoxDredgingForm.SelectedIndex == 1;
 		}
 
+        /// <summary>
+        /// Метод показывающий значение поля комбобокс
+        /// </summary>
 		private void comboBoxEdgeType_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_parameters.CubeEdge = comboBoxEdgeType.SelectedIndex == 1;

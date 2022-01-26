@@ -12,10 +12,12 @@ namespace Core
         /// Поле определяющее будет ли вырез кубическим
         /// </summary>
 	    private bool _cubeDredging;
+
         /// <summary>
         /// Поле определяющее будет ли каёмка кубической
         /// </summary>
         private bool _cubeEdge;
+
 	    /// <summary>
         /// Устанавливает форму вырезов
         /// </summary>
@@ -25,6 +27,9 @@ namespace Core
 	        get => _cubeDredging;
         }
 
+        /// <summary>
+        /// Устанавливает форму каемки
+        /// </summary>
 	    public bool CubeEdge
 	    {
 		    set => _cubeEdge = value;
@@ -38,7 +43,8 @@ namespace Core
         /// <summary>
         /// Словарь ошибок параметров
         /// </summary>
-        public Dictionary<ParametersEnum, string> Errors = new Dictionary<ParametersEnum, string>();
+        public Dictionary<ParametersEnum, string> Errors =
+            new Dictionary<ParametersEnum, string>();
 
         /// <summary>
         /// Флаг существования ошибки
@@ -60,11 +66,16 @@ namespace Core
         public void SetDefaultValues()
         {
             ParametersList.Clear();
-            ParametersList.Add(new Parameter(ParametersEnum.DiceWidth, 30, 60, 30));
-            ParametersList.Add(new Parameter(ParametersEnum.DiceHeight, 60, 120, 60));
-            ParametersList.Add(new Parameter(ParametersEnum.DiceThickness, 10, 30, 10));
-            ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter, 8, 15, 8));
-            ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 3, 24, 3));
+            ParametersList.Add(new Parameter(ParametersEnum.DiceWidth,
+                30, 60, 30));
+            ParametersList.Add(new Parameter(ParametersEnum.DiceHeight,
+                60, 120, 60));
+            ParametersList.Add(new Parameter(ParametersEnum.DiceThickness,
+                10, 30, 10));
+            ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter,
+                8, 15, 8));
+            ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 3,
+                24, 3));
             CubeDredging = false;
         }
 
