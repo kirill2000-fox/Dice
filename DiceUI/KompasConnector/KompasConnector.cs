@@ -5,7 +5,6 @@ using Kompas6Constants3D;
 
 namespace KompasConnector
 {
-    //TODO: вынести в отдельный проект.(Исправлено)
     /// <summary>
     /// Коннектор для Компаса
     /// </summary>

@@ -11,7 +11,6 @@ using Microsoft.VisualBasic.Devices;
 
 namespace DiceUI
 {
-    //TODO: XML (исправлено)
     /// <summary>
     /// Главная форма
     /// </summary>
@@ -21,6 +20,8 @@ namespace DiceUI
         /// Параметры кости
         /// </summary>
         private readonly DiceParameters _parameters = new DiceParameters();
+
+        //TODO: XML
         private readonly KompasConnector.KompasConnector _kompasConnector = new KompasConnector.KompasConnector();
 
         /// <summary>
@@ -75,7 +76,6 @@ namespace DiceUI
 
             if (textBox.Text == "" || !double.TryParse(textBox.Text, out var value))
             {
-                //TODO: дубль(исправлено)
                 textBox.BackColor = Color.Crimson;
                 _parameters.Errors.Add(nameParameters,
                     "Введено не числовое значение");
@@ -86,20 +86,19 @@ namespace DiceUI
             {
                 _parameters[nameParameters].Value = value;
 
+                //TODO: должно быть в модели
                 if (nameParameters == ParametersEnum.DiceHeight)
                 {
                     var widthMax = value / 2.0;
                     DiceHeightMaxTextBox.Text = widthMax.ToString();
-
-                    //TODO: RSDN (ИСПРАВЛЕНО)
+                    
                     var width = _parameters[ParametersEnum.DiceWidth];
                     _parameters[ParametersEnum.DiceWidth] = new Parameter
                         (width.Name, width.Min, widthMax, width.Value);
 
                     var edgeMax = value / 5.0;
                     DiceEdgeMaxTextBox.Text = edgeMax.ToString();
-
-                    //TODO: RSDN (ИСПРАВЛЕНО)
+                    
                     var edge = _parameters[ParametersEnum.EdgeWidth];
                     _parameters[ParametersEnum.EdgeWidth] = new Parameter
                         (edge.Name, edge.Min, edgeMax, edge.Value);
@@ -111,8 +110,7 @@ namespace DiceUI
                 _parameters.Errors.Add(nameParameters, e.Message);
             }
         }
-
-        //TODO: дубль(исправлено)
+        
         /// <summary>
         /// Метод показывающий значение текстового поля
         /// </summary>
@@ -125,6 +123,7 @@ namespace DiceUI
 
             switch (parameter)
             {
+                //TODO: в модель данных
                 case ParametersEnum.DiceHeight:
                 {
                     message = "Значение должно быть от 60 мм до 120 мм";
@@ -193,7 +192,6 @@ namespace DiceUI
             {
                 const string message =
                     "Один из параметров выходит за пределы допустимого значения!";
-                //TODO: Единообразно.(ИСПРАВЛЕНО)
                 const string caption = "Ошибка!";
                 MessageBox.Show(message, caption,
                     MessageBoxButtons.OK,
@@ -208,6 +206,7 @@ namespace DiceUI
                
         }
 
+        //TODO: RSDN
         /// <summary>
         /// Метод показывающий значение поля комбобокс
         /// </summary>
@@ -216,6 +215,7 @@ namespace DiceUI
 			_parameters.CubeDredging = comboBoxDredgingForm.SelectedIndex == 1;
 		}
 
+        //TODO: RSDN
         /// <summary>
         /// Метод показывающий значение поля комбобокс
         /// </summary>

@@ -1,6 +1,7 @@
 ﻿
 namespace Core
 {
+    //TODO: RSDN
     /// <summary>
     /// Типы параметров
     /// </summary>

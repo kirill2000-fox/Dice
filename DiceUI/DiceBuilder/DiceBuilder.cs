@@ -6,14 +6,11 @@ using Kompas6Constants3D;
 
 namespace DiceBuilder
 {
-    //TODO: вынести в отдельный проект.(Исправлено)
-    //TODO: XML(ИСПРАВЛЕНО)
     /// <summary>
     /// Класс построения кости
     /// </summary>
     public class DiceBuilder
     {
-        //TODO: XML(Исправлено)
         /// <summary>
         /// Соединение с КОМПАС-3D
         /// </summary>
@@ -27,7 +24,7 @@ namespace DiceBuilder
         /// <summary>
         /// Конструктор класса DiceBuilder
         /// </summary>
-        /// //TODO: XML(Исправлено)
+        /// //TODO: XML
         public DiceBuilder(KompasConnector.KompasConnector connector, DiceParameters parameters)
         {
             _connector = connector;
