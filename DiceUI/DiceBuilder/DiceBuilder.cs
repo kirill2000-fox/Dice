@@ -393,6 +393,9 @@ namespace DiceBuilder
 	            _diceParameters[ParametersEnum.DiceWidth].Value * 0.8);
         }
 
+        /// <summary>
+        /// Построение кубической каемки
+        /// </summary>
         private void CreateCubeEdge()
         {
 	        //Плоскость построения
