@@ -38,13 +38,19 @@ namespace Core
                 }
 
                 _value = value;
+                Limits = $"Значение должно быть от {Min} мм до {Max} мм";
             }
         }
 
         /// <summary>
         /// Наименование параметра
         /// </summary>
-        public ParametersEnum Name { get; private set; }
+        public ParametersType Name { get; private set; }
+
+        /// <summary>
+        /// Добустимые значения параметра
+        /// </summary>
+        public string Limits { get; private set; }
 
         /// <summary>
         /// Создает экземпляр класса <see cref="Parameter"/>
@@ -53,7 +59,7 @@ namespace Core
         /// <param name="min">Минимальное значение</param>
         /// <param name="max">Максимальное значение</param>
         /// <param name="value"></param>
-        public Parameter(ParametersEnum name, double min, double max, double value)
+        public Parameter(ParametersType name, double min, double max, double value)
         {
             Name = name;
             Min = min;

@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Parameter.cs" />
-    <Compile Include="ParametersEnum.cs" />
+    <Compile Include="ParametersType.cs" />
     <Compile Include="DiceParameters.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

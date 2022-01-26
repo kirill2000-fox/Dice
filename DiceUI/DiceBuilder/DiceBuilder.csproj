@@ -45,6 +45,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Core\Core.csproj">
+      <Project>{7099C6A6-9AEB-418F-8B8D-60F8564821F6}</Project>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\KompasConnector\KompasConnector.csproj">
+      <Project>{b65ef3c6-f668-4050-8f01-c95936d56323}</Project>
+      <Name>KompasConnector</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\Libraries\Interop_Kompas6API5.dll" />
+    <Analyzer Include="..\Libraries\Interop_Kompas6Constants.dll" />
+    <Analyzer Include="..\Libraries\Interop_Kompas6Constants3D.dll" />
+  </ItemGroup>
+  <ItemGroup>
     <COMReference Include="Kompas6API5">
       <Guid>{0422828C-F174-495E-AC5D-D31014DBBE87}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -72,16 +87,6 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
-      <Project>{7099C6A6-9AEB-418F-8B8D-60F8564821F6}</Project>
-      <Name>Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\KompasConnector\KompasConnector.csproj">
-      <Project>{b65ef3c6-f668-4050-8f01-c95936d56323}</Project>
-      <Name>KompasConnector</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

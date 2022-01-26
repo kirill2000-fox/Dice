@@ -26,11 +26,11 @@ namespace CoreTest
         public void TestIndexerGet_ReturnValue()
         {
             // Arrange
-            var expected = new Parameter(ParametersEnum.DiceWidth, 30, 60, 30);
+            var expected = new Parameter(ParametersType.DiceWidth, 30, 60, 30);
 
             // Act
             var parametersList = new DiceParameters();
-            var actual = parametersList[ParametersEnum.DiceWidth];
+            var actual = parametersList[ParametersType.DiceWidth];
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -41,14 +41,14 @@ namespace CoreTest
         public void TestIndexerSet_GoodScenario()
         {
             // Arrange
-            var expected = new Parameter(ParametersEnum.DiceWidth, 30, 60, 30);
+            var expected = new Parameter(ParametersType.DiceWidth, 30, 60, 30);
 
             // Act
             var parametersList = new DiceParameters()
             {
-                [ParametersEnum.DiceWidth] = expected
+                [ParametersType.DiceWidth] = expected
             };
-            var actual = parametersList[ParametersEnum.DiceWidth];
+            var actual = parametersList[ParametersType.DiceWidth];
 
             // Assert
             Assert.AreEqual(expected, actual);
@@ -60,7 +60,7 @@ namespace CoreTest
         {
             // Act
             var diceParameters = new DiceParameters();
-            diceParameters.Errors[ParametersEnum.DiceThickness] = "Error";
+            diceParameters.Errors[ParametersType.DiceThickness] = "Error";
             var actual = diceParameters.HasError;
 
             // Assert
@@ -109,18 +109,18 @@ namespace CoreTest
             Assert.DoesNotThrow(() => diceParameters.CubeEdge = value);
         }
 
-        [TestCase(30, ParametersEnum.DiceWidth, TestName =
+        [TestCase(30, ParametersType.DiceWidth, TestName =
             "Получение корректного значения параметра DiceWidth")]
-        [TestCase(60, ParametersEnum.DiceHeight, TestName =
+        [TestCase(60, ParametersType.DiceHeight, TestName =
             "Получение корректного значения параметра DiceHeight")]
-        [TestCase(10, ParametersEnum.DiceThickness, TestName =
+        [TestCase(10, ParametersType.DiceThickness, TestName =
             "Получение корректного значения параметра DiceThickness")]
-        [TestCase(8, ParametersEnum.DredgingDiameter, TestName =
+        [TestCase(8, ParametersType.DredgingDiameter, TestName =
             "Получение корректного значения параметра DredgingDiameter")]
-        [TestCase(3, ParametersEnum.EdgeWidth, TestName =
+        [TestCase(3, ParametersType.EdgeWidth, TestName =
             "Получение корректного значения параметра DiceWidth")]
         public void TestGetParameter_CorrectValue(double expected,
-            ParametersEnum parameter)
+            ParametersType parameter)
         {
             // Act
             var diceParameters = new DiceParameters();

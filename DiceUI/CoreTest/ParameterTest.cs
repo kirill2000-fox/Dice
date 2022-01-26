@@ -8,13 +8,13 @@ namespace CoreTest
     public class ParameterTest
     {
         private readonly Parameter _testParameter =
-            new Parameter(ParametersEnum.DiceHeight, 30, 60, 30);
+            new Parameter(ParametersType.DiceHeight, 30, 60, 30);
         
         [TestCase(TestName = "Позитивный тест геттера Name")]
         public void TestNameGet_GoodScenario()
         {
             // Arrange
-            var expected = ParametersEnum.DiceHeight;
+            var expected = ParametersType.DiceHeight;
 
             // Act
             var actual = _testParameter.Name;
@@ -56,7 +56,7 @@ namespace CoreTest
             var expected = 50;
 
             // Act
-            var parameter = new Parameter(ParametersEnum.DiceHeight, 30, 60, 30);
+            var parameter = new Parameter(ParametersType.DiceHeight, 30, 60, 30);
             parameter.Value = expected;
             var actual = parameter.Value;
 
@@ -69,7 +69,7 @@ namespace CoreTest
         public void TestValueSet_ThrownExceptions(int value)
         {
             // Act
-            var parameter = new Parameter(ParametersEnum.DiceHeight, 30, 60, 30);
+            var parameter = new Parameter(ParametersType.DiceHeight, 30, 60, 30);
 
             // Assert
             Assert.Throws<ArgumentException>(() => parameter.Value = value);

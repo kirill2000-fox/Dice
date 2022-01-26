@@ -21,7 +21,10 @@ namespace DiceUI
         /// </summary>
         private readonly DiceParameters _parameters = new DiceParameters();
 
-        //TODO: XML
+        //TODO: XML (Исправлено)
+        /// <summary>
+        /// Коннектор для Компаса
+        /// </summary>
         private readonly KompasConnector.KompasConnector _kompasConnector = new KompasConnector.KompasConnector();
 
         /// <summary>
@@ -30,13 +33,13 @@ namespace DiceUI
         public MainForm()
         {
             InitializeComponent();
-            TextBoxDictionary = new Dictionary<ParametersEnum, TextBox>()
+            TextBoxDictionary = new Dictionary<ParametersType, TextBox>()
             {
-                {ParametersEnum.DiceHeight, DiceHeightTextbox },
-                {ParametersEnum.DiceWidth, DiceWidthTextbox },
-                {ParametersEnum.DiceThickness, DiceThicknessTextbox},
-                {ParametersEnum.DredgingDiameter, DredgingDiameterTextbox},
-                {ParametersEnum.EdgeWidth, EdgeWidthTextbox}
+                {ParametersType.DiceHeight, DiceHeightTextbox },
+                {ParametersType.DiceWidth, DiceWidthTextbox },
+                {ParametersType.DiceThickness, DiceThicknessTextbox},
+                {ParametersType.DredgingDiameter, DredgingDiameterTextbox},
+                {ParametersType.EdgeWidth, EdgeWidthTextbox}
             };
 
             SetStartValue();
@@ -47,15 +50,15 @@ namespace DiceUI
         /// </summary>
         private void SetStartValue()
         {
-            DiceHeightTextbox.Text = _parameters[ParametersEnum.DiceHeight]
+            DiceHeightTextbox.Text = _parameters[ParametersType.DiceHeight]
 	            .Value.ToString();
-            DiceWidthTextbox.Text = _parameters[ParametersEnum.DiceWidth]
+            DiceWidthTextbox.Text = _parameters[ParametersType.DiceWidth]
 	            .Value.ToString();
-            DiceThicknessTextbox.Text = _parameters[ParametersEnum.DiceThickness]
+            DiceThicknessTextbox.Text = _parameters[ParametersType.DiceThickness]
 	            .Value.ToString();
-            DredgingDiameterTextbox.Text = _parameters[ParametersEnum.DredgingDiameter]
+            DredgingDiameterTextbox.Text = _parameters[ParametersType.DredgingDiameter]
 	            .Value.ToString();
-            EdgeWidthTextbox.Text = _parameters[ParametersEnum.EdgeWidth]
+            EdgeWidthTextbox.Text = _parameters[ParametersType.EdgeWidth]
 	            .Value.ToString();
             comboBoxDredgingForm.SelectedIndex = 0;
             comboBoxEdgeType.SelectedIndex = 0;
@@ -63,13 +66,13 @@ namespace DiceUI
         /// <summary>
         /// Словарь текстобкса и параметра
         /// </summary>
-        public Dictionary<ParametersEnum, TextBox> TextBoxDictionary { get; set; } =
-            new Dictionary<ParametersEnum, TextBox>();
+        public Dictionary<ParametersType, TextBox> TextBoxDictionary { get; set; } =
+            new Dictionary<ParametersType, TextBox>();
 
         /// <summary>
         /// Метод для проверки условий
         /// </summary>
-        private void CheckValue(TextBox textBox, ParametersEnum nameParameters)
+        private void CheckValue(TextBox textBox, ParametersType nameParameters)
         {
             textBox.BackColor = Color.White;
             _parameters.Errors.Remove(nameParameters);
@@ -86,23 +89,10 @@ namespace DiceUI
             {
                 _parameters[nameParameters].Value = value;
 
-                //TODO: должно быть в модели
-                if (nameParameters == ParametersEnum.DiceHeight)
-                {
-                    var widthMax = value / 2.0;
-                    DiceHeightMaxTextBox.Text = widthMax.ToString();
-                    
-                    var width = _parameters[ParametersEnum.DiceWidth];
-                    _parameters[ParametersEnum.DiceWidth] = new Parameter
-                        (width.Name, width.Min, widthMax, width.Value);
-
-                    var edgeMax = value / 5.0;
-                    DiceEdgeMaxTextBox.Text = edgeMax.ToString();
-                    
-                    var edge = _parameters[ParametersEnum.EdgeWidth];
-                    _parameters[ParametersEnum.EdgeWidth] = new Parameter
-                        (edge.Name, edge.Min, edgeMax, edge.Value);
-                }
+                //TODO: должно быть в модели (Исправлено)
+                _parameters.CheckDependentParameters(nameParameters, value);
+                DiceWidthMaxTextBox.Text = _parameters[ParametersType.DiceWidth].Max.ToString();
+                DiceEdgeMaxTextBox.Text = _parameters[ParametersType.EdgeWidth].Max.ToString();
             }
             catch (ArgumentException e)
             {
@@ -117,42 +107,14 @@ namespace DiceUI
         private void TextBox_TextChanged(object sender, EventArgs e)
         {
             var textBox = (TextBox)sender;
-            var parameter = TextBoxDictionary.FirstOrDefault(keyValue =>
+            var nameParameters = TextBoxDictionary.FirstOrDefault(keyValue =>
                 keyValue.Value == textBox).Key;
-            var message = string.Empty;
-
-            switch (parameter)
-            {
-                //TODO: в модель данных
-                case ParametersEnum.DiceHeight:
-                {
-                    message = "Значение должно быть от 60 мм до 120 мм";
-                    break;
-                }
-                case ParametersEnum.DiceWidth:
-                {
-                    message = "Значение должно быть от 30 мм до 0.5*А мм";
-                    break;
-                }
-                case ParametersEnum.DiceThickness:
-                {
-                    message = "Значение должно быть от 10 мм до 30 мм";
-                    break;
-                }
-                case ParametersEnum.DredgingDiameter:
-                {
-                    message = "Значение должно быть от 8 мм до 15 мм";
-                    break;
-                }
-                case ParametersEnum.EdgeWidth:
-                {
-                    message = "Значение должно быть от 3 мм до 1.5*А мм";
-                    break;
-                }
-            }
+            var parameter = _parameters[nameParameters];
+            //TODO: в модель данных (Исправлено)
+            var message = parameter.Limits;
 
             toolTip1.SetToolTip(textBox, message);
-            CheckValue(textBox, parameter);
+            CheckValue(textBox, nameParameters);
         }
 
 
@@ -206,20 +168,20 @@ namespace DiceUI
                
         }
 
-        //TODO: RSDN
+        //TODO: RSDN(Исправлено)
         /// <summary>
         /// Метод показывающий значение поля комбобокс
         /// </summary>
-		private void comboBoxDredgingForm_SelectedIndexChanged(object sender, EventArgs e)
+		private void ComboBoxDredgingForm_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_parameters.CubeDredging = comboBoxDredgingForm.SelectedIndex == 1;
 		}
 
-        //TODO: RSDN
+        //TODO: RSDN(Исправлено)
         /// <summary>
         /// Метод показывающий значение поля комбобокс
         /// </summary>
-		private void comboBoxEdgeType_SelectedIndexChanged(object sender, EventArgs e)
+		private void ComboBoxEdgeType_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			_parameters.CubeEdge = comboBoxEdgeType.SelectedIndex == 1;
 		}

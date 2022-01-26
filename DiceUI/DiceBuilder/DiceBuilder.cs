@@ -24,7 +24,9 @@ namespace DiceBuilder
         /// <summary>
         /// Конструктор класса DiceBuilder
         /// </summary>
-        /// //TODO: XML
+        /// <param name="connector"></param>
+        /// <param name="parameters"></param>
+        /// //TODO: XML (Исправлено)
         public DiceBuilder(KompasConnector.KompasConnector connector, DiceParameters parameters)
         {
             _connector = connector;
@@ -38,9 +40,9 @@ namespace DiceBuilder
         {
             //Создание прямоугольника
             CreateRectangle(0,
-                -_diceParameters[ParametersEnum.DiceHeight].Value * 0.05,
-                _diceParameters[ParametersEnum.DiceHeight].Value,
-                _diceParameters[ParametersEnum.DiceWidth].Value);
+                -_diceParameters[ParametersType.DiceHeight].Value * 0.05,
+                _diceParameters[ParametersType.DiceHeight].Value,
+                _diceParameters[ParametersType.DiceWidth].Value);
 
             //Создание выемки
             CreateDredging();
@@ -171,7 +173,7 @@ namespace DiceBuilder
             sketchDefinition.EndEdit();
 
             //Выдавливание детали
-            PressOutSketch(sketchDefinition, _diceParameters[ParametersEnum.DiceThickness].Value, true);
+            PressOutSketch(sketchDefinition, _diceParameters[ParametersType.DiceThickness].Value, true);
         }
 
 
@@ -181,19 +183,19 @@ namespace DiceBuilder
         private void СreateSphereDredging()
         {
             double flaskDiameter = _diceParameters.ParametersList
-                .First(parameter => parameter.Name == ParametersEnum.DredgingDiameter).Value;
+                .First(parameter => parameter.Name == ParametersType.DredgingDiameter).Value;
             // Параметры дуги
             var radArc = flaskDiameter / 2;
             var width = _diceParameters.ParametersList
                 .First(parameter =>
-                    parameter.Name == ParametersEnum.DiceWidth).Value;
+                    parameter.Name == ParametersType.DiceWidth).Value;
             var height = _diceParameters.ParametersList
                 .First(parameter =>
-                    parameter.Name == ParametersEnum.DiceHeight).Value;
+                    parameter.Name == ParametersType.DiceHeight).Value;
             var x1 = height * 0.25;
-            var y1 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            var y1 = width * 0.5 - _diceParameters[ParametersType.DiceHeight].Value * 0.05;
             var x2 = height * 0.75;
-            var y2 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            var y2 = width * 0.5 - _diceParameters[ParametersType.DiceHeight].Value * 0.05;
 
             CreateArc(x1, y1, radArc);
             CreateArc(x2, y2, radArc);
@@ -212,7 +214,7 @@ namespace DiceBuilder
             ksPlaneOffsetDefinition planeOffsetDefinition = plane.GetDefinition();
             planeOffsetDefinition.direction = true;
             planeOffsetDefinition.offset = _diceParameters.ParametersList
-                .First(parameter => parameter.Name == ParametersEnum.DiceThickness).Value;
+                .First(parameter => parameter.Name == ParametersType.DiceThickness).Value;
             planeOffsetDefinition.SetPlane(planeXoy);
             plane.Create();
             ksEntity sketch = _connector.KsPart.NewEntity((int)Obj3dType.o3d_sketch);
@@ -299,15 +301,15 @@ namespace DiceBuilder
         private void CreateCubeDredging()
         {
 	        double flaskDiameter = _diceParameters.ParametersList
-		        .First(parameter => parameter.Name == ParametersEnum.DredgingDiameter).Value;
+		        .First(parameter => parameter.Name == ParametersType.DredgingDiameter).Value;
 	        var width = _diceParameters.ParametersList
 		        .First(parameter =>
-			        parameter.Name == ParametersEnum.DiceWidth).Value;
+			        parameter.Name == ParametersType.DiceWidth).Value;
 	        var height = _diceParameters.ParametersList
 		        .First(parameter =>
-			        parameter.Name == ParametersEnum.DiceHeight).Value;
+			        parameter.Name == ParametersType.DiceHeight).Value;
 	        var thickness = _diceParameters.ParametersList
-		        .First(parameter => parameter.Name == ParametersEnum.DiceThickness).Value;
+		        .First(parameter => parameter.Name == ParametersType.DiceThickness).Value;
 
 
             var offsetPosition = thickness - flaskDiameter;
@@ -327,9 +329,9 @@ namespace DiceBuilder
 
 
             var x1 = height * 0.25;
-            var y1 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            var y1 = width * 0.5 - _diceParameters[ParametersType.DiceHeight].Value * 0.05;
             var x2 = height * 0.75;
-            var y2 = width * 0.5 - _diceParameters[ParametersEnum.DiceHeight].Value * 0.05;
+            var y2 = width * 0.5 - _diceParameters[ParametersType.DiceHeight].Value * 0.05;
 
             //Построение многоугольника
             CreatePolygon(x1, y1, flaskDiameter / 2, doc2d);
@@ -377,9 +379,9 @@ namespace DiceBuilder
             var doc2D = (ksDocument2D)sketchDefinition.BeginEdit();
 
             //Построение окружности
-            doc2D.ksCircle(_diceParameters[ParametersEnum.DiceHeight].Value / 2,
-                -_diceParameters[ParametersEnum.DiceThickness].Value,
-                _diceParameters[ParametersEnum.EdgeWidth].Value / 2,
+            doc2D.ksCircle(_diceParameters[ParametersType.DiceHeight].Value / 2,
+                -_diceParameters[ParametersType.DiceThickness].Value,
+                _diceParameters[ParametersType.EdgeWidth].Value / 2,
                 1);
 
             //Выход из редактирования
@@ -387,7 +389,7 @@ namespace DiceBuilder
 
             //Выдавливание фигуры
             CreateExtrusionOffsetCutMethod(sketchDefinition, "Каемка",
-	            _diceParameters[ParametersEnum.DiceWidth].Value * 0.8);
+	            _diceParameters[ParametersType.DiceWidth].Value * 0.8);
         }
 
         /// <summary>
@@ -401,9 +403,9 @@ namespace DiceBuilder
 	        //Редактирование эскиза
 	        var doc2d = (ksDocument2D)sketchDefinition.BeginEdit();
 
-	        var x = _diceParameters[ParametersEnum.DiceHeight].Value / 2;
-	        var y = -_diceParameters[ParametersEnum.DiceThickness].Value;
-	        var radius = _diceParameters[ParametersEnum.EdgeWidth].Value / 2;
+	        var x = _diceParameters[ParametersType.DiceHeight].Value / 2;
+	        var y = -_diceParameters[ParametersType.DiceThickness].Value;
+	        var radius = _diceParameters[ParametersType.EdgeWidth].Value / 2;
             
             CreatePolygon(x, y, radius, doc2d);
             
@@ -413,7 +415,7 @@ namespace DiceBuilder
 
 	        //Выдавливание фигуры
 	        CreateExtrusionOffsetCutMethod(sketchDefinition, "Каемка",
-		        _diceParameters[ParametersEnum.DiceWidth].Value * 0.8);
+		        _diceParameters[ParametersType.DiceWidth].Value * 0.8);
         }
 
         /// <summary>

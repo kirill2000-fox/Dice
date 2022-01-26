@@ -43,8 +43,8 @@ namespace Core
         /// <summary>
         /// Словарь ошибок параметров
         /// </summary>
-        public Dictionary<ParametersEnum, string> Errors =
-            new Dictionary<ParametersEnum, string>();
+        public Dictionary<ParametersType, string> Errors =
+            new Dictionary<ParametersType, string>();
 
         /// <summary>
         /// Флаг существования ошибки
@@ -66,26 +66,45 @@ namespace Core
         public void SetDefaultValues()
         {
             ParametersList.Clear();
-            ParametersList.Add(new Parameter(ParametersEnum.DiceWidth,
+            ParametersList.Add(new Parameter(ParametersType.DiceWidth,
                 30, 60, 30));
-            ParametersList.Add(new Parameter(ParametersEnum.DiceHeight,
+            ParametersList.Add(new Parameter(ParametersType.DiceHeight,
                 60, 120, 60));
-            ParametersList.Add(new Parameter(ParametersEnum.DiceThickness,
+            ParametersList.Add(new Parameter(ParametersType.DiceThickness,
                 10, 30, 10));
-            ParametersList.Add(new Parameter(ParametersEnum.DredgingDiameter,
+            ParametersList.Add(new Parameter(ParametersType.DredgingDiameter,
                 8, 15, 8));
-            ParametersList.Add(new Parameter(ParametersEnum.EdgeWidth, 3,
+            ParametersList.Add(new Parameter(ParametersType.EdgeWidth, 3,
                 24, 3));
             CubeDredging = false;
         }
 
         /// <summary>
+        /// Проверка зависимых параметров
+        /// </summary>
+        /// <param name="nameParameters"></param>
+        /// <param name="value"></param>
+        public void CheckDependentParameters(ParametersType nameParameters, double value)
+        {
+            if (nameParameters == ParametersType.DiceHeight)
+            {
+                var width = this[ParametersType.DiceWidth];
+                this[ParametersType.DiceWidth] = new Parameter
+                    (width.Name, width.Min, value / 2.0, width.Value);
+
+                var edge = this[ParametersType.EdgeWidth];
+                this[ParametersType.EdgeWidth] = new Parameter
+                    (edge.Name, edge.Min, value / 5.0, edge.Value);
+            }
+        }
+
+        /// <summary>
         /// Индексатор, который позволяет получать элементы списка по значению
-        /// <see cref="ParametersEnum"/>
+        /// <see cref="ParametersType"/>
         /// </summary>
         /// <param name="index"></param>
         /// <returns></returns>
-        public Parameter this[ParametersEnum index]
+        public Parameter this[ParametersType index]
         {
             get
             {

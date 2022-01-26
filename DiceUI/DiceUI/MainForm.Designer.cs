@@ -37,7 +37,7 @@ namespace DiceUI
             this.comboBoxDredgingForm = new System.Windows.Forms.ComboBox();
             this.labelDredgingForm = new System.Windows.Forms.Label();
             this.DiceEdgeMaxTextBox = new System.Windows.Forms.TextBox();
-            this.DiceHeightMaxTextBox = new System.Windows.Forms.TextBox();
+            this.DiceWidthMaxTextBox = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -77,7 +77,7 @@ namespace DiceUI
             this.splitContainer1.Panel1.Controls.Add(this.comboBoxDredgingForm);
             this.splitContainer1.Panel1.Controls.Add(this.labelDredgingForm);
             this.splitContainer1.Panel1.Controls.Add(this.DiceEdgeMaxTextBox);
-            this.splitContainer1.Panel1.Controls.Add(this.DiceHeightMaxTextBox);
+            this.splitContainer1.Panel1.Controls.Add(this.DiceWidthMaxTextBox);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
             this.splitContainer1.Panel1.Controls.Add(this.label5);
             this.splitContainer1.Panel1.Controls.Add(this.label4);
@@ -118,7 +118,7 @@ namespace DiceUI
             this.comboBoxEdgeType.Name = "comboBoxEdgeType";
             this.comboBoxEdgeType.Size = new System.Drawing.Size(184, 24);
             this.comboBoxEdgeType.TabIndex = 25;
-            this.comboBoxEdgeType.SelectedIndexChanged += new System.EventHandler(this.comboBoxEdgeType_SelectedIndexChanged);
+            this.comboBoxEdgeType.SelectedIndexChanged += new System.EventHandler(this.ComboBoxEdgeType_SelectedIndexChanged);
             // 
             // labelEdgeType
             // 
@@ -145,7 +145,7 @@ namespace DiceUI
             this.comboBoxDredgingForm.Name = "comboBoxDredgingForm";
             this.comboBoxDredgingForm.Size = new System.Drawing.Size(184, 24);
             this.comboBoxDredgingForm.TabIndex = 23;
-            this.comboBoxDredgingForm.SelectedIndexChanged += new System.EventHandler(this.comboBoxDredgingForm_SelectedIndexChanged);
+            this.comboBoxDredgingForm.SelectedIndexChanged += new System.EventHandler(this.ComboBoxDredgingForm_SelectedIndexChanged);
             // 
             // labelDredgingForm
             // 
@@ -171,15 +171,15 @@ namespace DiceUI
             // 
             // DiceHeightMaxTextBox
             // 
-            this.DiceHeightMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
-            this.DiceHeightMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.DiceHeightMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
-            this.DiceHeightMaxTextBox.Location = new System.Drawing.Point(92, 161);
-            this.DiceHeightMaxTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.DiceHeightMaxTextBox.Name = "DiceHeightMaxTextBox";
-            this.DiceHeightMaxTextBox.ReadOnly = true;
-            this.DiceHeightMaxTextBox.Size = new System.Drawing.Size(17, 15);
-            this.DiceHeightMaxTextBox.TabIndex = 18;
+            this.DiceWidthMaxTextBox.BackColor = System.Drawing.SystemColors.Control;
+            this.DiceWidthMaxTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.DiceWidthMaxTextBox.ForeColor = System.Drawing.SystemColors.AppWorkspace;
+            this.DiceWidthMaxTextBox.Location = new System.Drawing.Point(92, 161);
+            this.DiceWidthMaxTextBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.DiceWidthMaxTextBox.Name = "DiceWidthMaxTextBox";
+            this.DiceWidthMaxTextBox.ReadOnly = true;
+            this.DiceWidthMaxTextBox.Size = new System.Drawing.Size(17, 15);
+            this.DiceWidthMaxTextBox.TabIndex = 18;
             // 
             // label6
             // 
@@ -398,7 +398,7 @@ namespace DiceUI
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.TextBox DiceHeightMaxTextBox;
+        private System.Windows.Forms.TextBox DiceWidthMaxTextBox;
         private System.Windows.Forms.TextBox DiceEdgeMaxTextBox;
 		private System.Windows.Forms.ComboBox comboBoxDredgingForm;
 		private System.Windows.Forms.Label labelDredgingForm;
