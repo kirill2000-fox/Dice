@@ -26,7 +26,7 @@ namespace DiceBuilder
         /// </summary>
         /// <param name="connector"></param>
         /// <param name="parameters"></param>
-        /// //TODO: XML (Исправлено)
+        /// //TODO: XML
         public DiceBuilder(KompasConnector.KompasConnector connector, DiceParameters parameters)
         {
             _connector = connector;

@@ -20,8 +20,7 @@ namespace DiceUI
         /// Параметры кости
         /// </summary>
         private readonly DiceParameters _parameters = new DiceParameters();
-
-        //TODO: XML (Исправлено)
+        
         /// <summary>
         /// Коннектор для Компаса
         /// </summary>
@@ -88,8 +87,7 @@ namespace DiceUI
             try
             {
                 _parameters[nameParameters].Value = value;
-
-                //TODO: должно быть в модели (Исправлено)
+                
                 _parameters.CheckDependentParameters(nameParameters, value);
                 DiceWidthMaxTextBox.Text = _parameters[ParametersType.DiceWidth].Max.ToString();
                 DiceEdgeMaxTextBox.Text = _parameters[ParametersType.EdgeWidth].Max.ToString();
@@ -110,7 +108,6 @@ namespace DiceUI
             var nameParameters = TextBoxDictionary.FirstOrDefault(keyValue =>
                 keyValue.Value == textBox).Key;
             var parameter = _parameters[nameParameters];
-            //TODO: в модель данных (Исправлено)
             var message = parameter.Limits;
 
             toolTip1.SetToolTip(textBox, message);
@@ -167,8 +164,7 @@ namespace DiceUI
             builder.BuildDice();
                
         }
-
-        //TODO: RSDN(Исправлено)
+        
         /// <summary>
         /// Метод показывающий значение поля комбобокс
         /// </summary>
@@ -176,8 +172,7 @@ namespace DiceUI
 		{
 			_parameters.CubeDredging = comboBoxDredgingForm.SelectedIndex == 1;
 		}
-
-        //TODO: RSDN(Исправлено)
+        
         /// <summary>
         /// Метод показывающий значение поля комбобокс
         /// </summary>

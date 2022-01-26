@@ -77,8 +77,10 @@ namespace Core
                 return false;
             }
 
-            if (parameter.Name == Name && parameter.Min == Min && parameter.Max == Max &&
-                parameter.Value == Value)
+            if (parameter.Name == Name 
+                && parameter.Min == Min 
+                && parameter.Max == Max 
+                && parameter.Value == Value)
             {
                 return true;
             }
