@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using Core;
+﻿using Core;
 using NUnit.Framework;
 
 namespace CoreTest
